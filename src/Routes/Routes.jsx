@@ -1,9 +1,9 @@
 import { Routes, Route } from "react-router-dom";
-import { BalancePage } from "./BalancePage";
-import { AdminPage } from "./AdminPage";
-import { Navbar } from "./Navbar";
-import { BalanceDetailsPage } from "./BalanceDetailsPage";
-import { NotFoundPage } from "./NotFoundPage";
+import { BalancePage } from "../Components/BalancePage/BalancePage";
+import { AdminPage } from "../Components/AdminPage/AdminPage";
+import { Navbar } from "../Components/Navbar";
+import { BalanceDetailsPage } from "../Components/BalancePage/BalanceDetailsPage";
+import { NotFoundPage } from "../Components/NotFoundPage";
 
 export const Routess = () => {
   return (
