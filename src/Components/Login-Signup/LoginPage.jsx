@@ -1,11 +1,14 @@
 import { useState } from "react";
+import { Navigate } from "react-router-dom";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { addAuth, getAuth, removeAuth } from "../store/actions";
 
 export const LoginPage = () => {
+   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
-    username: "",
-    age: "",
     email: "",
+    password: "",
   });
 
   const handleChange = (e) => {
@@ -21,15 +24,20 @@ export const LoginPage = () => {
     e.preventDefault();
     console.log(e, formData);
     axios
-      .post("http://localhost:8080/user", formData)
+      .post("https://reqres.in/api/login", formData)
+      .then((res) => {
+        console.log(res.data.token);
+        localStorage.setItem("token", res.data.token);
+        dispatch(addAuth(res.data.token))
+      })
+      .catch(function (e) {
+        console.log(e);
+      })
       .then(() => {
         setFormData({
           email: "",
           password: "",
         });
-      })
-      .catch(function (e) {
-        console.log(e);
       });
   };
 
@@ -44,7 +52,7 @@ export const LoginPage = () => {
       />
       <input
         id="password"
-        type="number"
+        type="text"
         onChange={handleChange}
         placeholder="enter password"
       />

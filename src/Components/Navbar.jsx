@@ -1,13 +1,19 @@
 import { Link } from "react-router-dom";
-const token = false;
-const links = [
-  // Fix this links array, it's an array of objects {to: "", title: ""}
-  { to: "/", title: "balance" },
-  { to: "/balance", title: "Admin" },
-  {to: token ? "/login" : "/signup", title: token? "Login" : "Signup"}
-];
+import { useDispatch, useSelector } from "react-redux";
+
+
 
 export const Navbar = () => {
+  const { auth } = useSelector((state) => ({ auth: state.token }));
+  const token = localStorage.getItem("token");
+  const links = [
+    // Fix this links array, it's an array of objects {to: "", title: ""}
+    { to: "/", title: "balance" },
+    { to: "/balance", title: "Admin" },
+    { to: "/signup", title: "New user - Signup" },
+    { to: auth ? "/signout" : "/login", title: token ? "signout" : "Login" },
+  ];
+console.log(auth)
   return (
     <>
       <div style={{ display: "flex", justifyContent: "center" }}>

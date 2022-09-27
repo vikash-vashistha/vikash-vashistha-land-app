@@ -23,9 +23,13 @@ export const SignupPage = () => {
     e.preventDefault();
     console.log(e, formData);
     axios
-      .post("http://localhost:8080/user", formData).then((res) => console.log("res", res))
+      .post("http://localhost:8080/user", formData)
+      .then((res) => {
+        localStorage.setItem("token", res.data.token);
+        console.log("res", res);
+      })
       .catch(function (e) {
-        console.log("error",e);
+        console.log("error", e);
       })
       .then(() => {
         alert("user created successfully");
@@ -35,8 +39,7 @@ export const SignupPage = () => {
           password: "",
           phone_no: "",
         });
-      })
-      
+      });
   };
 
   return (
