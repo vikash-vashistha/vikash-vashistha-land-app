@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 
 const links = [
   // Fix this links array, it's an array of objects {to: "", title: ""}
-  { to: "/", title: "Home" },
-  { to: "/balance", title: "balance" },
+  { to: "/", title: "balance" },
+  { to: "/balance", title: "Admin" },
 ];
 
 export const Navbar = () => {

@@ -1,0 +1,24 @@
+{
+  "land" : [{
+    "id": 1,
+    "name": "aaaaaaaaaa",
+    "head": "kanha",
+    "received": 200000,
+    "payment": 10000,
+    "price": 500000,
+    "area": 1200,
+    "total": 2000,
+    "contributers": [{
+        "user_id": "",
+        "share": "20%"
+      }]
+  }],
+  "user": [{
+    "name": "",
+    "email": "",
+    "password": "",
+    "role": "",
+    "phone no": ""
+
+  }]
+}

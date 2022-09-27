@@ -30,8 +30,9 @@ export const BalanceDetailsPage = () => {
         <img src={""} alt="" />
         <div className="productDetails" style={{ padding: "20px" }}>
           <div>
-            <h2 className="productName">{products.name}</h2>
-            <h5 className="productPrice">Price : {products.price}</h5>
+            <h2>{products.id}</h2>
+            <h2>{products.name}</h2>
+            <h5>Price : {products.price}</h5>
           </div>
           <h5>Specifications : {products.name}</h5>
           <div style={{ width: "700px", paddingLeft: "30px" }}>

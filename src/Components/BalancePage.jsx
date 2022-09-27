@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -9,9 +10,9 @@ export const BalancePage = () => {
   }, []);
 
   const getData = () => {
-    fetch(`http://localhost:3002/products`)
-      .then((d) => d.json())
-      .then((res) => setData([...res]));
+    axios
+      .get(`http://localhost:8080/land`)
+      .then((res) => setData([...res.data]));
   };
 
   return (
@@ -19,7 +20,7 @@ export const BalancePage = () => {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(6, 35%)",
+          gridTemplateColumns: "repeat(7, 35%)",
           justifyContent: "space-evenly",
           width: "500px",
           margin: "auto",
@@ -40,15 +41,20 @@ export const BalancePage = () => {
             className="container"
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(4, 35%)",
+              gridTemplateColumns: "repeat(7, 35%)",
               justifyContent: "space-evenly",
               width: "500px",
               margin: "auto",
               paddingTop: "10px",
             }}
           >
-            <div className="name">{el.name}</div>
-            <div className="price">{el.price}</div>
+            <div>{el.id}</div>
+            <div>{el.name}</div>
+            <div>{el.price}</div>
+            <div>{el.head}</div>
+            <div>{el.received}</div>
+            <div>{el.payment}</div>
+
             <Link to={`/products/${el.id}`}>more details</Link>
           </div>
         );
