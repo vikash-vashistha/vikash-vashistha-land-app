@@ -2,8 +2,10 @@ import { useState } from "react";
 import axios from "axios";
 
 export const SignupPage = () => {
+  const date = new Date().toDateString();
   const [formData, setFormData] = useState({
     id: Math.random(),
+    date,
     name: "",
     email: "",
     password: "",
@@ -34,6 +36,8 @@ export const SignupPage = () => {
       .then(() => {
         alert("user created successfully");
         setFormData({
+          id: Math.random(),
+          date,
           name: "",
           email: "",
           password: "",

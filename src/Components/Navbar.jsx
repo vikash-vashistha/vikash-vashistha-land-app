@@ -13,8 +13,11 @@ export const Navbar = () => {
   const links = [
     // Fix this links array, it's an array of objects {to: "", title: ""}
     { to: "/", title: "balance" },
-    { to: "/balance", title: "Admin" },
-    { to: "/signup", title: "New user - Signup" },
+    { to: "/admin", title: "admin" },
+    {
+      to: auth ? "/signup" : "/random",
+      title: auth ? "New user - Signup" : "",
+    },
     { to: auth ? "/signout" : "/login", title: auth ? "signout" : "Login" },
   ];
 console.log(auth)

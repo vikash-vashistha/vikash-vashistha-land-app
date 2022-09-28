@@ -15,7 +15,7 @@ export const Routess = () => {
       <Routes>
         <Route path="/" element={<BalancePage />} />
 
-        <Route path="/balance" element={<AdminPage />} />
+        <Route path="/admin" element={<AdminPage />} />
         <Route path="/balance/:id" element={<BalanceDetailsPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />

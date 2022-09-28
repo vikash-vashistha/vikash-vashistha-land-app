@@ -2,6 +2,7 @@
   "land": [
     {
       "id": 1,
+      "date": "",
       "name": "aaaaaaaaaa",
       "head": "kanha",
       "received": 200000,
@@ -18,6 +19,7 @@
       "plots": [
         {
           "plot_no": "",
+          "date": "",
           "user_id": "",
           "price": "",
           "received": []
@@ -28,6 +30,7 @@
   "user": [
     {
       "id": 1,
+      "date": "",
       "name": "",
       "email": "",
       "password": "",
@@ -35,10 +38,33 @@
     },
     {
       "id": 0.04237746291247135,
+      "date": "",
       "name": "vikas",
       "email": "vikas@gmail.com",
       "password": "vikas",
       "phone_no": "54"
+    },
+    {
+      "name": "Bajrang Kumar Sharma",
+      "email": "a@a.co",
+      "password": "rahulsharm",
+      "phone_no": "77777777",
+      "id": 2
+    },
+    {
+      "name": "Bajrang Kumar Sharm",
+      "email": "a@a.c",
+      "password": "rahulshar",
+      "phone_no": "7777777",
+      "id": 3
+    },
+    {
+      "id": 0.36436090388438136,
+      "date": "Wed Sep 28 2022",
+      "name": "a",
+      "email": "a@a.com",
+      "password": "rahulsharma",
+      "phone_no": "444444444"
     }
   ]
 }
