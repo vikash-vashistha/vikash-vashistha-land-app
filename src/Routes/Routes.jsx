@@ -7,6 +7,7 @@ import { SignupPage } from "../Components/Login-Signup/SignupPage";
 import { LoginPage } from "../Components/Login-Signup/LoginPage";
 import { SignoutPage } from "../Components/Login-Signup/SignoutPage";
 import { NotFoundPage } from "../Components/NotFoundPage";
+import NewLand from "../Components/NewLandForm/NewLand";
 
 export const Routess = () => {
   return (
@@ -20,6 +21,7 @@ export const Routess = () => {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signout" element={<SignoutPage />} />
+        <Route path="/newland" element={<NewLand />} />
 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
