@@ -1,8 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 export const BalancePage = () => {
+   const { auth } = useSelector((state) => ({ auth: state.token }));
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -34,7 +36,7 @@ export const BalancePage = () => {
         <h4>Received</h4>
         <h4>Payment</h4>
       </div>
-      {data.map((el) => {
+      {auth && data.map((el) => {
         return (
           <div
             key={el.id}

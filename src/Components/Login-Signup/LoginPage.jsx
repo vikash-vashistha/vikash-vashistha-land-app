@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Navigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { addAuth, getAuth, removeAuth } from "../store/actions";
+import { addAuth } from "../store/actions";
 
 export const LoginPage = () => {
    const dispatch = useDispatch();

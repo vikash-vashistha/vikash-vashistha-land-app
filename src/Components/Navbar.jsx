@@ -1,17 +1,21 @@
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { addAuth } from "./store/actions";
 
 
+const token = localStorage.getItem("token");
 
 export const Navbar = () => {
+  const dispatch = useDispatch();
+  if (token) dispatch(addAuth(token));
   const { auth } = useSelector((state) => ({ auth: state.token }));
-  const token = localStorage.getItem("token");
+  
   const links = [
     // Fix this links array, it's an array of objects {to: "", title: ""}
     { to: "/", title: "balance" },
     { to: "/balance", title: "Admin" },
     { to: "/signup", title: "New user - Signup" },
-    { to: auth ? "/signout" : "/login", title: token ? "signout" : "Login" },
+    { to: auth ? "/signout" : "/login", title: auth ? "signout" : "Login" },
   ];
 console.log(auth)
   return (

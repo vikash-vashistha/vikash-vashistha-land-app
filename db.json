@@ -14,6 +14,14 @@
           "user_id": "",
           "share": "20%"
         }
+      ],
+      "plots": [
+        {
+          "plot_no": "",
+          "user_id": "",
+          "price": "",
+          "received": []
+        }
       ]
     }
   ],
