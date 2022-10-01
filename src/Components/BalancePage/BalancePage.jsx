@@ -22,7 +22,7 @@ export const BalancePage = () => {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(7, 35%)",
+          gridTemplateColumns: "repeat(8, 35%)",
           justifyContent: "space-evenly",
           width: "500px",
           margin: "auto",
@@ -43,7 +43,7 @@ export const BalancePage = () => {
             className="container"
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(7, 35%)",
+              gridTemplateColumns: "repeat(8, 35%)",
               justifyContent: "space-evenly",
               width: "500px",
               margin: "auto",
@@ -51,9 +51,10 @@ export const BalancePage = () => {
             }}
           >
             <div>{el.id}</div>
-            <div>{el.name}</div>
+            <div>{el.scheme}</div>
+            <div>{el.location}</div>
             <div>{el.price}</div>
-            <div>{el.head}</div>
+            <div>{el.area}</div>
             <div>{el.received}</div>
             <div>{el.payment}</div>
 
