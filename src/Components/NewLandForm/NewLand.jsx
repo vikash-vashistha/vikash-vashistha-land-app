@@ -1,5 +1,5 @@
-import React from "react";
-import "./newland.css";
+import React from 'react';
+import './newland.css';
 import {
   FormControl,
   Input,
@@ -13,16 +13,12 @@ import {
   InputLeftAddon,
   Button,
   InputRightAddon,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
 const NewLand = () => {
-
-
-    const handleSubmit = ()=>{
-        
-        console.log("here")
-    }
-
+  const handleSubmit = () => {
+    console.log('here');
+  };
 
   return (
     <div className="newLand">
@@ -45,7 +41,6 @@ const NewLand = () => {
         <Input placeholder="Area" />
 
         <Stack spacing={2}>
-            
           <FormLabel>Amount</FormLabel>
           <InputGroup>
             <InputLeftElement
@@ -58,7 +53,7 @@ const NewLand = () => {
             <InputRightElement />
           </InputGroup>
         </Stack>
-        <Button colorScheme="blue" m={"20px"} onClick={handleSubmit}>
+        <Button colorScheme="blue" m={'20px'} onClick={handleSubmit}>
           Button
         </Button>
       </FormControl>
