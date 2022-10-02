@@ -1,23 +1,19 @@
 {
   "land": [
     {
-      "id": "l1",
+      "id": "L1",
       "date": "",
       "location": "jaipur",
       "scheme": "s2",
-      "price": 500000,
+      "price": 500,
       "area": 1200,
-      "total": 2000,
       "partenrs": [
         {
           "user_id": "u1",
           "share": "20%"
         }
       ],
-      "plots": [
-        "p1",
-        "p2"
-      ]
+      "plots": ["p1", "p2"]
     }
   ],
   "user": [
@@ -25,37 +21,50 @@
       "id": "u1",
       "date": "",
       "name": "",
-      "roles": ["partner", "seller", "coustomer"],
-      "received": [
-        {
-          "amount": 200000,
-          "date": ""
-        }
-      ],
-      "payment": [
-        {
-          "amount": 200000,
-          "date": ""
-        }
-      ],
+      "roles": ["partner", "seller", "customer", "date"],
       "email": "",
       "password": "",
       "phone_no": ""
     }
   ],
+
+  "schemes": [
+    {
+      "scheme_id": "s2",
+      "scheme_name": ""
+    }
+  ],
+  "transaction": [
+    {
+      "transaction_id": "t1",
+      "type": "credit/debit",
+      "date": "",
+      "user_id": "",
+      "land_id": "",
+      "plot_id": ""
+    }
+  ],
   "plots": [
     {
       "plot_id": "p1",
-      "plot_no": "",
       "date": "",
-      "user_id": "",
-      "price": "",
-      "received": []
+      "price": ""
     }
   ],
   "schemes": [
-    "s1",
-    "s2"
+    {
+      "scheme_id": "s2",
+      "scheme_name": ""
+    }
+  ],
+  "transaction": [
+    {
+      "transaction_id": "t1",
+      "type": "credit/debit",
+      "date": "",
+      "user_id": "",
+      "land_id": "",
+      "plot_id": ""
+    }
   ]
- 
 }
