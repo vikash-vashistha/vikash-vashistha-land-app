@@ -13,7 +13,10 @@
           "share": "20%"
         }
       ],
-      "plots": ["p1", "p2"]
+      "plots": [
+        "p1",
+        "p2"
+      ]
     }
   ],
   "user": [
@@ -21,27 +24,15 @@
       "id": "u1",
       "date": "",
       "name": "",
-      "roles": ["partner", "seller", "customer", "date"],
+      "roles": [
+        "partner",
+        "seller",
+        "customer",
+        "date"
+      ],
       "email": "",
       "password": "",
       "phone_no": ""
-    }
-  ],
-
-  "schemes": [
-    {
-      "scheme_id": "s2",
-      "scheme_name": ""
-    }
-  ],
-  "transaction": [
-    {
-      "transaction_id": "t1",
-      "type": "credit/debit",
-      "date": "",
-      "user_id": "",
-      "land_id": "",
-      "plot_id": ""
     }
   ],
   "plots": [
