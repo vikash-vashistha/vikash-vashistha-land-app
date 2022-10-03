@@ -1,0 +1,13 @@
+#buttonBox {
+  text-align: center;
+  width: 30%;
+  margin: auto;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+.maindiv > div:last-child {
+  width: 20%;
+  margin: auto;
+  margin-top: 40px;
+}
