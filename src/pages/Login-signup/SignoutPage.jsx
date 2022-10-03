@@ -1,13 +1,9 @@
-import { useDispatch, useSelector } from "react-redux";
-import { removeAuth } from "../../store/actions";
+import React from 'react'
 
-export const SignoutPage = () => {
-  const dispatch = useDispatch();
-  
-  const handleClick = () => {
-    dispatch(removeAuth(null));
-    localStorage.removeItem("token");
-  };
+const SignoutPage = () => {
+  return (
+    <div>SignoutPage</div>
+  )
+}
 
-  return <button onClick={handleClick}>Sign out</button>;
-};
+export default SignoutPage
