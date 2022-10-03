@@ -16,7 +16,7 @@ export const Routess = () => {
     <>
       {/* <Navbar /> */}
       <Routes>
-        <Route path="/" element={<Auth/>} />
+        <Route path="/auth" element={<Auth/>} />
 
         {/* <Route path="/admin" element={<AdminPage />} />
         <Route path="/balance" element={<BalancePage />} />
