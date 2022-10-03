@@ -4,12 +4,29 @@
       "id": "L1",
       "date": "",
       "location": "jaipur",
-      "scheme": "s2",
+      "scheme": "s1",
       "price": 500,
       "area": 1200,
       "partenrs": [
         {
           "user_id": "u1",
+          "share": "20%"
+        }
+      ],
+      "plots": [
+        "p1",
+        "p2"
+      ]
+    },{
+      "id": "L2",
+      "date": "",
+      "location": "kota",
+      "scheme": "s2",
+      "price": 500,
+      "area": 1200,
+      "partenrs": [
+        {
+          "user_id": "u2",
           "share": "20%"
         }
       ],

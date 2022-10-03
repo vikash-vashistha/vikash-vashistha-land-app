@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addAuth } from "./store/actions";
+import { addAuth } from "../store/actions";
 
 
 const token = localStorage.getItem("token");
