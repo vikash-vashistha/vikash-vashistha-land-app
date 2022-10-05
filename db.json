@@ -13,11 +13,9 @@
           "share": "20%"
         }
       ],
-      "plots": [
-        "p1",
-        "p2"
-      ]
-    },{
+      "plots": ["p1", "p2"]
+    },
+    {
       "id": "L2",
       "date": "",
       "location": "kota",
@@ -30,10 +28,7 @@
           "share": "20%"
         }
       ],
-      "plots": [
-        "p1",
-        "p2"
-      ]
+      "plots": ["p1", "p2"]
     }
   ],
   "user": [
@@ -41,12 +36,7 @@
       "id": "u1",
       "date": "",
       "name": "",
-      "roles": [
-        "partner",
-        "seller",
-        "customer",
-        "date"
-      ],
+      "roles": ["partner", "seller", "customer", "date"],
       "email": "",
       "password": "",
       "phone_no": ""
@@ -67,11 +57,87 @@
   ],
   "transaction": [
     {
-      "transaction_id": "t1",
-      "type": "credit/debit",
-      "date": "",
-      "user_id": "",
-      "land_id": "",
+      "transaction_id": "jkvkabvavnlk",
+      "type": "credit",
+      "date": "05-09-2022",
+      "amount": 500,
+      "user_id": {
+        "name": "Mr. A",
+        "email": "a@a.com"
+      },
+      "land_id": {
+        "name": "land1"
+      },
+      "plot_id": ""
+    },
+    {
+      "transaction_id": "kvjzvdffjs",
+      "type": "debit",
+      "date": "04-09-2022",
+      "amount": 600,
+      "user_id": {
+        "name": "Mr. A",
+        "email": "a@a.com"
+      },
+      "land_id": {
+        "name": "land2"
+      },
+      "plot_id": ""
+    },
+    {
+      "transaction_id": "vhzbvbzkjv",
+      "type": "credit",
+      "date": "04-09-2022",
+      "amount": 700,
+      "user_id": {
+        "name": "Mr. A",
+        "email": "a@a.com"
+      },
+      "land_id": {
+        "name": "land3"
+      },
+      "plot_id": ""
+    },
+    {
+      "transaction_id": "xcvnxkjvk",
+      "type": "credit",
+      "date": "03-09-2022",
+      "amount": 800,
+      "user_id": {
+        "name": "Mr. A",
+        "email": "a@a.com"
+      },
+      "land_id": {
+        "name": "land3"
+      },
+      "plot_id": ""
+    },
+    {
+      "transaction_id": "sgjkznzdlkj",
+      "type": "debit",
+      "date": "03-09-2022",
+      "amount": 900,
+      "user_id": {
+        "name": "Mr. A",
+        "email": "a@a.com"
+      },
+      "land_id": {
+        "name": "land4"
+      },
+      "plot_id": ""
+    },
+    {
+      "transaction_id": "bzkkzfndkvl",
+      "type": "debit",
+      "date": "03-09-2022",
+      "amount": 1000,
+      "user_id": {
+        "name": "Mr. A",
+        "email": "a@a.com"
+      },
+      "land_id": {
+        "name": "land4"
+      },
       "plot_id": ""
     }
   ]
