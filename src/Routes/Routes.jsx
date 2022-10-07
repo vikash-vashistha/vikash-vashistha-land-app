@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Auth from "../pages/Login-signup/Auth";
-// import { BalancePage } from "../pages/BalancePage/BalancePage";
+import { BalancePage } from "../pages/BalancePage/BalancePage";
 // import { AdminPage } from "../Pages/AdminPage";
 // import { Navbar } from "../Components/Navbar";
 // import { BalanceDetailsPage } from "../Pages/BalancePage/BalanceDetailsPage";
@@ -17,7 +17,7 @@ export const Routess = () => {
       {/* <Navbar /> */}
       <Routes>
         <Route path="/auth" element={<Auth/>} />
-
+        <Route path="/balance" element={<BalancePage />} />
         {/* <Route path="/admin" element={<AdminPage />} />
         <Route path="/balance" element={<BalancePage />} />
         <Route path="/balance/:id" element={<BalanceDetailsPage />} />
