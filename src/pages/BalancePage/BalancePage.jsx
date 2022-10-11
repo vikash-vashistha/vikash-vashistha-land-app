@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getTransactions } from '../../store/transaction/action.transaction';
 
-export const BalancePage = () => {
+function BalancePage(){
   // const { transactiondata } = useSelector((store) => store.transaction);
   const [transactiondata, setTransactiondata] = useState([]);
   useEffect(() => {
@@ -64,3 +64,6 @@ export const BalancePage = () => {
     </>
   );
 };
+
+
+export { BalancePage };

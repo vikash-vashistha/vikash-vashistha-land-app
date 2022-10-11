@@ -6,4 +6,4 @@ const SignoutPage = () => {
   )
 }
 
-export default SignoutPage
+export {SignoutPage}
