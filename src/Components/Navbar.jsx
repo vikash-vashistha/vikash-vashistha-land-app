@@ -16,7 +16,7 @@ export const Navbar = () => {
     { to: "/admin", title: "admin" },
     {
       to: auth ? "/signup" : "/random",
-      title: auth ? "New user - Signup" : "",
+      title: auth ? "" : "New user - Signup",
     },
     { to: auth ? "/signout" : "/login", title: auth ? "signout" : "Login" },
   ];
