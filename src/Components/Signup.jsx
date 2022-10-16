@@ -15,7 +15,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 
-export const SignupPage = () => {
+export const Signup = () => {
   const [show, setShow] = useState(false);
   const [input, setInput] = useState("");
   const [password, setPassword] = useState("");

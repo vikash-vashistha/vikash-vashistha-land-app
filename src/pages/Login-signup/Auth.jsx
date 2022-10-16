@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Button, ButtonGroup } from "@chakra-ui/react";
-import { SignupPage } from "../../Components/Signup";
-import { LoginPage } from "../../Components/Login";
+import { Login } from "../../Components/Login";
+import "./Auth.css";
+import { Signup } from "../../Components/Signup";
 
 const Auth = () => {
   const [login, setLogin] = useState(true);
@@ -35,7 +36,7 @@ const Auth = () => {
         </Button>
       </div>
 
-      <div>{login ? <SignupPage /> : <LoginPage />}</div>
+      <div>{login ? <Signup /> : <Login />}</div>
     </div>
   );
 };

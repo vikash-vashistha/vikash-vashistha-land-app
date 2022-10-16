@@ -15,7 +15,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 
-function LoginPage(){
+export const Login = () => {
 
   const [show, setShow] = useState(false);
   const [input, setInput] = useState("");
@@ -80,4 +80,3 @@ function LoginPage(){
 };
 
 
-export {LoginPage}
