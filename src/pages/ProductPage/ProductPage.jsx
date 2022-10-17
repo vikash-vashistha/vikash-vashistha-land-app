@@ -11,7 +11,8 @@ export const ProductsPage = () => {
   useEffect(() => {
     getData();
   }, [text]);
-
+  
+// getting locations
   const getData = () => {
     axios
       .get(`http://localhost:2345/products/locations?city=${text}`)
@@ -27,9 +28,15 @@ export const ProductsPage = () => {
       <div>
         {data &&
           data.map((e) => (
-            <button>
-              <Link to={`/products/scheme/${e.city}`}>
-                <span key={e._id}>{e.city}</span>
+            <button
+              style={{ margin: "5px", textDecoration: "none" }}
+              key={e._id}
+            >
+              <Link
+                to={`/products/scheme/${e.city}`}
+                style={{ margin: "5px", textDecoration: "none" }}
+              >
+                <span>{e.city}</span>
                 <span> (</span>
                 <span>{e.state}</span> <span>)</span>
               </Link>

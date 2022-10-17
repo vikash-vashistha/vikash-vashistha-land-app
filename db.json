@@ -1,7 +1,6 @@
 {
   "land": [
     {
-      "id": "L1",
       "date": "",
       "location": "jaipur",
       "scheme": "s1",
@@ -14,12 +13,11 @@
         }
       ],
       "plots": [
-        "p1",
-        "p2"
+        "634d5045d0c9188cce90c362",
+        "634d5045d0c9188cce90c363"
       ]
     },
     {
-      "id": "L2",
       "date": "",
       "location": "kota",
       "scheme": "s2",
@@ -32,8 +30,7 @@
         }
       ],
       "plots": [
-        "p1",
-        "p2"
+        "634d5045d0c9188cce90c362"
       ]
     }
   ],
@@ -53,13 +50,6 @@
       "phone_no": ""
     }
   ],
-  "plots": [
-    {
-      "plot_id": "p1",
-      "date": "",
-      "price": ""
-    }
-  ],
   "schemes": [
     {
       "scheme_id": "s2",
@@ -73,6 +63,18 @@
     "mumbai",
     "agara",
     "udaipur"
+  ],
+  "plots": [
+    {
+      "plot_id": "634d5045d0c9188cce90c362",
+      "date": "",
+      "price": "1"
+    },
+    {
+      "plot_id": "634d5045d0c9188cce90c363",
+      "date": "",
+      "price": "2"
+    }
   ],
   "transaction": [
     {

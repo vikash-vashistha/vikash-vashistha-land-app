@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
-export const BalanceDetailsPage = () => {
+export const SchemeDetailsPage = () => {
   const { id } = useParams();
   const [products, setProducts] = useState([]);
 
@@ -23,8 +23,6 @@ export const BalanceDetailsPage = () => {
         products.map((e) => {
           return (
             <div>
-              "L1" date : "" location : "jaipur" scheme : "s1" price : 500 area
-              : 1200 partenrs : Array plots : Array
               <p>{e.location}</p>
               <p>{e.price}</p>
               <p>{e.scheme}</p>
