@@ -9,6 +9,7 @@ import { Navbar } from "../Components/Navbar";
 import { NotFoundPage } from "../pages/NotFoundPage";
 import NewLand from "../Components/NewLandForm/NewLand";
 import { ProductsPage } from "../pages/ProductPage/ProductPage"
+import { ProductsDetailsPage } from "../pages/ProductPage/ProductDetailsPage";
 
 export const Routess = () => {
   return (
@@ -16,6 +17,7 @@ export const Routess = () => {
       <Navbar />
       <Routes>
         <Route path="/" element={<ProductsPage />} />
+        <Route path="/products/scheme/:id" element={<ProductsDetailsPage />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="login" element={<Login />} />
         <Route path="signout" element={<Signout />} />

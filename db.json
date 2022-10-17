@@ -13,7 +13,10 @@
           "share": "20%"
         }
       ],
-      "plots": ["p1", "p2"]
+      "plots": [
+        "p1",
+        "p2"
+      ]
     },
     {
       "id": "L2",
@@ -28,7 +31,10 @@
           "share": "20%"
         }
       ],
-      "plots": ["p1", "p2"]
+      "plots": [
+        "p1",
+        "p2"
+      ]
     }
   ],
   "user": [
@@ -36,7 +42,12 @@
       "id": "u1",
       "date": "",
       "name": "",
-      "roles": ["partner", "seller", "customer", "date"],
+      "roles": [
+        "partner",
+        "seller",
+        "customer",
+        "date"
+      ],
       "email": "",
       "password": "",
       "phone_no": ""
@@ -54,6 +65,14 @@
       "scheme_id": "s2",
       "scheme_name": ""
     }
+  ],
+  "location": [
+    "jaipur",
+    "kota",
+    "delhi",
+    "mumbai",
+    "agara",
+    "udaipur"
   ],
   "transaction": [
     {
