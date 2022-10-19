@@ -7,6 +7,7 @@ export const ProductsDetailsPage = () => {
   const [schemes, setSchemes] = useState([]);
   const [lands, setLands] = useState([]);
   const [plots, setPlots] = useState([]);
+  const [plotsDetails, setPlotDetail] = useState([]);
 
   useEffect(() => {
     getProducts();
@@ -24,10 +25,10 @@ export const ProductsDetailsPage = () => {
 
   // getting lands inside scheme
   const handleClick1 = (el) => {
-    console.log(el)
+    // console.log(el)
      axios.get(`http://localhost:2345/products/lands/${el}`).then((res) => {
        setLands([...res.data]);
-       console.log(res.data);
+      //  console.log(res.data);
      });
   }
 
@@ -37,10 +38,20 @@ export const ProductsDetailsPage = () => {
      axios
        .get(`http://localhost:2345/products/singleland/${id}`)
        .then((res) => {
+         console.log(res.data)
          setPlots([...res.data.plots]);
          console.log("plots",plots);
        });
-  }
+    }
+  
+  const handleClick3 = (id) => {
+    console.log(id);
+    axios.get(`http://localhost:2345/products/plots/${id}`).then((res) => {
+      console.log(res.data);
+      setPlotDetail([...res.data]);
+      console.log("plots", plots);
+    });
+  };
 
   return (
     <>
@@ -74,15 +85,29 @@ export const ProductsDetailsPage = () => {
             );
           })}
       </div>
-      <div style={{ marginLeft: "10%" }}>
+      <div style={{ marginLeft: "20%" }}>
         {plots &&
-          plots.map((e) => {
+          plots.map((e, i) => {
             return (
-              <ol>
+              <ol key={i}>
                 <li>
-                  <button >
-                    {e}
-                  </button>
+                  <button onClick={() => handleClick3(e)}>{e}</button>
+                </li>
+              </ol>
+            );
+          })}
+      </div>
+      <div style={{ marginLeft: "30%" }}>
+        {plotsDetails &&
+          plotsDetails.map((e) => {
+            return (
+              <ol key={e._id}>
+                <li>
+                  <p>facing - {e.face}</p>
+                  <p>road - {e.road}</p>
+                  <p>water - {e.water}</p>
+                  <p>electricity - {e.electricity}</p>
+                  <p>rate - {e.price} per sq ft</p>
                 </li>
               </ol>
             );

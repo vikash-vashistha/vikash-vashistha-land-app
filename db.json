@@ -68,12 +68,20 @@
     {
       "plot_id": "634d5045d0c9188cce90c362",
       "date": "",
-      "price": "1"
+      "price": "1",
+      "face": "east facing",
+      "road": "ls rs front back",
+      "water": "available",
+      "electricty": "available"
     },
     {
       "plot_id": "634d5045d0c9188cce90c363",
       "date": "",
-      "price": "2"
+      "price": "2",
+      "face": "east facing",
+      "road": "ls rs front back",
+      "water": "available",
+      "electricty": "available"
     }
   ],
   "transaction": [
