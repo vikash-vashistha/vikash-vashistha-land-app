@@ -10,6 +10,7 @@ import { NotFoundPage } from "../pages/NotFoundPage";
 import NewLand from "../Components/NewLandForm/NewLand";
 import { ProductsPage } from "../pages/ProductPage/ProductPage"
 import { ProductsDetailsPage } from "../pages/ProductPage/ProductDetailsPage";
+import PrivateRoute from "./PrivateRoute";
 
 export const Routess = () => {
   return (
@@ -21,7 +22,14 @@ export const Routess = () => {
         <Route path="/signup" element={<Signup />} />
         <Route path="login" element={<Login />} />
         <Route path="signout" element={<Signout />} />
-        <Route path="/balance" element={<BalancePage />} />
+        <Route
+          path="/balance"
+          element={
+            <PrivateRoute>
+              <BalancePage />
+            </PrivateRoute>
+          }
+        />
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/balance" element={<BalancePage />} />
         <Route path="/balance/:id" element={<BalanceDetailsPage />} />
