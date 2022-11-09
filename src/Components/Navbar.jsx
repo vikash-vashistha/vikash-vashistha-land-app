@@ -14,9 +14,12 @@ export const Navbar = () => {
     { to: "/", title: "home" },
     { to: "/admin", title: "admin" },
     { to: "/balance", title: "history" },
-    {to: "/form", title: "register a new land /partner in a land"},
-    {to: auth ? "/signup" : "/random",
-      title: auth ? "" : "New user - Signup"},
+    { to: "/form", title: "register a new land /partner in a land" },
+    { to: "/chat", title: "chat" },
+    {
+      to: auth ? "/signup" : "/random",
+      title: auth ? "" : "New user - Signup",
+    },
     { to: auth ? "/signout" : "/login", title: auth ? "signout" : "Login" },
   ];
 console.log(auth)

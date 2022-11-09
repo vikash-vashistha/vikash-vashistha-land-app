@@ -31,7 +31,13 @@
       ],
       "plots": [
         "634d5045d0c9188cce90c362"
-      ]
+      ],
+      "parent_id": "",
+      "last_items": "difficult",
+      "ancestors": [],
+      "created_At": "",
+      "updated_At": "",
+      "deleted": ""
     }
   ],
   "user": [
@@ -47,13 +53,20 @@
       ],
       "email": "",
       "password": "",
-      "phone_no": ""
+      "phone_no": "",
+      "created_At": "",
+      "updated_At": "",
+      "deleted": ""
     }
+    
   ],
   "schemes": [
     {
       "scheme_id": "s2",
-      "scheme_name": ""
+      "scheme_name": "",
+      "created_At": "",
+      "updated_At": "",
+      "deleted": ""
     }
   ],
   "location": [
@@ -72,7 +85,10 @@
       "face": "east facing",
       "road": "ls rs front back",
       "water": "available",
-      "electricty": "available"
+      "electricty": "available",
+      "created_At": "",
+      "updated_At": "",
+      "deleted": ""
     },
     {
       "plot_id": "634d5045d0c9188cce90c363",
@@ -81,7 +97,10 @@
       "face": "east facing",
       "road": "ls rs front back",
       "water": "available",
-      "electricty": "available"
+      "electricty": "available",
+      "created_At": "",
+      "updated_At": "",
+      "deleted": ""
     }
   ],
   "transaction": [
@@ -97,7 +116,10 @@
       "land_id": {
         "name": "land1"
       },
-      "plot_id": ""
+      "plot_id": "",
+      "created_At": "",
+      "updated_At": "",
+      "deleted": ""
     },
     {
       "transaction_id": "kvjzvdffjs",
