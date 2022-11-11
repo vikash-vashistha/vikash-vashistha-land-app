@@ -14,6 +14,6 @@ export const removeAuth = (data) => {
 
 export const getAuth = () => {
   return {
-    type: GET_AUTH
+    type: GET_AUTH,
   };
 };
