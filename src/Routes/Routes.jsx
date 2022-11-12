@@ -30,9 +30,22 @@ export const Routess = () => {
             </PrivateRoute>
           }
         />
-        <Route path="/admin" element={<AdminPage />} />
-        <Route path="/balance" element={<BalancePage />} />
-        <Route path="/balance/:id" element={<BalanceDetailsPage />} />
+        <Route
+          path="/admin"
+          element={
+            <PrivateRoute>
+              <AdminPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/balance/:id"
+          element={
+            <PrivateRoute>
+              <BalanceDetailsPage />
+            </PrivateRoute>
+          }
+        />
         <Route path="/newland" element={<NewLand />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
