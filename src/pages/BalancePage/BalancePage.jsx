@@ -13,12 +13,18 @@ export const BalancePage = () => {
     getProducts((page));
   }, [page]);
   const getProducts = async (page) => {
+    const token = localStorage.getItem("token");
+    console.log(token)
     try {
       setLoading(true);
-      await axios.get(`http://localhost:2345/transaction?page=${page}&size=${3}`).then((res) => {
-        console.log("res.data: ", res.data.transaction);
-        setTransactiondata([...res.data.transaction]);
-      });
+      await axios
+        .get(`http://localhost:2345/transaction?page=${page}&size=${3}`, {
+          headers: { authorization: `Bearer ${token}` },
+        })
+        .then((res) => {
+          console.log("res.data: ", res.data.transaction);
+          setTransactiondata([...res.data.transaction]);
+        });
       setLoading(false);
     } catch (e) {
       setLoading(false);

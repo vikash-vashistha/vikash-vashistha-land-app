@@ -8,11 +8,10 @@ import { BrowserRouter } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <ReduxProvider store={store}>
-      <BrowserRouter>
-          <App />
-      </BrowserRouter>
-    </ReduxProvider>
-  </React.StrictMode>
-);
+  <ReduxProvider store={store}>
+  <BrowserRouter>
+  <App />
+  </BrowserRouter>
+  </ReduxProvider>
+  );
+  // <React.StrictMode></React.StrictMode>

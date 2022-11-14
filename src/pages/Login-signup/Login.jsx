@@ -22,7 +22,7 @@ export const Login = () => {
     e.preventDefault();
     console.log(e, formData);
     axios
-      .post("https://reqres.in/api/login", formData)
+      .post("http://localhost:2345/login", formData)
       .then((res) => {
         console.log(res.data.token);
         localStorage.setItem("token", res.data.token);

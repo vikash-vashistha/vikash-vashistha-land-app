@@ -7,6 +7,7 @@ export const Signup = () => {
     id: Math.random(),
     date,
     name: "",
+    role: ["coustomer"],
     email: "",
     password: "",
     phone_no: "",
@@ -18,30 +19,33 @@ export const Signup = () => {
       [id]: value,
     });
   };
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async(e) => {
     e.preventDefault();
     console.log(e, formData);
-    axios
-      .post("http://localhost:8080/user", formData)
+    try {
+      await axios
+      .post("http://localhost:2345/register", formData)
       .then((res) => {
-        localStorage.setItem("token", res.data.token);
         console.log("res", res);
       })
-      .catch(function (e) {
-        console.log("error", e);
-      })
       .then(() => {
-        alert("user created successfully");
-        setFormData({
-          id: Math.random(),
-          date,
-          name: "",
-          email: "",
-          password: "",
-          phone_no: "",
-        });
+        alert("user created successfully, Please Sign In");
+        // setFormData({
+        //   id: Math.random(),
+        //   date,
+        //   name: "",
+        //   email: "",
+        //   password: "",
+        //   phone_no: "",
+        // });
       });
+    }catch(e) {
+        console.log("error", e);
+      }
+    
   };
+
   return (
     <form onSubmit={handleSubmit}>
       <h3>Sigh up</h3>

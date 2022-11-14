@@ -1,25 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
-import { PlotDetails } from "./PlotDetailsPage";
+import { useParams } from "react-router-dom";
 
-export const Plots = ({ plots }) => {
-  const [plotsDetails, setPlotDetail] = useState([]);
-  const handleClick3 = (id) => {
-    console.log(id);
-    try {
-      axios.get(`http://localhost:2345/products/plots/${id}`).then((res) => {
+export const Plots = () => {
+  const { id } = useParams();
+  const [plots, setPlots] = useState([]);
+  // getting plots inside land
+
+  useEffect(() => {
+    axios.get(`http://localhost:2345/products/singleland/${id}`).then((res) => {
       console.log(res.data);
-        setPlotDetail([...res.data]);
-        
+      setPlots((prv) => [...res.data.plots]);
+      console.log("plots", plots);
     });
-    } catch (e) {
-      console.log(e)
-    }
-  };
+  }, []);
   return (
-    <div>
-      {plots.map((e, i) => <button style={{marginLeft: "50%"}} key={i} onClick={() => handleClick3(e)}>{ e}</button>)}
-      <PlotDetails plotsDetails={plotsDetails} />
-    </div>
+    <>
+      <div>
+        {plots.map((e, i) => (
+          <Link
+            to={`/products/plotdetails/${e}`}
+            style={{ margin: "5px", textDecoration: "none" }}
+          >
+            {e}
+          </Link>
+        ))}
+      </div>
+    </>
   );
 };
