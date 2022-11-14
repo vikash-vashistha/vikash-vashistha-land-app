@@ -1,12 +1,16 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 export const ProductsPage = () => {
+  const ref = useRef()
   const { auth } = useSelector((state) => ({ auth: state.token }));
   const [text, setText] = useState("");
   const [data, setData] = useState([]);
+  const handleClick = () => {
+    ref.current.scrollTop = 0;
+  }
 
   useEffect(() => {
     getData();
@@ -20,12 +24,12 @@ export const ProductsPage = () => {
   };
 
   return (
-    <>
+    <div style={{ display: "flex" }}>
       <div>
         <input onChange={(e) => setText(e.target.value)} />
         <button>search</button>
       </div>
-      <div>
+      <div style={{ height: "500px", overflowY: "scroll" }} ref={ref}>
         {data &&
           data.map((e) => (
             <button
@@ -43,6 +47,7 @@ export const ProductsPage = () => {
             </button>
           ))}
       </div>
-    </>
+      <button style={{height: "30px", marginTop: "400px"}} onClick={handleClick}>⬆️</button>
+    </div>
   );
 };

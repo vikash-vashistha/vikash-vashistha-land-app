@@ -10,20 +10,20 @@ export const Plots = () => {
 
   useEffect(() => {
     axios.get(`http://localhost:2345/products/singleland/${id}`).then((res) => {
-      console.log(res.data);
-      setPlots((prv) => [...res.data.plots]);
+      console.log(plots, res.data);
+      setPlots( (prv) => [...res.data]);
       console.log("plots", plots);
     });
   }, []);
   return (
     <>
       <div>
-        {plots.map((e, i) => (
-          <Link
-            to={`/products/plotdetails/${e}`}
+        {plots && plots.map((e) => (
+          <Link key={e._id}
+            to={`/products/plotdetails/${e._id}`}
             style={{ margin: "5px", textDecoration: "none" }}
           >
-            {e}
+            {e._id}
           </Link>
         ))}
       </div>

@@ -3,34 +3,25 @@
     {
       "date": "",
       "location": "jaipur",
-      "scheme": "s1",
+      "scheme": "63727fa8fe51d531ee219225",
       "price": 500,
       "area": 1200,
       "partenrs": [
         {
-          "user_id": "u1",
+          "user_id": "63708d17b13958e2ae7acc3d",
           "share": "20%"
         }
-      ],
-      "plots": [
-        "634d5045d0c9188cce90c362",
-        "634d5045d0c9188cce90c363"
       ]
     },
     {
       "date": "",
       "location": "kota",
-      "scheme": "s2",
+      "scheme": "63727fa8fe51d531ee219226",
       "price": 500,
       "area": 1200,
       "partenrs": [
         {
-          "user_id": "u2",
-          "share": "20%"
-        }
-      ],
-      "plots": [
-        "634d5045d0c9188cce90c362"
+          "user_id": "63708d17b13958e2ae7acc3d"}
       ]
     }
   ],
@@ -52,8 +43,10 @@
   ],
   "schemes": [
     {
-      "scheme_id": "s2",
-      "scheme_name": ""
+      "scheme_name": "pratap nagar"
+    },
+    {
+      "scheme_name": "kishan nagar"
     }
   ],
   "location": [
@@ -67,21 +60,27 @@
   "plots": [
     {
       "plot_id": "63500e047a838b71de30770b",
+      "land_id": "6372805bfe51d531ee21922c",
       "date": "",
       "price": "1",
-      "face": "east facing",
-      "road": "ls rs front back",
-      "water": "available",
-      "electricty": "available"
+      "area": "",
+      "partenrs": false,
+      "eastroad": false,
+      "westroad": false,
+      "northroad": false,
+      "southroad": false
     },
     {
       "plot_id": "63500e047a838b71de30770c",
+      "land_id": "6372805bfe51d531ee21922c",
       "date": "",
       "price": "2",
-      "face": "east facing",
-      "road": "ls rs front back",
-      "water": "available",
-      "electricty": "available"
+      "area": "",
+      "partenrs": false,
+      "eastroad": false,
+      "westroad": false,
+      "northroad": false,
+      "southroad": false
     }
   ],
   "transaction": [

@@ -7,7 +7,6 @@ import { BalanceDetailsPage } from "../pages/BalancePage/BalanceDetailsPage";
 import { SellerPage } from "../pages/SellerPage/SellerPage";
 import { Navbar } from "../Components/Navbar/Navbar";
 import { NotFoundPage } from "../pages/NotFoundPage/NotFoundPage";
-import NewLand from "../pages/SellerPage/NewLandForm/NewLand";
 import { ProductsPage } from "../pages/ProductPage/ProductPage";
 import PrivateRoute from "./PrivateRoute";
 import ChatApp from "../pages/ChatPage/CatApp";
@@ -15,6 +14,8 @@ import { Scheme } from "../pages/ProductPage/SchemePage";
 import { Land } from "../pages/ProductPage/LandPage";
 import { Plots } from "../pages/ProductPage/PlotsPage";
 import { PlotDetails } from "../pages/ProductPage/PlotDetailsPage";
+import { NewLand } from "../pages/SellerPage/NewLandForm/NewLand";
+import {NewPlot} from "../pages/SellerPage/NewPlotForm/NewPlot"
 
 export const Routess = () => {
   return (
@@ -24,7 +25,9 @@ export const Routess = () => {
         <Route path="/" element={<ProductsPage />} />
         <Route path="/products/scheme/:id" element={<Scheme />} />
         <Route path="/products/lands/:id" element={<Land />} />
-        <Route path="/products/plots/:id" element={<Plots />} />
+        <Route path="/products/singleland/:id" element={<Plots />} />
+
+       
         <Route path="/products/plotdetails/:id" element={<PlotDetails />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="login" element={<Login />} />
@@ -61,7 +64,11 @@ export const Routess = () => {
             </PrivateRoute>
           }
         />
-        <Route path="/newland" element={<NewLand />} />
+        <Route path="/seller" element={<SellerPage />} />
+
+        <Route path="/seller/newland" element={<NewLand />} />
+        <Route path="/seller/newplot/:id" element={<NewPlot />} />
+
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>

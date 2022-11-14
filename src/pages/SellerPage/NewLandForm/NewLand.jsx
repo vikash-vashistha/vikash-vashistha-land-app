@@ -1,64 +1,87 @@
-import React from 'react';
-import './newland.css';
-import {
-  FormControl,
-  Input,
-  Stack,
-  InputLeftElement,
-  FormLabel,
-  InputRightElement,
-  FormErrorMessage,
-  FormHelperText,
-  InputGroup,
-  InputLeftAddon,
-  Button,
-  InputRightAddon,
-} from '@chakra-ui/react';
+import React, { useState } from 'react';
+import styles from './NewLand.module.css';
+// import {
+//   FormControl,
+//   Input,
+//   Stack,
+//   InputLeftElement,
+//   FormLabel,
+//   InputRightElement,
+//   FormErrorMessage,
+//   FormHelperText,
+//   InputGroup,
+//   InputLeftAddon,
+//   Button,
+//   InputRightAddon,
+// } from '@chakra-ui/react';
 
-const NewLand = () => {
-  const handleSubmit = () => {
-    console.log('here');
+const date = new Date().toDateString();
+const initState = {
+      date,
+      "location": "",
+      "scheme": "",
+      "price": "",
+      "area": "",
+      "partenrs": false,
+      "plots": []
+}
+export const NewLand = () => {
+  const [formData, setFormData] = useState(initState)
+  const handleSubmit = (e) => {
+e.preventDefault()
+    console.log(formData);
   };
 
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    const valueToUpdate = type === "checkbox" ? checked : value;
+    setFormData({...formData, [name]: valueToUpdate})
+  }
+
   return (
-    <div className="newLand">
-      <FormControl isRequired>
-        <FormLabel>First name</FormLabel>
-        <Input placeholder="First name" />
-        <FormLabel>Head</FormLabel>
-        <Input placeholder="Head" />
+    <div className={styles.temp}>
+      <form onSubmit={handleSubmit}>
+        <label>Location</label>
+        <input
+          name="location"
+          value={formData.name}
+          onChange={handleChange}
+          placeholder="Location"
+        />
+        <label>Scheme</label>
+        <input
+          name="scheme"
+          value={formData.scheme}
+          onChange={handleChange}
+          placeholder="Scheme"
+        />
 
-        <FormLabel>Received</FormLabel>
-        <Input placeholder="Received" />
+        <label>Area</label>
+        <input
+          name="area"
+          value={formData.area}
+          onChange={handleChange}
+          placeholder="Area"
+        />
 
-        <FormLabel>payment</FormLabel>
-        <Input placeholder="Payment" />
+        <label>Price</label>
+        <input
+          name="price"
+          value={formData.price}
+          onChange={handleChange}
+          placeholder="Price"
+        />
 
-        <FormLabel>Price</FormLabel>
-        <Input placeholder="Price" />
-
-        <FormLabel>Area</FormLabel>
-        <Input placeholder="Area" />
-
-        <Stack spacing={2}>
-          <FormLabel>Amount</FormLabel>
-          <InputGroup>
-            <InputLeftElement
-              pointerEvents="none"
-              color="gray.300"
-              fontSize="1.2em"
-              children="$"
-            />
-            <Input placeholder="Enter amount" />
-            <InputRightElement />
-          </InputGroup>
-        </Stack>
-        <Button colorScheme="blue" m={'20px'} onClick={handleSubmit}>
-          Button
-        </Button>
-      </FormControl>
+        <label>Partners</label>
+        <input
+          name="partners"
+          type="checkbox"
+          value={formData.partenrs}
+          onChange={handleChange}
+          placeholder="Partners"
+        />
+        <input type="submit" style={{backgroundColor: "blue", color: "white"}} m={"20px"}/>
+      </form>
     </div>
   );
 };
-
-export default NewLand;

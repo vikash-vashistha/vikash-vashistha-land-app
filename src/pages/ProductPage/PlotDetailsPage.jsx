@@ -23,10 +23,10 @@ export const PlotDetails = () => {
           return (
             <ol key={e._id}>
               <li>
-                <p>facing - {e.face}</p>
-                <p>road - {e.road}</p>
-                <p>water - {e.water}</p>
-                <p>electricity - {e.electricity}</p>
+                <p>eastroad - {e.eastroad ? "available" : "not available"}</p>
+                <p>westroad - {e.westroad ? "available" : "not available"}</p>
+                <p>northroad - {e.northroad ? "available" : "not available"}</p>
+                <p>southroad - {e.southroad ? "available" : "not available"}</p>
                 <p>rate - {e.price} per sq ft</p>
               </li>
             </ol>
