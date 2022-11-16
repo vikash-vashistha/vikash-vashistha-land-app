@@ -1,22 +1,35 @@
 import axios from "axios";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { ThemeContext } from "../../Context/TheamContext";
+
+const styles = {
+  dark: {
+    color: "black",
+    background: "white",
+  },
+  light: {
+    color: "white",
+    background: "black",
+  },
+};
 
 export const ProductsPage = () => {
-  const ref = useRef()
+  const {theme, toggleTheme} = useContext(ThemeContext);
+  const ref = useRef();
   const { auth } = useSelector((state) => ({ auth: state.token }));
   const [text, setText] = useState("");
   const [data, setData] = useState([]);
   const handleClick = () => {
     ref.current.scrollTop = 0;
-  }
+  };
 
   useEffect(() => {
     getData();
   }, [text]);
-  
-// getting locations
+
+  // getting locations
   const getData = () => {
     axios
       .get(`http://localhost:2345/products/locations?city=${text}`)
@@ -27,7 +40,7 @@ export const ProductsPage = () => {
     <div style={{ display: "flex" }}>
       <div>
         <input onChange={(e) => setText(e.target.value)} />
-        <button>search</button>
+        <button style={styles[theme]}>search</button>
       </div>
       <div style={{ height: "500px", overflowY: "scroll" }} ref={ref}>
         {data &&
@@ -47,7 +60,12 @@ export const ProductsPage = () => {
             </button>
           ))}
       </div>
-      <button style={{height: "30px", marginTop: "400px"}} onClick={handleClick}>⬆️</button>
+      <button
+        style={{ height: "30px", marginTop: "400px" }}
+        onClick={handleClick}
+      >
+        ⬆️
+      </button>
     </div>
   );
 };
