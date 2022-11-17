@@ -3,7 +3,6 @@ import { Signup } from "../pages/Login-signup/Signup";
 import { Login } from "../pages/Login-signup/Login";
 import { Signout } from "../pages/Login-signup/Signout";
 import { BalancePage } from "../pages/BalancePage/BalancePage";
-import { BalanceDetailsPage } from "../pages/BalancePage/BalanceDetailsPage";
 import { SellerPage } from "../pages/SellerPage/SellerPage";
 import { Navbar } from "../Components/Navbar/Navbar";
 import { NotFoundPage } from "../pages/NotFoundPage/NotFoundPage";
@@ -53,14 +52,6 @@ export const Routess = () => {
           element={
             <PrivateRoute>
               <SellerPage />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/balance/:id"
-          element={
-            <PrivateRoute>
-              <BalanceDetailsPage />
             </PrivateRoute>
           }
         />

@@ -1,37 +1,72 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { getTransactions } from "../../store/transaction/action.transaction";
+import { useEffect, useReducer, useState } from "react";
 
-export const BalancePage = () => {
-  const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(false);
-  // const { transactiondata } = useSelector((store) => store.transaction);
-  const [transactiondata, setTransactiondata] = useState([]);
-  useEffect(() => {
-    getProducts((page));
-  }, [page]);
-  const getProducts = async (page) => {
-    const token = localStorage.getItem("token");
-    console.log(token)
-    try {
-      setLoading(true);
-      await axios
-        .get(`http://localhost:2345/transaction?page=${page}&size=${3}`, {
-          headers: { authorization: `Bearer ${token}` },
-        })
-        .then((res) => {
-          console.log("res.data: ", res.data.transaction);
-          setTransactiondata([...res.data.transaction]);
-        });
-      setLoading(false);
-    } catch (e) {
-      setLoading(false);
-      console.log(e);
+const initValue = {
+  isLoading: false,
+  isError: false,
+  data: [],
+  page: 1,
+};
+
+const balanceReducer = (state, action) => {
+  switch (action.type) {
+    case "FETCH_TRANSACTION_LOADING": {
+      return { ...state, isLoading: true, isError: false };
     }
-  };
-  console.log("transactiondata: ", transactiondata);
+    case "FETCH_TRANSACTION_SUCCESS": {
+      return { ...state, isLoading: false, data: action.payload };
+    }
+    case "FETCH_TRANSACTION_FAILURE": {
+      return { ...state, isLoading: false, isError: true };
+    }
+    case "INCREMENT_PAGE": {
+      return { ...state, isLoading: false, page: action.payload + 1 };
+    }
+    case "DECREMENT_PAGE": {
+      return { ...state, isLoading: false, page: action.payload - 1 };
+    }
+    default:
+      return state;
+  }
+};
+
+const transLoadingAction = { type: "FETCH_TRANSACTION_LOADING" };
+const transSuccessAction = { type: "FETCH_TRANSACTION_SUCCESS" };
+const transFailureAction = { type: "FETCH_TRANSACTION_FAILURE" };
+const incPage = { type: "INCREMENT_PAGE" };
+const decPage = { type: "DECREMENT_PAGE" };
+
+const getProducts = async (state, dispatch) => {
+  const token = localStorage.getItem("token");
+  // console.log(token);
+  try {
+    // setLoading(true);
+    dispatch(transLoadingAction);
+    await axios
+      .get(`http://localhost:2345/transaction?page=${state.page}&size=${3}`, {
+        headers: { authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        console.log("res.data: ", res.data.transaction);
+        dispatch({
+          ...transSuccessAction,
+          payload: [...res.data.transaction],
+        });
+        // setTransactiondata([...res.data.transaction]);
+      });
+    // setLoading(false);
+  } catch (e) {
+    // setLoading(false);
+    dispatch(transFailureAction);
+    console.log(e);
+  }
+};
+export const BalancePage = () => {
+  const [state, dispatch] = useReducer(balanceReducer, initValue);
+
+  useEffect(() => {
+    getProducts(state, dispatch);
+  }, [state.page]);
 
   return (
     <>
@@ -56,42 +91,50 @@ export const BalancePage = () => {
         <h4>to</h4>
         <h4>Amount</h4>
       </div>
-      {transactiondata && transactiondata.map((el) => {
-        return (
-          <div
-            key={el.transaction_id}
-            className="container"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(9, 35%)",
-              justifyContent: "space-evenly",
-              width: "500px",
-              margin: "auto",
-              paddingTop: "10px",
-            }}
-          >
-            <div>{el.transaction_id}</div>
-            <div>{el.date}</div>
-            <div>{el.scheme}</div>
-            <div>{el.type}</div>
-            <div>{el.land_id.name}</div>
-            <div>{el.plot_id.face}</div>
-            <div>{el.from}</div>
-            <div>{el.to}</div>
-            <div>{el.amount}</div>
-            {/* <Link to={`/products/${el.id}`}>more details</Link> */}
-          </div>
-        );
-      })}
+      {state.data &&
+        state.data.map((el) => {
+          return (
+            <div
+              key={el.transaction_id}
+              className="container"
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(9, 35%)",
+                justifyContent: "space-evenly",
+                width: "500px",
+                margin: "auto",
+                paddingTop: "10px",
+              }}
+            >
+              <div>{el.transaction_id}</div>
+              <div>{el.date}</div>
+              <div>{el.scheme}</div>
+              <div>{el.type}</div>
+              <div>{el.land_id.name}</div>
+              <div>{el.plot_id.face}</div>
+              <div>{el.from}</div>
+              <div>{el.to}</div>
+              <div>{el.amount}</div>
+              {/* <Link to={`/products/${el.id}`}>more details</Link> */}
+            </div>
+          );
+        })}
       <br />
       <div style={{ marginLeft: "45%" }}>
-        <button onClick={() => setPage((prv) => prv - 1)} disabled={page == 1}>
+        <button
+          onClick={() => dispatch({ ...decPage, payload: state.page })}
+          disabled={state.page == 1}
+        >
           prv
         </button>
-        <span style={{ padding: "0.5rem" }}>{page}</span>
-        <button onClick={() => setPage((prv) => prv + 1)}>next</button>
+        <span style={{ padding: "0.5rem" }}>{state.page}</span>
+        <button onClick={() => dispatch({ ...incPage, payload: state.page })}>
+          next
+        </button>
       </div>
-      <div style={{ marginLeft: "45%" }}>{loading && <h3>...loading</h3>}</div>
+      <div style={{ marginLeft: "45%" }}>
+        {state.isLoading && <h3>...loading</h3>}
+      </div>
     </>
   );
 };

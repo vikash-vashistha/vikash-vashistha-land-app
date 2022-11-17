@@ -20,7 +20,7 @@ export const Navbar = () => {
     },
     { to: auth ? "/signout" : "/login", title: auth ? "signout" : "Login" },
   ];
-  console.log(auth);
+  // console.log(auth);
   return (
     <>
       <div style={{ display: "flex", justifyContent: "space-around" }}>
