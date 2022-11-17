@@ -26,7 +26,6 @@ export const Routess = () => {
         <Route path="/products/lands/:id" element={<Land />} />
         <Route path="/products/singleland/:id" element={<Plots />} />
 
-       
         <Route path="/products/plotdetails/:id" element={<PlotDetails />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="login" element={<Login />} />
@@ -55,10 +54,31 @@ export const Routess = () => {
             </PrivateRoute>
           }
         />
-        <Route path="/seller" element={<SellerPage />} />
+        <Route
+          path="/seller"
+          element={
+            <PrivateRoute>
+              <SellerPage />
+            </PrivateRoute>
+          }
+        />
 
-        <Route path="/seller/newland" element={<NewLand />} />
-        <Route path="/seller/newplot/:id" element={<NewPlot />} />
+        <Route
+          path="/seller/newland"
+          element={
+            <PrivateRoute>
+              <NewLand />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/seller/newplot/:id"
+          element={
+            <PrivateRoute>
+              <NewPlot />
+            </PrivateRoute>
+          }
+        />
 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

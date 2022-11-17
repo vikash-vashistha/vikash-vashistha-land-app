@@ -19,7 +19,6 @@ export const Navbar = () => {
     { to: "/admin", title: "admin" },
     { to: "/seller", title: "seller" },
     { to: "/balance", title: "history" },
-    { to: "/form", title: "register a new land /partner in a land" },
     { to: "/chat", title: "chat" },
 
     { 

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { ThemeContext } from "../../Context/TheamContext";
 
-const styles = {
+export const styles = {
   dark: {
     color: "black",
     background: "white",
