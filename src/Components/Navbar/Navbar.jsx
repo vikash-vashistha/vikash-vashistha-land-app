@@ -1,7 +1,15 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
+const baseStyle = {
+  color: "black",
+  TextDecoration: "none"
+}
 
+const activeStyle = {
+  color: "red",
+  TextDecoration: "none"
+}
 
 export const Navbar = () => {
   const { auth } = useSelector((state) => ({ auth: state.token }));
@@ -14,7 +22,7 @@ export const Navbar = () => {
     { to: "/form", title: "register a new land /partner in a land" },
     { to: "/chat", title: "chat" },
 
-    {
+    { 
       to: "/signup" ,
       title:  "New user - Signup",
     },
@@ -26,9 +34,9 @@ export const Navbar = () => {
       <div style={{ display: "flex", justifyContent: "space-around" }}>
         {links.map((el) => {
           return (
-            <Link key={el.to} style={{ padding: "10px" }} to={el.to}>
+            <NavLink style={({isActive}) => isActive ? activeStyle : baseStyle} key={el.to}  to={el.to}>
               {el.title}
-            </Link>
+            </NavLink>
           );
         })}
       </div>
