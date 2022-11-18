@@ -1,6 +1,21 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import {
+  Input,
+  InputGroup,
+  InputLeftAddon,
+  Stack,
+  InputRightElement,
+  InputLeftElement,
+  PhoneIcon,
+  Button,
+  Image,
+  Box,
+  PinInput,
+  PinInputField,
+  Text,
+} from "@chakra-ui/react";
 
 const token = localStorage.getItem("token");
 export const SellerPage = () => {
@@ -24,18 +39,21 @@ export const SellerPage = () => {
           paddingTop: "175px",
         }}
       >
-        <Link to="./newland">register land</Link>
+        <Link to="./newland"><Button>register land</Button></Link>
         {lands &&
-          lands.map((e) => {
+          lands.map((e, i) => {
             return (
-              <ol key={e._id}>
-                <li>
-                  <Link to={`/seller/newplot/${e._id}/`}>register plot</Link>
+              <Box key={e._id}>
+                <Stack>
+                  <h3>{"land" + " " + (i+1)}</h3>
+                  <Link to={`/seller/newplot/${e._id}/`}>
+                    <Button>register plot</Button>
+                  </Link>
                   <span style={{ marginLeft: "2%" }}>price = {e.price}</span>
                   <span style={{ marginLeft: "2%" }}>area = {e.area}</span>
-                  <button>become partner</button>
-                </li>
-              </ol>
+                  <Button>become partner</Button>
+                </Stack>
+              </Box>
             );
           })}
         

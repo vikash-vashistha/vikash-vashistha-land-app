@@ -89,7 +89,8 @@
       "type": "credit",
       "date": "05-09-2022",
       "amount": 500,
-      "user_id": "63708d17b13958e2ae7acc3d",
+      "from": "63708d17b13958e2ae7acc3d",
+      "to": "63708d17b13958e2ae7acc3d",
       "land_id": "634d5260d0c9188cce90c366",
       "plot_id": "63500e047a838b71de30770c"
     },
@@ -98,7 +99,8 @@
       "type": "debit",
       "date": "04-09-2022",
       "amount": 600,
-      "user_id": "63708d17b13958e2ae7acc3d",
+       "from": "63708d17b13958e2ae7acc3d",
+      "to": "63708d17b13958e2ae7acc3d",
       "land_id": "634d5260d0c9188cce90c366",
       "plot_id": ""
     },
@@ -107,7 +109,8 @@
       "type": "credit",
       "date": "04-09-2022",
       "amount": 700,
-      "user_id": "63708d17b13958e2ae7acc3d",
+       "from": "63708d17b13958e2ae7acc3d",
+      "to": "63708d17b13958e2ae7acc3d",
       "land_id": "634d5260d0c9188cce90c366",
       "plot_id": "63500e047a838b71de30770c"
     },
@@ -116,7 +119,8 @@
       "type": "credit",
       "date": "03-09-2022",
       "amount": 800,
-      "user_id": "63708d17b13958e2ae7acc3d",
+       "from": "63708d17b13958e2ae7acc3d",
+      "to": "63708d17b13958e2ae7acc3d",
       "land_id": "634d5260d0c9188cce90c366",
       "plot_id": "63500e047a838b71de30770c"
     },
@@ -125,7 +129,8 @@
       "type": "debit",
       "date": "03-09-2022",
       "amount": 900,
-      "user_id": "63708d17b13958e2ae7acc3d",
+       "from": "63708d17b13958e2ae7acc3d",
+      "to": "63708d17b13958e2ae7acc3d",
       "land_id": "634d5260d0c9188cce90c366",
       "plot_id": "63500e047a838b71de30770b"
     },
@@ -134,7 +139,8 @@
       "type": "debit",
       "date": "03-09-2022",
       "amount": 1000,
-      "user_id": "63708d17b13958e2ae7acc3d",
+       "from": "63708d17b13958e2ae7acc3d",
+      "to": "63708d17b13958e2ae7acc3d",
       "land_id": "634d5260d0c9188cce90c366",
       "plot_id": "63500e047a838b71de30770b"
     }

@@ -1,6 +1,19 @@
 import axios from "axios";
 import { useEffect, useReducer, useState } from "react";
 
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tfoot,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
+  TableContainer,
+  Button
+} from "@chakra-ui/react";
+
 const initValue = {
   isLoading: false,
   isError: false,
@@ -70,67 +83,54 @@ export const BalancePage = () => {
 
   return (
     <>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(9, 35%)",
-          justifyContent: "space-evenly",
-          width: "500px",
-          margin: "auto",
-          paddingTop: "50px",
-        }}
-      >
-        <h4>Serial no.</h4>
-        <h4>Date</h4>
-        <h4>Scheme</h4>
+      <TableContainer>
+      <Table variant="simple">
+      <TableCaption>All user Transactions</TableCaption>
+          <Thead>
+            <Tr>
+              <Th>Serial no.</Th>
+              <Th>Date</Th>
 
-        <h4>type</h4>
-        <h4>Land</h4>
-        <h4>Plot</h4>
-        <h4>from</h4>
-        <h4>to</h4>
-        <h4>Amount</h4>
-      </div>
-      {state.data &&
-        state.data.map((el) => {
-          return (
-            <div
-              key={el.transaction_id}
-              className="container"
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(9, 35%)",
-                justifyContent: "space-evenly",
-                width: "500px",
-                margin: "auto",
-                paddingTop: "10px",
-              }}
-            >
-              <div>{el.transaction_id}</div>
-              <div>{el.date}</div>
-              <div>{el.scheme}</div>
-              <div>{el.type}</div>
-              <div>{el.land_id.name}</div>
-              <div>{el.plot_id.face}</div>
-              <div>{el.from}</div>
-              <div>{el.to}</div>
-              <div>{el.amount}</div>
-              {/* <Link to={`/products/${el.id}`}>more details</Link> */}
-            </div>
-          );
-        })}
+              <Th>type</Th>
+              <Th>Land</Th>
+              <Th>Plot</Th>
+              <Th>from</Th>
+              <Th>to</Th>
+              <Th>Amount</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {state.data &&
+              state.data.map((el) => {
+                return (
+                  <Tr key={el.transaction_id}>
+                    <td>{el.transaction_id}</td>
+                    <td>{el.date}</td>
+                    <td>{el.type}</td>
+                    <td>{el.land_id}</td>
+                    <td>{el.plot_id}</td>
+                    <td>{el.from}</td>
+                    <td>{el.to}</td>
+                    <td>{el.amount}</td>
+                    {/* <Link to={`/products/${el.id}`}>more details</Link> */}
+                  </Tr>
+                );
+              })}
+          </Tbody>
+        </Table>
+      </TableContainer>
       <br />
       <div style={{ marginLeft: "45%" }}>
-        <button
+        <Button
           onClick={() => dispatch({ ...decPage, payload: state.page })}
           disabled={state.page == 1}
         >
           prv
-        </button>
+        </Button>
         <span style={{ padding: "0.5rem" }}>{state.page}</span>
-        <button onClick={() => dispatch({ ...incPage, payload: state.page })}>
+        <Button onClick={() => dispatch({ ...incPage, payload: state.page })}>
           next
-        </button>
+        </Button>
       </div>
       <div style={{ marginLeft: "45%" }}>
         {state.isLoading && <h3>...loading</h3>}

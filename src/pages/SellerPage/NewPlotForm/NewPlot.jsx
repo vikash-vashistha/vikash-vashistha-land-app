@@ -1,20 +1,23 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./NewPlot.module.css";
-// import {
-//   FormControl,
-//   Input,
-//   Stack,
-//   InputLeftElement,
-//   FormLabel,
-//   InputRightElement,
-//   FormErrorMessage,
-//   FormHelperText,
-//   InputGroup,
-//   InputLeftAddon,
-//   Button,
-//   InputRightAddon,
-// } from '@chakra-ui/react';
+import {
+  FormControl,
+  Input,
+  Stack,
+  InputLeftElement,
+  FormLabel,
+  InputRightElement,
+  FormErrorMessage,
+  FormHelperText,
+  InputGroup,
+  InputLeftAddon,
+  Button,
+  InputRightAddon,
+  Checkbox,
+  CheckboxGroup,
+} from "@chakra-ui/react";
+import axios from "axios";
 
 const date = new Date().toDateString();
 export const NewPlot = () => {
@@ -24,7 +27,7 @@ export const NewPlot = () => {
     price: "",
     area: "",
     land_id: id,
-    partenrs: false,
+    partners: false,
     eastroad: false,
     westroad: false,
     northroad: false,
@@ -34,6 +37,7 @@ export const NewPlot = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
+    axios.post("http://localhost/land")
   };
 
   const handleChange = (e) => {
@@ -43,10 +47,10 @@ export const NewPlot = () => {
   };
 
   return (
-    <div className={styles.temp}>
+    <Stack className={styles.temp}>
       <form onSubmit={handleSubmit}>
         <label>Area</label>
-        <input
+        <Input
           name="area"
           value={formData.area}
           onChange={handleChange}
@@ -54,7 +58,7 @@ export const NewPlot = () => {
         />
 
         <label>Price</label>
-        <input
+        <Input
           name="price"
           value={formData.price}
           onChange={handleChange}
@@ -62,51 +66,52 @@ export const NewPlot = () => {
         />
 
         <label>Partners</label>
-        <input
+        <Checkbox
+          colorScheme="red"
           name="partners"
           type="checkbox"
           value={formData.partenrs}
           onChange={handleChange}
-          placeholder="Partners"
-        />
+        ></Checkbox>
+        <br />
         <label>East road</label>
-        <input
+        <Checkbox
+          colorScheme="red"
           name="eastroad"
           type="checkbox"
           value={formData.eastroad}
           onChange={handleChange}
-          placeholder="East Road"
-        />
+        ></Checkbox>
+        <br />
         <label>West Road</label>
-        <input
+        <Checkbox
+          colorScheme="red"
           name="westroad"
           type="checkbox"
           value={formData.westroad}
           onChange={handleChange}
-          placeholder="West Road"
-        />
+        ></Checkbox>
+        <br />
         <label>North Road</label>
-        <input
+        <Checkbox
+          colorScheme="red"
           name="northroad"
           type="checkbox"
           value={formData.northroad}
           onChange={handleChange}
-          placeholder="North Road"
-        />
+        ></Checkbox>
+        <br />
         <label>South Road</label>
-        <input
+        <Checkbox
+          colorScheme="red"
           name="southroad"
           type="checkbox"
           value={formData.southroad}
           onChange={handleChange}
-          placeholder="South Road"
-        />
-        <input
-          type="submit"
-          style={{ backgroundColor: "blue", color: "white" }}
-          m={"20px"}
-        />
+        ></Checkbox>
+        <br />
+        <Input type="submit" />
       </form>
-    </div>
+    </Stack>
   );
 };

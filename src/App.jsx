@@ -1,14 +1,15 @@
 import { Routess } from "./Routes/Routes";
 import "./App.css";
-import { ThemeContext } from "./Context/TheamContext";
-import { useContext } from "react";
+import {
+ Container
+} from "@chakra-ui/react";
+
 function App() {
-  const { theme, toggleTheme } = useContext(ThemeContext)
-  console.log(theme)
   return (
     <div className="App">
-      <Routess />
-      <button onClick={() => toggleTheme()} >Change Theam</button>
+      <Container maxW="7xl">
+        <Routess />
+      </Container>
     </div>
   );
 }

@@ -15,6 +15,7 @@ import { Plots } from "../pages/ProductPage/PlotsPage";
 import { PlotDetails } from "../pages/ProductPage/PlotDetailsPage";
 import { NewLand } from "../pages/SellerPage/NewLandForm/NewLand";
 import {NewPlot} from "../pages/SellerPage/NewPlotForm/NewPlot"
+import { Footer } from "../Components/Footer";
 
 export const Routess = () => {
   return (
@@ -82,6 +83,7 @@ export const Routess = () => {
 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+      <Footer />
     </>
   );
 };

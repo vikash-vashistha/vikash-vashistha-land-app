@@ -30,7 +30,7 @@ export const Navbar = () => {
   // console.log(auth);
   return (
     <>
-      <div style={{ display: "flex", justifyContent: "space-around" }}>
+      <div style={{ display: "flex", justifyContent: "space-around", borderBottom: "1px solid gray", marginBottom: "10px" }}>
         {links.map((el) => {
           return (
             <NavLink style={({isActive}) => isActive ? activeStyle : baseStyle} key={el.to}  to={el.to}>

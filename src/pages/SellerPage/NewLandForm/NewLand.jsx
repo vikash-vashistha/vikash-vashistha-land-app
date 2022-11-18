@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
 import styles from './NewLand.module.css';
-// import {
-//   FormControl,
-//   Input,
-//   Stack,
-//   InputLeftElement,
-//   FormLabel,
-//   InputRightElement,
-//   FormErrorMessage,
-//   FormHelperText,
-//   InputGroup,
-//   InputLeftAddon,
-//   Button,
-//   InputRightAddon,
-// } from '@chakra-ui/react';
+import {
+  FormControl,
+  Input,
+  Stack,
+  InputLeftElement,
+  FormLabel,
+  InputRightElement,
+  FormErrorMessage,
+  FormHelperText,
+  InputGroup,
+  InputLeftAddon,
+  Button,
+  InputRightAddon,
+  Checkbox
+} from '@chakra-ui/react';
 
 const date = new Date().toDateString();
 const initState = {
@@ -22,7 +23,7 @@ const initState = {
       "scheme": "",
       "price": "",
       "area": "",
-      "partenrs": false,
+      "partners": false,
       "plots": []
 }
 export const NewLand = () => {
@@ -42,14 +43,14 @@ e.preventDefault()
     <div className={styles.temp}>
       <form onSubmit={handleSubmit}>
         <label>Location</label>
-        <input
+        <Input
           name="location"
           value={formData.name}
           onChange={handleChange}
           placeholder="Location"
         />
         <label>Scheme</label>
-        <input
+        <Input
           name="scheme"
           value={formData.scheme}
           onChange={handleChange}
@@ -57,7 +58,7 @@ e.preventDefault()
         />
 
         <label>Area</label>
-        <input
+        <Input
           name="area"
           value={formData.area}
           onChange={handleChange}
@@ -65,22 +66,22 @@ e.preventDefault()
         />
 
         <label>Price</label>
-        <input
+        <Input
           name="price"
           value={formData.price}
           onChange={handleChange}
           placeholder="Price"
         />
-
-        <label>Partners</label>
-        <input
+        <Checkbox
+          colorScheme="red"
           name="partners"
           type="checkbox"
           value={formData.partenrs}
           onChange={handleChange}
-          placeholder="Partners"
-        />
-        <input type="submit" style={{backgroundColor: "blue", color: "white"}} m={"20px"}/>
+        >
+          Partners
+        </Checkbox>
+        <Input type="submit" />
       </form>
     </div>
   );

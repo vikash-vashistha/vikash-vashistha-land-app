@@ -3,15 +3,27 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { ThemeContext } from "../../Context/TheamContext";
+import {
+  Input,
+  InputGroup,
+  InputLeftAddon,
+  Stack,
+  InputRightElement,
+  InputLeftElement,
+  PhoneIcon,
+  Button,
+  Image,
+  Box,
+} from "@chakra-ui/react";
 
 export const styles = {
   dark: {
-    color: "black",
-    background: "white",
+    color: "blue",
+    background: "pink",
   },
   light: {
-    color: "white",
-    background: "black",
+    color: "pink",
+    background: "blue",
   },
 };
 
@@ -37,35 +49,61 @@ export const ProductsPage = () => {
   };
 
   return (
-    <div style={{ display: "flex" }}>
+    <div>
       <div>
-        <input onChange={(e) => setText(e.target.value)} />
-        <button style={styles[theme]}>search</button>
-      </div>
-      <div style={{ height: "500px", overflowY: "scroll" }} ref={ref}>
-        {data &&
-          data.map((e) => (
-            <button
-              style={{ margin: "5px", textDecoration: "none" }}
-              key={e._id}
+        <InputGroup margin="auto" size="md" width="80%">
+          <Input
+            onChange={(e) => setText(e.target.value)}
+            pr="4.5rem"
+            type="text"
+            placeholder="Search City"
+          />
+          <InputRightElement width="4.5rem">
+            <Button
+              h="1.75rem"
+              size="sm"
+              style={styles[theme]}
+              onClick={handleClick}
             >
-              <Link
-                to={`/products/scheme/${e.city}`}
-                style={{ margin: "5px", textDecoration: "none" }}
-              >
-                <span>{e.city}</span>
-                <span> (</span>
-                <span>{e.state}</span> <span>)</span>
-              </Link>
-            </button>
-          ))}
+              search
+            </Button>
+          </InputRightElement>
+        </InputGroup>
       </div>
-      <button
-        style={{ height: "30px", marginTop: "400px" }}
-        onClick={handleClick}
-      >
-        ⬆️
-      </button>
+      <div style={{ display: "flex", height: "450px" }}>
+        <div
+          style={{
+            margin: "auto",
+            width: "90%",
+            height: "430px",
+            overflowY: "scroll",
+          }}
+          ref={ref}
+        >
+          {data &&
+            data.map((e) => (
+              <Button
+                style={{ margin: "5px", textDecoration: "none" }}
+                key={e._id}
+              >
+                <Link
+                  to={`/products/scheme/${e.city}`}
+                  style={{ margin: "5px", textDecoration: "none" }}
+                >
+                  <span>{e.city}</span>
+                  <span> (</span>
+                  <span>{e.state}</span> <span>)</span>
+                </Link>
+              </Button>
+            ))}
+        </div>
+        <Button
+          style={{ height: "30px", marginTop: "35%" }}
+          onClick={handleClick}
+        >
+          ⬆️
+        </Button>
+      </div>
     </div>
   );
 };

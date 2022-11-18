@@ -1,5 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { addAuth, getAuth, removeAuth } from "../../store/actions";
+import {
+  Button,
+} from "@chakra-ui/react";
 
 export const Signout = () => {
   const dispatch = useDispatch();
@@ -9,5 +12,5 @@ export const Signout = () => {
     dispatch(removeAuth(null));
   };
 
-  return <button onClick={handleClick}>Sign out</button>;
+  return <Button onClick={handleClick}>Sign out</Button>;
 };

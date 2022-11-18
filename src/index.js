@@ -13,11 +13,12 @@ root.render(
   <React.StrictMode>
     <ThemeContextProviderComponent>
       <ReduxProvider store={store}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+        <ChakraProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </ChakraProvider>
       </ReduxProvider>
-      </ThemeContextProviderComponent>
+    </ThemeContextProviderComponent>
   </React.StrictMode>
 );
-// <ChakraProvider></ChakraProvider>;

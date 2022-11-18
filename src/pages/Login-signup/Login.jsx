@@ -3,8 +3,24 @@ import { Navigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { addAuth, getAuth, removeAuth } from "../../store/actions";
+import {
+  Input,
+  InputGroup,
+  InputLeftAddon,
+  Stack,
+  InputRightElement,
+  InputLeftElement,
+  PhoneIcon,
+  Button,
+  Image,
+  Box,
+  PinInput,
+  PinInputField,
+  Text
+} from "@chakra-ui/react";
 
 export const Login = () => {
+  const [otp, setOtp] = useState("")
   const dispatch = useDispatch();
   const isAuth  = useSelector((state) => state.token);
   const [formData, setFormData] = useState({
@@ -44,21 +60,39 @@ export const Login = () => {
    return isAuth ? (
      <Navigate to="/" />
    ) : (
-     <form onSubmit={handleSubmit}>
-       <h3>Log in</h3>
-       <input
-         id="email"
-         type="email"
-         onChange={handleChange}
-         placeholder="enter email"
-       />
-       <input
-         id="password"
-         type="text"
-         onChange={handleChange}
-         placeholder="enter password"
-       />
-       <input type="submit" value={"Log in"} />
-     </form>
+     <Stack margin="auto" width="40%">
+       <form onSubmit={handleSubmit}>
+         <h3>Log in</h3>
+         <Input
+           id="email"
+           type="email"
+           onChange={handleChange}
+           placeholder="enter email"
+         />
+         <Input
+           id="password"
+           type="text"
+           onChange={handleChange}
+           placeholder="enter password"
+         />
+         <Input type="submit" value={"Log in"} />
+       </form>
+       <br />
+       <br />
+       <h3>or use PIN</h3>
+       <br />
+       <br />
+       <Box>
+         <PinInput value={otp} onChange={(value) => setOtp(value)} otp>
+           <PinInputField />
+           <PinInputField />
+           <PinInputField />
+           <PinInputField />
+         </PinInput>
+         </Box>
+         <Box>
+           <Text>{otp}</Text>
+         </Box>
+     </Stack>
    );
 };
