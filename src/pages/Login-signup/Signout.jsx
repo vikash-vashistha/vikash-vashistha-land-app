@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addAuth, getAuth, removeAuth } from "../../store/actions";
+import { addAuth, getAuth, removeAuth } from "../../Redux/actions";
 import {
   Button,
 } from "@chakra-ui/react";

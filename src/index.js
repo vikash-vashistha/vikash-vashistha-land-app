@@ -4,9 +4,9 @@ import "./index.css";
 import App from "./App";
 import { ChakraProvider } from "@chakra-ui/react";
 import { Provider as ReduxProvider } from "react-redux";
-import { store } from "../src/store/store";
 import { BrowserRouter } from "react-router-dom";
 import { ThemeContextProviderComponent } from "./Context/TheamContext";
+import { store } from "./Redux/store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

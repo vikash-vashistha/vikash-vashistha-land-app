@@ -8,7 +8,6 @@ import {
   Stack,
   InputRightElement,
   InputLeftElement,
-  PhoneIcon,
   Button,
   Image,
   Box,
@@ -19,6 +18,8 @@ import {
   CloseButton,
   Select,
 } from "@chakra-ui/react";
+
+import { PhoneIcon, AddIcon, WarningIcon } from '@chakra-ui/icons';
 
 export const Signup = () => {
   const navigate = useNavigate();
@@ -133,6 +134,10 @@ export const Signup = () => {
           </InputRightElement>
         </InputGroup>
         <InputGroup>
+          <InputRightElement 
+            pointerEvents="none"
+            children={<PhoneIcon color="gray.300" />}
+          />
           <InputLeftAddon children="+91" />
           <Input
             id="phone_no"
@@ -163,8 +168,8 @@ export const Signup = () => {
           isLoading={loading}
         >
           status
-          </Button>
-          <Input type="submit" value={"create user"} />
+        </Button>
+        <Input type="submit" value={"create user"} />
       </form>
       <Box boxSize="sm">
         <Image src={blob} />

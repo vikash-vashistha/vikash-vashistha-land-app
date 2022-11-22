@@ -30,7 +30,7 @@ function createConnection(user) {
         user.name
       } at ${new Date().toTimeString()}`;
       callback(message);
-    }, 1000);
+    }, 5000);
   }
   function unsubscribe() {
     console.log(`stopped listening to ${user.name}`);

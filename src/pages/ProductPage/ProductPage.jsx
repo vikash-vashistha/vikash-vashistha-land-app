@@ -28,8 +28,9 @@ export const styles = {
 };
 
 export const ProductsPage = () => {
-  const {theme, toggleTheme} = useContext(ThemeContext);
   const ref = useRef();
+  // const ref1 = useRef();
+  const {theme, toggleTheme} = useContext(ThemeContext);
   const { auth } = useSelector((state) => ({ auth: state.token }));
   const [text, setText] = useState("");
   const [data, setData] = useState([]);
@@ -38,7 +39,10 @@ export const ProductsPage = () => {
   };
 
   useEffect(() => {
+    
     getData();
+    // ref1.current = setInterval(() => {}, 2000);
+    // return clearInterval(ref1.current);
   }, [text]);
 
   // getting locations
