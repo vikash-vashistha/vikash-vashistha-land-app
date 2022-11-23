@@ -66,7 +66,7 @@ export const Plots = () => {
 
               <Link
                 key={e._id}
-                to={`/products/plotdetails/${e._id}`}
+                to={`/plotdetails/${e._id}`}
                 style={{ margin: "5px", textDecoration: "none" }}
               >
                 <Button>Check out</Button>

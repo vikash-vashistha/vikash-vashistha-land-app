@@ -13,6 +13,7 @@ import {
   TableContainer,
   Button
 } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 const initValue = {
   isLoading: false,
@@ -97,22 +98,23 @@ export const BalancePage = () => {
               <Th>from</Th>
               <Th>to</Th>
               <Th>Amount</Th>
+              <Th>more</Th>
             </Tr>
           </Thead>
           <Tbody>
             {state.data &&
-              state.data.map((el) => {
+              state.data.map((el, i) => {
                 return (
-                  <Tr key={el.transaction_id}>
-                    <td>{el.transaction_id}</td>
+                  <Tr key={el._id}>
+                    <td>{i+1}</td>
                     <td>{el.date}</td>
                     <td>{el.type}</td>
-                    <td>{el.land_id}</td>
-                    <td>{el.plot_id}</td>
-                    <td>{el.from}</td>
-                    <td>{el.to}</td>
+                    <td>{el.land_id.title}</td>
+                    <td>{el.plot_id.title}</td>
+                    <td>{el.from.name}</td>
+                    <td>{el.to.name}</td>
                     <td>{el.amount}</td>
-                    {/* <Link to={`/products/${el.id}`}>more details</Link> */}
+                    <Link to={`/details/${el._id}`}>more details</Link>
                   </Tr>
                 );
               })}

@@ -10,7 +10,6 @@ import { store } from "./Redux/store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
     <ThemeContextProviderComponent>
       <ReduxProvider store={store}>
         <ChakraProvider>
@@ -20,5 +19,4 @@ root.render(
         </ChakraProvider>
       </ReduxProvider>
     </ThemeContextProviderComponent>
-  </React.StrictMode>
 );

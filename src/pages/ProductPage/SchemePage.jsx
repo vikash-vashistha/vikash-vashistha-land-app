@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { Button, Stack, Text } from "@chakra-ui/react";
 
 
 export const Scheme = () => {
-  const { id } = useParams();
-
+  const {id} = useParams();
+console.log(IDBObjectStore)
   const [schemes, setSchemes] = useState([]);
 
   useEffect(() => {
@@ -15,28 +16,36 @@ export const Scheme = () => {
 
   // getting schemes
   const getProducts = () => {
-    console.log(id);
-    axios.get(`http://localhost:2345/products/scheme/${id}`).then((res) => {
+    axios.get(`http://localhost:2345/scheme/${id}`).then((res) => {
       setSchemes([...res.data]);
       console.log(res.data);
     });
   };
 
   return (
-    <div>
+    <div style={{ display: "flex", flexWrap: "wrap" }}>
       {schemes &&
-        schemes.map((e) => {
+        schemes.map((e, i) => {
           return (
-            <ol key={e._id}>
-              <li>
-                <Link
-                  to={`/products/lands/${e.scheme}`}
-                  style={{ margin: "5px", textDecoration: "none" }}
-                >
-                  {e.scheme}
-                </Link>
-              </li>
-            </ol>
+            <Stack
+              width="sm"
+              key={e._id}
+              style={{
+                border: "1px solid grey",
+                borderRadius: "5px",
+                margin: "5px",
+                padding: "5px",
+              }}
+            >
+              <Link
+                to={`/lands/${e._id}`}
+                style={{ margin: "5px", textDecoration: "none" }}
+              >
+                <Button>Scheme NO. {i + 1} Checkout Lands</Button>
+              </Link>
+              <Text>{e.city}</Text>
+              <Text>scheme {e.scheme_name}</Text>
+            </Stack>
           );
         })}
     </div>

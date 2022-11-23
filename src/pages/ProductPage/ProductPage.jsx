@@ -91,7 +91,7 @@ export const ProductsPage = () => {
                 key={e._id}
               >
                 <Link
-                  to={`/products/scheme/${e.city}`}
+                  to={`/scheme/${e.city}`}
                   style={{ margin: "5px", textDecoration: "none" }}
                 >
                   <span>{e.city}</span>

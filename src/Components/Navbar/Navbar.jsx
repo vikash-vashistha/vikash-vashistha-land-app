@@ -16,15 +16,15 @@ export const Navbar = () => {
 
   const links = [
     { to: "/", title: "home" },
-    { to: "/admin", title: "admin" },
     { to: "/seller", title: "seller" },
     { to: "/balance", title: "history" },
-    { to: "/chat", title: "chat" },
-
+    { to: "/chat", title: "message" },
+    
     { 
       to: "/signup" ,
       title:  "New user - Signup",
     },
+    { to: "/cart", title: "cart" },
     { to: auth ? "/signout" : "/login", title: auth ? "signout" : "Login" },
   ];
   // console.log(auth);

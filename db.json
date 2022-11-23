@@ -1,5 +1,6 @@
 {
   "land": [
+    
     {
       "date": "",
       "location": "jaipur",
@@ -11,18 +12,26 @@
           "user_id": "63708d17b13958e2ae7acc3d",
           "share": "20%"
         }
-      ]
+      ],
+      "electricity": "false",
+      "road": "true",
+      "sewerage": "true",
+      "water": "true"
     },
     {
       "date": "",
-      "location": "kota",
+      "location": "jaipur",
       "scheme": "63727fa8fe51d531ee219226",
       "price": 500,
       "area": 1200,
       "partenrs": [
         {
           "user_id": "63708d17b13958e2ae7acc3d"}
-      ]
+      ],
+      "electricity": "true",
+      "road": "false",
+      "sewerage": "true",
+      "water": "true"
     }
   ],
   "user": [

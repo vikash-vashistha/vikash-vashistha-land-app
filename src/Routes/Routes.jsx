@@ -16,6 +16,7 @@ import { PlotDetails } from "../pages/ProductPage/PlotDetailsPage";
 import { NewLand } from "../pages/SellerPage/NewLandForm/NewLand";
 import {NewPlot} from "../pages/SellerPage/NewPlotForm/NewPlot"
 import { Footer } from "../Components/Footer";
+import { BalanceDetail } from "../pages/BalancePage/BalanceDetail";
 
 export const Routess = () => {
   return (
@@ -23,12 +24,12 @@ export const Routess = () => {
       <Navbar />
       <Routes>
         <Route path="/" element={<ProductsPage />} />
-        <Route path="/products/scheme/:id" element={<Scheme />} />
-        <Route path="/products/lands/:id" element={<Land />} />
-        <Route path="/products/singleland/:id" element={<Plots />} />
+        <Route path="scheme/:id" element={<Scheme />} />
+        <Route path="lands/:id" element={<Land />} />
+        <Route path="singleland/:id" element={<Plots />} />
 
-        <Route path="/products/plotdetails/:id" element={<PlotDetails />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="plotdetails/:id" element={<PlotDetails />} />
+        <Route path="signup" element={<Signup />} />
         <Route path="login" element={<Login />} />
         <Route path="signout" element={<Signout />} />
         <Route
@@ -48,10 +49,10 @@ export const Routess = () => {
           }
         />
         <Route
-          path="/admin"
+          path="/details/:id"
           element={
             <PrivateRoute>
-              <SellerPage />
+              <BalanceDetail />
             </PrivateRoute>
           }
         />

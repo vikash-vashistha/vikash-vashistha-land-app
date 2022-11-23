@@ -1,54 +1,40 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { Box, Button, Checkbox, Text, layoutPropNames, Stack } from "@chakra-ui/react";
-
+import { Button, Text, Stack, Flex } from "@chakra-ui/react";
+import { LandFilterSort } from "./LandFilterSort";
 
 export const Land = () => {
   const { id } = useParams();
+  console.log(id)
   const [lands, setLands] = useState([]);
+const location = useLocation()
   // getting lands inside scheme
   useEffect(() => {
-    axios.get(`http://localhost:2345/products/alllands/${id}`).then((res) => {
-      setLands([...res.data]);
-       console.log(res.data);
-    });
-  }, []);
-
+    if (lands.length === 0 || location.search) {
+      // const getLandParams = {
+      //   params: {
+      //     category: searchParams.getAll("category"),
+      //     sortBy: searchParams.getAll("sortBy"),
+      //     range: searchParams.getAll("range"),
+      //   },
+      // };
+      axios
+        .get(`http://localhost:2345/land/${id}${location.search}`)
+        .then((res) => {
+          setLands([...res.data]);
+          console.log(res.data);
+        });
+    }
+  }, [location.search]);
+console.log(location.search)
   return (
     <div style={{ display: "flex" }}>
-      <div style={{ width: "20%" }}>
-        <br />
-
-        <h3>Filter</h3>
-        <Stack>
-          <Checkbox>Water</Checkbox>
-          <Checkbox>Electricty</Checkbox>
-          <Checkbox>Road</Checkbox>
-          <Checkbox>Sewerage</Checkbox>
-        </Stack>
-        <br />
-
-        <h3>Sort by price</h3>
-        <Stack>
-          <Checkbox>Low to High</Checkbox>
-          <Checkbox>High to Low</Checkbox>
-        </Stack>
-        <br />
-
-        <h3>Select range</h3>
-        <Stack>
-          <Checkbox>1L to 5L</Checkbox>
-          <Checkbox>5L to 15L</Checkbox>
-          <Checkbox>15L to 25L</Checkbox>
-          <Checkbox>25L to 50L</Checkbox>
-          <Checkbox>50L and above</Checkbox>
-        </Stack>
-      </div>
-      <div style={{ width: "80%"}}>
+      <LandFilterSort />
+      <div style={{ width: "80%", display: "flex", flexWrap: "wrap" }}>
         {lands &&
-          lands.map((e) => {
+          lands.map((e, i) => {
             return (
               <Stack
                 width="sm"
@@ -61,13 +47,35 @@ export const Land = () => {
                 }}
               >
                 <Link
-                  to={`/products/singleland/${e._id}`}
+                  to={`/singleland/${e._id}`}
                   style={{ margin: "5px", textDecoration: "none" }}
                 >
-                  <Button>Check out plots</Button>
+                  <Button>Land NO. {i + 1} Check out plots</Button>
                 </Link>
-                <Text>price = {e.price}</Text>
-                <Text>area = {e.area}</Text>
+                <Text>price = {e.price} rs/sq. ft.</Text>
+                <Text>area = {e.area} sq. ft.</Text>
+                <Flex>
+                  <Text>
+                    {e.facility && e.facility.includes("electricity")
+                      ? "💡"
+                      : ""}
+                  </Text>
+                  <Text>
+                    {e.facility && e.facility.includes("water")
+                      ? "💧"
+                      : ""}
+                  </Text>
+                  <Text>
+                    {e.facility && e.facility.includes("road")
+                      ? "🛣️"
+                      : ""}
+                  </Text>
+                  <Text>
+                    {e.facility && e.facility.includes("sewerage")
+                      ? "🚽"
+                      : ""}
+                  </Text>
+                </Flex>
                 <Button>become partner</Button>
               </Stack>
             );
