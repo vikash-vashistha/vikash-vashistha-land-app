@@ -17,6 +17,8 @@ import { NewLand } from "../pages/SellerPage/NewLandForm/NewLand";
 import {NewPlot} from "../pages/SellerPage/NewPlotForm/NewPlot"
 import { Footer } from "../Components/Footer";
 import { BalanceDetail } from "../pages/BalancePage/BalanceDetail";
+import { Profile } from "../Components/Navbar/Profile";
+import { Cart } from "../pages/CartPage/Cart";
 
 export const Routess = () => {
   return (
@@ -32,6 +34,8 @@ export const Routess = () => {
         <Route path="signup" element={<Signup />} />
         <Route path="login" element={<Login />} />
         <Route path="signout" element={<Signout />} />
+        <Route path="profile" element={<Profile />} />
+
         <Route
           path="/chat"
           element={
@@ -81,7 +85,14 @@ export const Routess = () => {
             </PrivateRoute>
           }
         />
-
+        <Route
+          path="/cart"
+          element={
+            <PrivateRoute>
+              <Cart />
+            </PrivateRoute>
+          }
+        />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <Footer />

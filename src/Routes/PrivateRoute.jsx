@@ -1,20 +1,22 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 
 const PrivateRoute = ({ children }) => {
-  const isAuth = useSelector((state) => state.token);
-
-  if (!isAuth) {
+  const location = useLocation();
+  console.log("inside private route", location);
+  const { auth } = useSelector((state) => ({ auth: state.auth.isAuth }));
+  console.log("auth", auth);
+  if (!auth) {
     return (
       // <h1 style={{ textAlign: "center" }}>
       //   Not authorized, Please login to continue
       // </h1>
-      <Navigate to="/login" />
+      <Navigate to="/login" state={{ from: location }} replace />
     );
-  } else {
-    return children;
   }
+    return children;
+  
 };
 
 export default PrivateRoute;

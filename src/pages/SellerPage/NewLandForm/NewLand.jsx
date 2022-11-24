@@ -13,7 +13,8 @@ import {
   InputLeftAddon,
   Button,
   InputRightAddon,
-  Checkbox
+  Checkbox,
+  Select
 } from '@chakra-ui/react';
 
 const date = new Date().toDateString();
@@ -22,12 +23,15 @@ const initState = {
       "location": "",
       "scheme": "",
       "price": "",
-      "area": "",
+  "area": "",
+      "title" : "",
       "partners": false,
       "plots": []
 }
 export const NewLand = () => {
-  const [formData, setFormData] = useState(initState)
+  const [formData, setFormData] = useState(initState);
+  const [facility, setFacility] = useState([]);
+
   const handleSubmit = (e) => {
 e.preventDefault()
     console.log(formData);
@@ -36,9 +40,14 @@ e.preventDefault()
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     const valueToUpdate = type === "checkbox" ? checked : value;
-    setFormData({...formData, [name]: valueToUpdate})
+    setFormData({...formData, [name]: valueToUpdate, facility})
   }
 
+  const handleFacility = (e) => {
+    const { value} = e.target;
+    setFacility([ ...facility, value ]);
+  }
+console.log(formData);
   return (
     <div className={styles.temp}>
       <form onSubmit={handleSubmit}>
@@ -56,7 +65,6 @@ e.preventDefault()
           onChange={handleChange}
           placeholder="Scheme"
         />
-
         <label>Area</label>
         <Input
           name="area"
@@ -64,13 +72,29 @@ e.preventDefault()
           onChange={handleChange}
           placeholder="Area"
         />
-
         <label>Price</label>
         <Input
           name="price"
           value={formData.price}
           onChange={handleChange}
           placeholder="Price"
+        />
+        <Stack></Stack>
+        <Select
+          name="facility"
+          onChange={handleFacility}
+          placeholder="Facility"
+        >
+          <option value="electricity">electricity</option>
+          <option value="water">water</option>
+          <option value="road">road</option>
+          <option value="sewerage">sewerage</option>
+        </Select>
+        <Input
+          name="title"
+          value={formData.title}
+          onChange={handleChange}
+          placeholder="Title"
         />
         <Checkbox
           colorScheme="red"

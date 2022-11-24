@@ -74,7 +74,7 @@ export const ProductsPage = () => {
           </InputRightElement>
         </InputGroup>
       </div>
-      <div style={{ display: "flex", height: "450px" }}>
+      <div style={{ display: "flex", height: "450px", margin: "5px" }}>
         <div
           style={{
             margin: "auto",
