@@ -8,9 +8,9 @@ export const Footer = () => {
   console.log(theme);
 
   return (
-      <div style={{ padding: "25px", backgroundColor: "#eef1ff" }}>
-      <h5 style={{ textAlign: "center" }}>Made with ❤️ by Vikash</h5>
+      < >
+      <h5 style={{ textAlign: "center" }}>Made with ❤️ by Vikash Vashistha</h5>
       <Button onClick={() => toggleTheme()}>Change Theam</Button>
-    </div>
+    </>
   );
 };

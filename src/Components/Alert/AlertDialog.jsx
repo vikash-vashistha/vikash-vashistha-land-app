@@ -1,11 +1,6 @@
+import { AlertDialog, AlertDialogContent, Slide } from "@chakra-ui/react";
 import * as React from "react";
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import Slide from "@mui/material/Slide";
+
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -21,27 +16,28 @@ export default function AlertDialogSlide({ setHandleError, errors, title }) {
 
   return (
     <div>
-      <Dialog
+      <AlertDialog
         open={open}
         TransitionComponent={Transition}
         keepMounted
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle>{title}</DialogTitle>
-        <DialogContent>
+    { /*   <AlertDialogTitle>{title}</AlertDialogTitle>
+        <AlertDialogContent>
           {errors.map(({ param, msg }) => (
-            <DialogContentText id="alert-dialog-slide-description">
+            <AlertDialogContentText id="alert-dialog-slide-description">
               <l1>
                 {<b>{param} :</b>} {msg}
               </l1>
-            </DialogContentText>
+            </AlertDialogContentText>
           ))}
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Close</Button>
-        </DialogActions>
-      </Dialog>
+        </AlertDialogContent>
+        <AlertDialogActions>
+        <button onClick={handleClose}>Close</button>
+      </AlertDialogActions>
+          */}
+      </AlertDialog>
     </div>
   );
 }
