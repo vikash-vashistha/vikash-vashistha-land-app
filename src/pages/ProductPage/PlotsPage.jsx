@@ -25,7 +25,7 @@ const location = useLocation();
 console.log(location.search);
 
   return (
-    <div style={{ display: "flex"}}>
+    <div style={{ display: "flex" }}>
       <PlotFilterSort />{" "}
       <div style={{ display: "flex", flexWrap: "wrap" }}>
         {plots &&
@@ -51,7 +51,7 @@ console.log(location.search);
                 to={`/plotdetails/${e._id}`}
                 style={{ margin: "5px", textDecoration: "none" }}
               >
-                <Button>Check out</Button>
+                <Button disabled={e?.user_id?.phone_no ? true : false}>Check out</Button>
               </Link>
               <Stack
                 style={{
@@ -59,18 +59,19 @@ console.log(location.search);
                   margin: "5px",
                   padding: "20px",
                   height: "150px",
+                  backgroundColor: e?.user_id?.phone_no ? "grey" : "lightGreen",
                   width: e.length === e.width ? "150px" : "75px",
                   borderRight: e?.road?.includes("east")
-                    ? "10px dashed red"
+                    ? "10px dashed black"
                     : "5px solid blue",
                   borderLeft: e?.road?.includes("west")
-                    ? "10px dashed red"
+                    ? "10px dashed black"
                     : "5px solid blue",
                   borderBottom: e?.road?.includes("south")
-                    ? "10px dashed red"
+                    ? "10px dashed black"
                     : "5px solid blue",
                   borderTop: e?.road?.includes("north")
-                    ? "10px dashed red"
+                    ? "10px dashed black"
                     : "5px solid blue",
                 }}
               >

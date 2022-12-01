@@ -1,0 +1,15 @@
+.main{
+  margin: auto;
+  display : flex;
+  flex-wrap: wrap;
+  height: 450px;
+  justify-content: space-evenly;
+}
+
+.inner{
+   border: 1px solid grey;
+   padding: 2%;
+   border-radius: 5px;
+   display: flex;
+   width: 15%;
+}

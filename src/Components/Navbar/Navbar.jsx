@@ -42,6 +42,9 @@ export const Navbar = () => {
       title: user?.role?.includes("seller") ? "seller👔" : "🛒",
     },
     {
+      to: `/cart/${user._id}`, title: "cart",
+    },
+    {
       to: auth ? "/signout" : "/login",
       title: auth ? "signout☣️" : "Login",
     },

@@ -1,33 +1,22 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./NewPlot.module.css";
-import {
-  FormControl,
-  Input,
-  Stack,
-  InputLeftElement,
-  FormLabel,
-  InputRightElement,
-  FormErrorMessage,
-  FormHelperText,
-  InputGroup,
-  InputLeftAddon,
-  Button,
-  InputRightAddon,
-  Checkbox,
-  CheckboxGroup,
-} from "@chakra-ui/react";
+import { Input, Stack, Checkbox } from "@chakra-ui/react";
 import axios from "axios";
-
+let newData;
 const date = new Date().toDateString();
+const token = localStorage.getItem("token");
+
 export const NewPlot = () => {
   const { id } = useParams();
   const initState = {
     date,
     price: "",
     area: "",
+    title: "",
+    length: "",
+    width: "",
     land_id: id,
-    partners: false,
     eastroad: false,
     westroad: false,
     northroad: false,
@@ -36,16 +25,38 @@ export const NewPlot = () => {
   const [formData, setFormData] = useState(initState);
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
-    axios.post("http://localhost/land")
+    let road = [];
+
+    if (formData?.eastroad) road.push("east");
+    if (formData?.westroad) road.push("west");
+    if (formData?.northroad) road.push("north");
+    if (formData?.southroad) road.push("south");
+    newData = {
+      date: formData.date,
+      price: formData.price,
+      title: formData.title,
+      length: formData.length,
+      widht: formData.width,
+      area: formData.area,
+      land_id: formData.land_id,
+      road,
+    };
+    console.log("form", formData);
+    console.log("new", newData);
+    axios
+      .post("http://localhost:2345/products",newData).then((res) => console.log(res))
+      .catch((e) => console.log(e));
   };
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     const valueToUpdate = type === "checkbox" ? checked : value;
     setFormData({ ...formData, [name]: valueToUpdate });
-  };
 
+    // console.log(formData);
+    // console.log(newData);
+  };
+  console.log(id);
   return (
     <Stack className={styles.temp}>
       <form onSubmit={handleSubmit}>
@@ -56,7 +67,6 @@ export const NewPlot = () => {
           onChange={handleChange}
           placeholder="Area"
         />
-
         <label>Price</label>
         <Input
           name="price"
@@ -64,15 +74,28 @@ export const NewPlot = () => {
           onChange={handleChange}
           placeholder="Price"
         />
-
-        <label>Partners</label>
-        <Checkbox
-          colorScheme="red"
-          name="partners"
-          type="checkbox"
-          value={formData.partenrs}
+        <label>Title</label>
+        <Input
+          name="title"
+          value={formData.title}
           onChange={handleChange}
-        ></Checkbox>
+          placeholder="title"
+        ></Input>
+        <br />
+        <label>Length</label>
+        <Input
+          name="length"
+          value={formData.length}
+          onChange={handleChange}
+          placeholder="length"
+        ></Input>
+        <br /> <label>Width</label>
+        <Input
+          name="width"
+          value={formData.width}
+          onChange={handleChange}
+          placeholder="width"
+        ></Input>
         <br />
         <label>East road</label>
         <Checkbox

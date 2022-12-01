@@ -16,25 +16,36 @@ import {
   Checkbox,
   Select
 } from '@chakra-ui/react';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 const date = new Date().toDateString();
-const initState = {
-      date,
-      "location": "",
-      "scheme": "",
-      "price": "",
-  "area": "",
-      "title" : "",
-      "partners": false,
-      "plots": []
-}
 export const NewLand = () => {
+  const { id } = useParams();
+  const initState = {
+        date,
+        "location": "",
+        "scheme": id,
+        "price": "",
+        "area": "",
+    "title": "",
+        "status": false,
+        "facility": []
+  }
+  const { user } = useSelector((state) => ({ user: state.app.user }));
   const [formData, setFormData] = useState(initState);
   const [facility, setFacility] = useState([]);
 
   const handleSubmit = (e) => {
-e.preventDefault()
+    e.preventDefault()
     console.log(formData);
+    let newData = { ...formData, partners: [user._id] }
+    console.log(newData);
+    axios
+      .post("http://localhost:2345/land", newData)
+      .then((res) => console.log(res))
+      .catch((e) => console.log(e));
   };
 
   const handleChange = (e) => {
@@ -58,13 +69,6 @@ console.log(formData);
           onChange={handleChange}
           placeholder="Location"
         />
-        <label>Scheme</label>
-        <Input
-          name="scheme"
-          value={formData.scheme}
-          onChange={handleChange}
-          placeholder="Scheme"
-        />
         <label>Area</label>
         <Input
           name="area"
@@ -79,7 +83,6 @@ console.log(formData);
           onChange={handleChange}
           placeholder="Price"
         />
-        <Stack></Stack>
         <Select
           name="facility"
           onChange={handleFacility}
@@ -100,7 +103,7 @@ console.log(formData);
           colorScheme="red"
           name="partners"
           type="checkbox"
-          value={formData.partenrs}
+          value={formData.status}
           onChange={handleChange}
         >
           Partners

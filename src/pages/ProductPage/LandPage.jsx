@@ -28,6 +28,16 @@ const location = useLocation()
         });
     }
   }, [location.search]);
+
+  const handlePartner = (e) => {
+    console.log(e);
+    axios
+      .get(`http://localhost:2345/land/${e}`)
+      .then((res) => {
+        console.log( res.data);
+      });
+  }
+
 console.log(location.search)
   return (
     <div style={{ display: "flex" }}>
@@ -61,22 +71,16 @@ console.log(location.search)
                       : ""}
                   </Text>
                   <Text>
-                    {e.facility && e.facility.includes("water")
-                      ? "💧"
-                      : ""}
+                    {e.facility && e.facility.includes("water") ? "💧" : ""}
                   </Text>
                   <Text>
-                    {e.facility && e.facility.includes("road")
-                      ? "🛣️"
-                      : ""}
+                    {e.facility && e.facility.includes("road") ? "🛣️" : ""}
                   </Text>
                   <Text>
-                    {e.facility && e.facility.includes("sewerage")
-                      ? "🚽"
-                      : ""}
+                    {e.facility && e.facility.includes("sewerage") ? "🚽" : ""}
                   </Text>
                 </Flex>
-                <Button>become partner</Button>
+                <Button onClick={() => handlePartner(e._id)}>become partner</Button>
               </Stack>
             );
           })}

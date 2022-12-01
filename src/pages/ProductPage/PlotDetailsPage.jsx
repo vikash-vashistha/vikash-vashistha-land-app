@@ -1,23 +1,49 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { Flex, Stack, Text } from "@chakra-ui/react";
+import { Button, Flex, Stack, Text } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
+const token = localStorage.getItem("token");
 
 export const PlotDetails = () => {
   const { id } = useParams();
   const [plotsDetails, setPlotDetails] = useState({});
+  const { user } = useSelector((state) => ({ user: state.app.user }));
 
   useEffect(() => {
     try {
       axios.get(`http://localhost:2345/products/plots/${id}`).then((res) => {
-        console.log("vik",res.data);
+        // console.log("vik",res.data);
         setPlotDetails(res.data[0]);
       });
     } catch (e) {
       console.log(e);
     }
   }, []);
-  console.log(plotsDetails);
+
+  const handleCart = () => {
+    console.log(user._id, id);
+     try {
+       axios
+         .post(
+           `http://localhost:2345/cart`,
+           {
+             user_id: user._id,
+             plot_id: id,
+             land_id: plotsDetails?.land_id,
+           },
+           {
+             headers: { authorization: `Bearer ${token}` },
+           }
+         )
+         .then((res) => {
+           console.log("vik", res);
+         });
+     } catch (e) {
+       console.log(e);
+     }
+  }
+  // console.log(plotsDetails);
   return (
     <div style={{ margin: "auto", display: "flex" }}>
       <Stack
@@ -120,42 +146,36 @@ export const PlotDetails = () => {
           margin: "5px",
           padding: "20px",
           height: "150px",
+          backgroundColor: plotsDetails?.user_id?.phone_no ? "grey" : "lightGreen",
           width: plotsDetails.length === plotsDetails.width ? "150px" : "75px",
           borderRight: plotsDetails?.road?.includes("east")
-            ? "10px dashed red"
+            ? "10px dashed black"
             : "5px solid blue",
           borderLeft: plotsDetails?.road?.includes("west")
-            ? "10px dashed red"
+            ? "10px dashed black"
             : "5px solid blue",
           borderBottom: plotsDetails?.road?.includes("south")
-            ? "10px dashed red"
+            ? "10px dashed black"
             : "5px solid blue",
           borderTop: plotsDetails?.road?.includes("north")
-            ? "10px dashed red"
+            ? "10px dashed black"
             : "5px solid blue",
         }}
       >
-          <Text>
-            {plotsDetails?.land_id?.facility.includes("electricity")
-              ? "💡"
-              : ""}
-          </Text>
-          <Text>
-            {plotsDetails?.land_id?.facility.includes("water")
-              ? "💧"
-              : ""}
-          </Text>
-          <Text>
-            {plotsDetails?.land_id?.facility.includes("road")
-              ? "🛣️"
-              : ""}
-          </Text>
-          <Text>
-            {plotsDetails?.land_id?.facility.includes("sewerage")
-              ? "🚽"
-              : ""}
-          </Text>
-      </Stack>
+        <Text>
+          {plotsDetails?.land_id?.facility.includes("electricity") ? "💡" : ""}
+        </Text>
+        <Text>
+          {plotsDetails?.land_id?.facility.includes("water") ? "💧" : ""}
+        </Text>
+        <Text>
+          {plotsDetails?.land_id?.facility.includes("road") ? "🛣️" : ""}
+        </Text>
+        <Text>
+          {plotsDetails?.land_id?.facility.includes("sewerage") ? "🚽" : ""}
+        </Text>
+        </Stack>
+        <Button onClick={handleCart}>Add to Cart</Button>
     </div>
   );
 };

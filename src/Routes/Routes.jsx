@@ -70,7 +70,7 @@ export const Routess = () => {
         />
 
         <Route
-          path="/seller/newland"
+          path="/seller/newland/:id"
           element={
             <PrivateRoute>
               <NewLand />
@@ -86,7 +86,7 @@ export const Routess = () => {
           }
         />
         <Route
-          path="/cart"
+          path="/cart/:id"
           element={
             <PrivateRoute>
               <Cart />
