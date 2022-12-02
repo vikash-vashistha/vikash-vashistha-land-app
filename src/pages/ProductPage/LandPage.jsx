@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { useParams, useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { Button, Text, Stack, Flex } from "@chakra-ui/react";
+import { Button, Text, Stack, Flex, useDisclosure } from "@chakra-ui/react";
 import { LandFilterSort } from "./LandFilterSort";
 
 export const Land = () => {
+  const btnRef = useRef();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const { id } = useParams();
   console.log(id)
   const [lands, setLands] = useState([]);
@@ -38,7 +40,7 @@ const location = useLocation()
       });
   }
 
-console.log(location.search)
+console.log(location.search, lands)
   return (
     <div style={{ display: "flex" }}>
       <LandFilterSort />
@@ -80,7 +82,21 @@ console.log(location.search)
                     {e.facility && e.facility.includes("sewerage") ? "🚽" : ""}
                   </Text>
                 </Flex>
-                <Button onClick={() => handlePartner(e._id)}>become partner</Button>
+                <Flex>
+                  {e?.partners?.map((el, it) => (
+                    <Link
+                      to={`/chat/${el._id}`}
+                      style={{ margin: "5px", textDecoration: "none" }}
+                    >
+                      <Button 
+                        colorScheme="teal" variant="link" key={it}>{el.name}
+                      </Button>
+                    </Link>
+                  ))}{" "}
+                </Flex>
+                <Button onClick={() => handlePartner(e._id)}>
+                  become partner
+                </Button>
               </Stack>
             );
           })}

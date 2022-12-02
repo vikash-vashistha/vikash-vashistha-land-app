@@ -8,7 +8,7 @@ import { Navbar } from "../Components/Navbar/Navbar";
 import { NotFoundPage } from "../pages/NotFoundPage/NotFoundPage";
 import { ProductsPage } from "../pages/ProductPage/ProductPage";
 import PrivateRoute from "./PrivateRoute";
-import ChatApp from "../pages/ChatPage/CatApp";
+import {ChatApp} from "../pages/ChatPage/CatApp";
 import { Scheme } from "../pages/ProductPage/SchemePage";
 import { Land } from "../pages/ProductPage/LandPage";
 import { Plots } from "../pages/ProductPage/PlotsPage";
@@ -19,6 +19,7 @@ import { Footer } from "../Components/Footer";
 import { BalanceDetail } from "../pages/BalancePage/BalanceDetail";
 import { Profile } from "../Components/Navbar/Profile";
 import { Cart } from "../pages/CartPage/Cart";
+import { ChatAll } from "../pages/ChatPage/ChatAll";
 
 export const Routess = () => {
   return (
@@ -35,9 +36,16 @@ export const Routess = () => {
         <Route path="login" element={<Login />} />
         <Route path="signout" element={<Signout />} />
         <Route path="profile" element={<Profile />} />
-
         <Route
           path="/chat"
+          element={
+            <PrivateRoute>
+              <ChatAll />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/chat/:id"
           element={
             <PrivateRoute>
               <ChatApp />

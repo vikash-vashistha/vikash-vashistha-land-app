@@ -2,7 +2,6 @@ import { Button, Stack, Text } from "@chakra-ui/react"
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
-import { PlotFilterSort } from "../ProductPage/PlotFilterSort";
 
 const token = localStorage.getItem("token");
 
@@ -16,7 +15,7 @@ const location = useLocation();
 
   useEffect(() => {
     axios
-      .get(`http://localhost:2345/cart/${id}${location.search}`,{
+      .get(`http://localhost:2345/cart/${id}`,{
          headers: { authorization: `Bearer ${token}` },
        })
       .then((res) => {
@@ -26,12 +25,23 @@ const location = useLocation();
       });
   }, [location.search]);
 
+  const itemRemoveHandler = (e) => {
+  axios
+    .delete(`http://localhost:2345/cart/${e}`, {
+      headers: { authorization: `Bearer ${token}` },
+    })
+    .then((res) => {
+      console.log(plots, res.data);
+      setPlots((prv) => [...res.data]);
+      console.log("plots", plots);
+    });
+}
+
 console.log(location.search);
 
 
 return (
-  <div style={{ display: "flex" }}>
-    <PlotFilterSort />{" "}
+  <div style={{ display: "flex", justifyContent: "space-between" }}>
     <div style={{ display: "flex", flexWrap: "wrap" }}>
       {plots &&
         plots.map((e, i) => (
@@ -67,7 +77,7 @@ return (
               ""
             )}
             <Text>Price {e?.plot_id?.price} 💰</Text>
-            
+
             <Link
               key={e._id}
               to={`/plotdetails/${e._id}`}
@@ -107,10 +117,10 @@ return (
                 {e?.land_id?.facility?.includes("sewerage") ? "🚽" : ""}
               </Text>
             </Stack>
+            <Button onClick={() => itemRemoveHandler(e._id)}>Remove</Button>
           </Stack>
         ))}
     </div>
-    <Text>Totoal Amount </Text>
     <Button>Place Order</Button>
   </div>
 );
