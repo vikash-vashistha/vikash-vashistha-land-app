@@ -1,46 +1,30 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { Button, Text, Stack, Flex, useDisclosure } from "@chakra-ui/react";
-import { LandFilterSort } from "./LandFilterSort";
+import { Button, Text, Stack, Flex } from "@chakra-ui/react";
+import { LandFilterSort } from "../ProductPage/LandFilterSort";
 
-export const Land = () => {
-  const btnRef = useRef();
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const { id } = useParams();
-  console.log(id)
+const token = localStorage.getItem("token");
+
+export const SellerLandPage = () => {
   const [lands, setLands] = useState([]);
-const location = useLocation()
+  const location = useLocation();
   // getting lands inside scheme
   useEffect(() => {
     if (lands.length === 0 || location.search) {
-      // const getLandParams = {
-      //   params: {
-      //     category: searchParams.getAll("category"),
-      //     sortBy: searchParams.getAll("sortBy"),
-      //     range: searchParams.getAll("range"),
-      //   },
-      // };
-      axios
-        .get(`http://localhost:2345/land/${id}${location.search}`)
-        .then((res) => {
-          setLands([...res.data]);
-          console.log(res.data);
-        });
+        axios
+          .get(`http://localhost:2345/land/seller/${location.search}`, {
+            headers: { authorization: `Bearer ${token}` },
+          })
+          .then((res) => {
+            setLands([...res.data]);
+            console.log(res.data);
+          });
     }
   }, [location.search]);
 
-  const handlePartner = (e) => {
-    console.log(e);
-    axios
-      .get(`http://localhost:2345/land/${e}`)
-      .then((res) => {
-        console.log( res.data);
-      });
-  }
-
-console.log(location.search, lands)
+  console.log(location.search, lands);
   return (
     <div style={{ display: "flex" }}>
       <LandFilterSort />
@@ -89,15 +73,15 @@ console.log(location.search, lands)
                       to={`/chat/${el._id}`}
                       style={{ margin: "5px", textDecoration: "none" }}
                     >
-                      <Button 
-                        colorScheme="teal" variant="link" key={it}>{el.name}
+                      <Button colorScheme="teal" variant="link" key={it}>
+                        {el.name}
                       </Button>
                     </Link>
                   ))}{" "}
                 </Flex>
-                <Button onClick={() => handlePartner(e._id)}>
-                  become partner
-                </Button>
+                <Link to={`/seller/newplot/${e._id}/`}>
+                  <Button>create a plot</Button>
+                </Link>
               </Stack>
             );
           })}

@@ -13,67 +13,85 @@ import {
   useDisclosure,
   Button,
   Input,
+  Flex,
 } from "@chakra-ui/react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
+import { useSelector } from "react-redux";
 const token = localStorage.getItem("token");
-const users = [
-  {
-    id: 1,
-    name: "Aman",
-  },
-  {
-    id: 2,
-    name: "Albert",
-  },
-  {
-    id: 3,
-    name: "Nrupul",
-  },
-  {
-    id: 4,
-    name: "Bicky",
-  },
-  {
-    id: 5,
-    name: "Nihal",
-  },
-];
 
 export const ChatApp = () => {
+  const { user } = useSelector((state) => ({ user: state.app.user }));
   const { id } = useParams();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
   const [messages, setMessages] = useState([]);
+  const [users, setUsers] = useState([]);
   const [subscribedTo, setSubscribedTo] = useState(users[0]);
+  const [text, setText] = useState("");
+  const [replys, setReplys] = useState([]);
+
+  const gettingChat = () => {
+    axios
+      .get(`http://localhost:2345/chat/${id}`, {
+        headers: { authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        console.log("res.data: ", res.data);
+        setMessages([...res.data.chats[0].messages]);
+        return res.data;
+      });
+  };
+
+  const gettingReply = () => {
+    axios
+      .get(`http://localhost:2345/chat/${id}`, {
+        headers: { authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        // console.log("res.data: ", res.data);
+        setReplys([...res.data.replys[0].messages]);
+        return res.data;
+      });
+  };
+  // useEffect(() => {
+  //   gettingChat()
+  // }, [])
 
   const createConnection = (user) => {
-    console.log(`started lisening to `, user);
+    console.log(`started lisening to `, user?.name);
     let id1;
     function listen(callback) {
-      id1 = setInterval(() => {
-        axios
-          .get(`http://localhost:2345/chat/${id}`, {
-            headers: { authorization: `Bearer ${token}` },
-          })
-          .then((res) => {
-            console.log("res.data: ", res.data);
-            setMessages([...res.data])
-          });
-        let message = `new Message from ${
-          user.name
-        } at ${new Date().toTimeString()}`;
-        callback(message);
-      }, 5000);
+      // id1 = setInterval(() => {
+      gettingChat();
+      gettingReply()
+      let message = `${text} from ${
+        user?.name
+      } at ${new Date().toTimeString()}`;
+      callback(message);
+      // }, 5000);
     }
     function unsubscribe() {
-      console.log(`stopped listening to ${user.name}`);
-      clearInterval(id1);
+      console.log(`stopped listening to ${user?.name}`);
+      // clearInterval(id1);
     }
     return { listen, unsubscribe };
   };
 
- 
+  useEffect(() => {
+    axios
+      .get(`http://localhost:2345/user/all`, {
+        headers: { authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        console.log("user.data: ", res.data);
+        setUsers([...res.data.user]);
+        setSubscribedTo(res.data.user[0]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   useEffect(() => {
     const connection = createConnection(subscribedTo);
@@ -85,52 +103,128 @@ export const ChatApp = () => {
       setMessages([]);
     };
   }, [subscribedTo]);
-  // console.log(onClose);
+  console.log("ram", messages);
+
+  const handleSave = () => {
+    setMessages([
+      ...messages,
+      `${text} from ${user?.name} ${new Date().toString()}`,
+    ]);
+    if (messages.length === 0) {
+      console.log("inside post", messages);
+      axios
+        .post(
+          `http://localhost:2345/chat`,
+          {
+            user_id: `${user?._id}`,
+            chat_with: `${subscribedTo?._id}`,
+            messages: `${messages[0].messages}`,
+          },
+          {
+            headers: { authorization: `Bearer ${token}` },
+          }
+        )
+        .then((res) => {
+          console.log("user.data: ", res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      console.log("inside patch", messages);
+
+      axios
+        .patch(
+          `http://localhost:2345/chat`,
+          {
+            user_id: user._id,
+            chat_with: subscribedTo._id,
+            messages: [...messages, text],
+          },
+          {
+            headers: { authorization: `Bearer ${token}` },
+          }
+        )
+        .then((res) => {
+          console.log("user.data: ", res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+  //  console.log("sf", subscribedTo)
 
   return (
-    <div>
-      {messages?.map((e, i) => (
-        <div key={i}>
-          <Button ref={btnRef} colorScheme="teal" onClick={onOpen}>
-            {e?.chat_with?.name}
-          </Button>
-          <Drawer
-            isOpen={isOpen}
-            placement="right"
-            onClose={onClose}
-            finalFocusRef={btnRef}
-          >
-            <DrawerOverlay />
-            <DrawerContent>
-              <DrawerCloseButton />
-              <DrawerHeader>ChatApp</DrawerHeader>
+    <>
+      <Button ref={btnRef} colorScheme="teal" onClick={onOpen}>
+        check
+      </Button>
+      <Drawer
+        isOpen={isOpen}
+        placement="right"
+        onClose={onClose}
+        finalFocusRef={btnRef}
+      >
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader>ChatApp</DrawerHeader>
 
-              <DrawerBody>
-                <h2> Contacts </h2>
-                <Contacts
-                  users={users}
-                  active={subscribedTo}
-                  onChange={(user) => setSubscribedTo(user)}
-                />
-                <h1> Chats </h1>
-                <div className="chatbox">
-                  {e?.messages?.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </div>
-                <Input placeholder="Type here..." />
-              </DrawerBody>
+          <DrawerBody>
+            <h2> Contacts </h2>
+            <Contacts
+              users={users}
+              active={subscribedTo}
+              onChange={(user) => {
+                setSubscribedTo(user);
+              }}
+            />
+            <h1> Chats </h1>
+            <Flex>
+              <div className="chatbox" style={{ justifyContent: "left" }}>
+                {messages?.map((item, it) => (
+                  <li
+                    style={{
+                      border: "1px solid red",
+                      backgroundColor: "green",
+                    }}
+                    key={it}
+                  >
+                    {item}
+                  </li>
+                ))}
+              </div>
+              <div className="chatbox">
+                {replys?.map((item, it) => (
+                  <li
+                    style={{
+                      border: "1px solid green",
+                      backgroundColor: "red",
+                    }}
+                    key={it}
+                  >
+                    {item}
+                  </li>
+                ))}
+              </div>
+            </Flex>
+            <Input
+              placeholder="Type here..."
+              onChange={(e) => setText(e.target.value)}
+            />
+          </DrawerBody>
 
-              <DrawerFooter>
-                <Button variant="outline" mr={3} onClick={onClose}>
-                  Cancel
-                </Button>
-                <Button colorScheme="blue">Save</Button>
-              </DrawerFooter>
-            </DrawerContent>
-          </Drawer>
-        </div>
-      ))}
-    </div>
+          <DrawerFooter>
+            <Button variant="outline" mr={3} onClick={onClose}>
+              Cancel
+            </Button>
+            <Button colorScheme="blue" onClick={handleSave}>
+              Save
+            </Button>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
+    </>
   );
 };

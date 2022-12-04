@@ -57,7 +57,7 @@ const getProducts = async (state, dispatch) => {
     // setLoading(true);
     dispatch(transLoadingAction);
     await axios
-      .get(`http://localhost:2345/transaction?page=${state.page}&size=${3}`, {
+      .get(`http://localhost:2345/transaction?page=${state.page}&size=${10}`, {
         headers: { authorization: `Bearer ${token}` },
       })
       .then((res) => {
@@ -130,7 +130,7 @@ export const BalancePage = () => {
           prv
         </Button>
         <span style={{ padding: "0.5rem" }}>{state.page}</span>
-        <Button onClick={() => dispatch({ ...incPage, payload: state.page })}>
+        <Button onClick={() => dispatch({ ...incPage, payload: state.page })} disabled={state.data.length === 0}>
           next
         </Button>
       </div>

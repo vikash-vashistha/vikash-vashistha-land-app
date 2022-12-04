@@ -21,16 +21,16 @@ export const SellerPage = () => {
     });
 }
   
-  useEffect(() => {
-     axios
-       .get(`http://localhost:2345/land/seller`, {
-         headers: { authorization: `Bearer ${token}` },
-       })
-       .then((res) => {
-         setLands([...res.data]);
-          console.log(res.data);
-       });
-  },[])
+  // useEffect(() => {
+  //    axios
+  //      .get(`http://localhost:2345/land`, {
+  //        headers: { authorization: `Bearer ${token}` },
+  //      })
+  //      .then((res) => {
+  //        setLands([...res.data]);
+  //         console.log(res.data);
+  //      });
+  // },[])
   return (
     <Stack>
       <Stack>
@@ -49,7 +49,7 @@ export const SellerPage = () => {
               }}
             >
               <Link
-                to={`/lands/${e._id}`}
+                to={`/lands/seller`}
                 style={{ margin: "5px", textDecoration: "none" }}
               >
                 <Button>Scheme NO. {i + 1} Checkout Lands</Button>

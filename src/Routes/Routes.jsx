@@ -20,6 +20,7 @@ import { BalanceDetail } from "../pages/BalancePage/BalanceDetail";
 import { Profile } from "../Components/Navbar/Profile";
 import { Cart } from "../pages/CartPage/Cart";
 import { ChatAll } from "../pages/ChatPage/ChatAll";
+import { SellerLandPage } from "../pages/SellerPage/SellerLandPage";
 
 export const Routess = () => {
   return (
@@ -76,7 +77,14 @@ export const Routess = () => {
             </PrivateRoute>
           }
         />
-
+        <Route
+          path="/lands/seller"
+          element={
+            <PrivateRoute>
+              <SellerLandPage />
+            </PrivateRoute>
+          }
+        />
         <Route
           path="/seller/newland/:id"
           element={
