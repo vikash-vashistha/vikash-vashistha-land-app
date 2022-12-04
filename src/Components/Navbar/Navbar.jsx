@@ -38,11 +38,12 @@ export const Navbar = () => {
       title: auth ? `👤 (${user?.email})` : "👤",
     },
     {
-      to: user?.role?.includes("seller") ? "/seller" : "/cart",
-      title: user?.role?.includes("seller") ? "seller👔" : "🛒",
+      to: user?.role?.includes("seller") ? "/seller" : "/admin",
+      title: user?.role?.includes("seller") ? "seller👔" : user?.role?.includes("admin") ? "admin🙎‍♂️" : "",
     },
     {
-      to: `/cart/${user._id}`, title: "cart",
+      to: `/cart/${user._id}`,
+      title: "🛒",
     },
     {
       to: auth ? "/signout" : "/login",

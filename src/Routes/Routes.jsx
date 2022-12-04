@@ -21,6 +21,7 @@ import { Profile } from "../Components/Navbar/Profile";
 import { Cart } from "../pages/CartPage/Cart";
 import { ChatAll } from "../pages/ChatPage/ChatAll";
 import { SellerLandPage } from "../pages/SellerPage/SellerLandPage";
+import { Admin } from "../pages/Admin/Admin";
 
 export const Routess = () => {
   return (
@@ -106,6 +107,14 @@ export const Routess = () => {
           element={
             <PrivateRoute>
               <Cart />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            <PrivateRoute>
+              <Admin />
             </PrivateRoute>
           }
         />
