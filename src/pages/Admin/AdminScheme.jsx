@@ -165,18 +165,16 @@ export const AdminScheme = () => {
       <Table variant="striped" colorScheme="teal">
         <Thead>
           <Tr>
-            <Th>Name</Th>
-            <Th>Email</Th>
-            <Th>Date</Th>
-            <Th>Phone no</Th>
-            <Th>Image</Th>
-            <Th>Role</Th>
+            <Th>Scheme id</Th>
+            <Th>City</Th>
+            <Th>Scheme</Th>
           </Tr>
         </Thead>
         <Tbody>
           {scheme &&
             scheme.map((e, i) => (
               <Tr key={i}>
+                <Td>{e._id}</Td>
                 <Td>{e.city}</Td>
                 <Td>{e.scheme_name}</Td>
                 <Td>

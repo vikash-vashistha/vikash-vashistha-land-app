@@ -28,89 +28,68 @@ import {
   InputRightElement,
   InputGroup,
   Select,
+  Checkbox,
 } from "@chakra-ui/react";
 
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 let auth = localStorage.getItem("token");
+
 export const AdminLand = () => {
-  const [name, setName] = useState("");
-  const [users, setUsers] = useState([]);
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
-  // add user
-  const [loading, setLoading] = useState(false);
-  const [show, setShow] = useState(false);
-  const handleClick = () => setShow(!show);
-  const [file, setFile] = useState(null);
-  const [blob, setBlob] = useState(null);
-
   const date = new Date().toDateString();
-  const [formData, setFormData] = useState({
-    id: Math.random(),
+  const { user } = useSelector((state) => ({ user: state.app.user }));
+  const [name, setName] = useState("");
+  const [land, setLand] = useState([]);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const initState = {
     date,
-    name: "",
-    gender: "",
-    role: ["coustomer"],
-    email: "",
-    password: "",
-    phone_no: "",
-  });
-  const handleChange = (e) => {
-    const { id, value } = e.target;
-    setFormData({
-      ...formData,
-      [id]: value,
-    });
+    location: "",
+    scheme: "",
+    price: "",
+    area: "",
+    title: "",
+    status: false,
+    facility: [],
   };
-
-  const handleSubmit = async (e) => {
+  const [formData, setFormData] = useState(initState);
+  const [facility, setFacility] = useState([]);
+ 
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e, formData);
-    try {
-      await axios
-        .post("http://localhost:2345/register", formData)
-        .then((res) => {
-          console.log("res", res);
-        })
-        .then(() => {
-          alert("user created successfully, Please Sign In");
-          // setFormData({
-          //   id: Math.random(),
-          //   date,
-          //   name: "",
-          //   email: "",
-          //   password: "",
-          //   phone_no: "",
-          // });
-        });
-    } catch (e) {
-      console.log("error", e);
-    }
+    console.log(formData);
+    let newData = { ...formData, partners: [user._id] };
+    console.log(newData);
+    axios
+      .post("http://localhost:2345/land/admin", newData)
+      .then((res) => console.log(res))
+      .catch((e) => console.log(e));
   };
 
-  useEffect(() => {
-    file && setBlob(URL.createObjectURL(file));
-  }, [file]);
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    const valueToUpdate = type === "checkbox" ? checked : value;
+    setFormData({ ...formData, [name]: valueToUpdate, facility });
+  };
 
-  useEffect(() => {
-    return () => {
-      URL.revokeObjectURL(blob);
-    };
-  }, [blob]);
+  const handleFacility = (e) => {
+    const { value } = e.target;
+    setFacility([...facility, value]);
+  };
 
   // finish add user
 
-  const handleUsers = () => {
+  const handleLands = () => {
     // console.log("auth", auth);
     axios
-      .get(`http://localhost:2345/user/admin?name=${name}`, {
+      .get(`http://localhost:2345/land/admin?title=${name}`, {
         headers: { authorization: `Bearer ${auth}` },
       })
       .then((res) => {
         console.log("res.data: ", res.data);
-        setUsers([...res.data]);
+        setLand([...res.data]);
       })
       .catch((err) => {
         console.log(err);
@@ -119,7 +98,7 @@ export const AdminLand = () => {
 
   const handleDelete = (e) => {
     axios
-      .delete(`http://localhost:2345/user/admin/${e}`, {
+      .delete(`http://localhost:2345/land/admin/${e}`, {
         headers: { authorization: `Bearer ${auth}` },
       })
       .then((res) => {
@@ -129,6 +108,10 @@ export const AdminLand = () => {
         console.log(err);
       });
   };
+
+
+
+
 
   return (
     <Stack
@@ -141,9 +124,9 @@ export const AdminLand = () => {
     >
       <Flex gap="5px">
         <Input onChange={(e) => setName(e.target.value)} />
-        <Button onClick={handleUsers}>Search</Button>
+        <Button onClick={handleLands}>Search</Button>
         <Stack>
-          <Button onClick={onOpen}>Add User</Button>
+          <Button onClick={onOpen}>Add Land</Button>
 
           <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
@@ -152,77 +135,60 @@ export const AdminLand = () => {
                 <ModalHeader>Modal Title</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
-                  <h3>Sigh up</h3>
+                  <label>Location</label>
                   <Input
-                    id="name"
-                    type="text"
+                    name="location"
+                    value={formData.name}
                     onChange={handleChange}
-                    placeholder="enter username"
+                    placeholder="Location"
                   />
+                  <label>Area</label>
                   <Input
-                    id="email"
-                    type="text"
+                    name="area"
+                    value={formData.area}
                     onChange={handleChange}
-                    placeholder="enter email"
+                    placeholder="Area"
                   />
-                  <InputGroup size="md">
-                    <Input
-                      id="password"
-                      onChange={handleChange}
-                      pr="4.5rem"
-                      type={show ? "text" : "password"}
-                      placeholder="Enter password"
-                    />
-                    <InputRightElement width="4.5rem">
-                      <Button h="1.75rem" size="sm" onClick={handleClick}>
-                        {show ? "Hide" : "Show"}
-                      </Button>
-                    </InputRightElement>
-                  </InputGroup>
-                  <InputGroup>
-                    <InputRightElement
-                      pointerEvents="none"
-                      children={<PhoneIcon color="gray.300" />}
-                    />
-                    <InputLeftAddon children="+91" />
-                    <Input
-                      id="phone_no"
-                      onChange={handleChange}
-                      type="tel"
-                      placeholder="phone number"
-                    />
-                  </InputGroup>
+                  <label>Price</label>
                   <Input
-                    type="file"
-                    placeholder="upload image"
-                    onChange={(e) => {
-                      setFile(e.target.files[0]);
-                    }}
+                    name="price"
+                    value={formData.price}
+                    onChange={handleChange}
+                    placeholder="Price"
+                  />
+                  <label>Scheme</label>
+                  <Input
+                    name="scheme"
+                    value={formData.scheme}
+                    onChange={handleChange}
+                    placeholder="Scheme"
                   />
                   <Select
-                    placeholder="Gender"
-                    id="gender"
+                    name="facility"
+                    onChange={handleFacility}
+                    placeholder="Facility"
+                  >
+                    <option value="electricity">electricity</option>
+                    <option value="water">water</option>
+                    <option value="road">road</option>
+                    <option value="sewerage">sewerage</option>
+                  </Select>
+                  <Input
+                    name="title"
+                    value={formData.title}
+                    onChange={handleChange}
+                    placeholder="Title"
+                  />
+                  <Checkbox
+                    colorScheme="red"
+                    name="partners"
+                    type="checkbox"
+                    value={formData.status}
                     onChange={handleChange}
                   >
-                    <option value="male">male</option>
-                    <option vlaue="female">female</option>
-                    <option value="other">other</option>
-                  </Select>
-                  <Button
-                    onClick={() => {
-                      setLoading(true);
-                      setTimeout(() => {
-                        setLoading(false);
-                      }, 2000);
-                    }}
-                    isLoading={loading}
-                  >
-                    status
-                  </Button>
-
-                  <Box boxSize="sm">
-                    <Image src={blob} />
-                  </Box>
+                    Partners
+                  </Checkbox>
+                  <Input type="submit" />
                 </ModalBody>
 
                 <ModalFooter>
@@ -230,7 +196,7 @@ export const AdminLand = () => {
                     Close
                   </Button>
                   <Button variant="ghost">
-                    <Input type="submit" value={"create user"} />
+                    <Input type="submit" value={"create scheme"} />
                   </Button>
                 </ModalFooter>
               </form>
@@ -241,28 +207,32 @@ export const AdminLand = () => {
       <Table variant="striped" colorScheme="teal">
         <Thead>
           <Tr>
-            <Th>Name</Th>
-            <Th>Email</Th>
-            <Th>Date</Th>
-            <Th>Phone no</Th>
-            <Th>Image</Th>
-            <Th>Role</Th>
+            <Th>Location</Th>
+            <Th>Scheme</Th>
+            <Th>Title</Th>
+            <Th>Price</Th>
+            <Th>Area</Th>
+            <Th>Partners</Th>
+            <Th>Facility</Th>
           </Tr>
         </Thead>
         <Tbody>
-          {users &&
-            users.map((e, i) => (
+          {land &&
+            land.map((e, i) => (
               <Tr key={i}>
-                <Td>{e.name}</Td>
-                <Td>{e.email}</Td>
-                <Td>{e.date}</Td>
-                <Td>{e.phone_no}</Td>
+                <Td>{e.location}</Td>
+                <Td>{e.scheme.scheme_name}</Td>
+                <Td>{e.title}</Td>
+                <Td>{e.price}</Td>
+                <Td>{e.area}</Td>
                 <Td>
-                  <Image src={e.image} alt="not available" />
+                  {e.partners.map((el, it) => (
+                    <p key={it}>{el.name}</p>
+                  ))}
                 </Td>
                 <Td>
-                  {e.role.map((el, it) => (
-                    <Text key={it}>{el}</Text>
+                  {e.facility.map((el, it) => (
+                    <p key={it}>{el}</p>
                   ))}
                 </Td>
                 <Td>
