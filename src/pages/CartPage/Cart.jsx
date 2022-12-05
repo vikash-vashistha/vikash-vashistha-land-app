@@ -2,6 +2,7 @@ import { Button, Stack, Text } from "@chakra-ui/react"
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
+import { Payment } from "../../Components/Payment";
 
 const token = localStorage.getItem("token");
 
@@ -20,9 +21,14 @@ const location = useLocation();
        })
       .then((res) => {
         console.log(plots, res.data);
-        setPlots((prv) => [...res.data]);
+        setPlots([...res.data]);
         console.log("plots", plots);
-      });
+        let temp;
+        if (plots.length > 0) {
+          temp = plots.reduce((a, e) => (a += Number(e.plot_id.price)));
+        }
+        setTotal(temp);
+      })
   }, [location.search]);
 
   const itemRemoveHandler = (e) => {
@@ -37,7 +43,7 @@ const location = useLocation();
     });
 }
 
-console.log(location.search);
+console.log(plots);
 
 
 return (
@@ -121,7 +127,9 @@ return (
           </Stack>
         ))}
     </div>
-    <Button>Place Order</Button>
+    <Text>Total {total}</Text>
+    <Payment />
+    
   </div>
 );
 }

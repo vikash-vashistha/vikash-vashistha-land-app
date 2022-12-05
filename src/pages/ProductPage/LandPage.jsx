@@ -6,8 +6,6 @@ import { Button, Text, Stack, Flex, useDisclosure } from "@chakra-ui/react";
 import { LandFilterSort } from "./LandFilterSort";
 
 export const Land = () => {
-  const btnRef = useRef();
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const { id } = useParams();
   console.log(id)
   const [lands, setLands] = useState([]);

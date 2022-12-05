@@ -1,116 +1,36 @@
-import { PhoneIcon } from "@chakra-ui/icons";
 import {
   Table,
   Thead,
   Tbody,
-  Tfoot,
   Tr,
   Th,
   Td,
-  TableCaption,
-  TableContainer,
   Button,
   Flex,
   Stack,
-  Text,
-  Image,
   Input,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  useDisclosure,
-  Box,
-  InputLeftAddon,
-  InputRightElement,
-  InputGroup,
-  Select,
+  Image,
+  Text,
 } from "@chakra-ui/react";
 
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+const token = localStorage.getItem("token");
 
-let auth = localStorage.getItem("token");
 export const AdminCart = () => {
   const [name, setName] = useState("");
-  const [users, setUsers] = useState([]);
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [cart, setCart] = useState([]);
+  
 
-  // add user
-  const [loading, setLoading] = useState(false);
-  const [show, setShow] = useState(false);
-  const handleClick = () => setShow(!show);
-  const [file, setFile] = useState(null);
-  const [blob, setBlob] = useState(null);
-
-  const date = new Date().toDateString();
-  const [formData, setFormData] = useState({
-    id: Math.random(),
-    date,
-    name: "",
-    gender: "",
-    role: ["coustomer"],
-    email: "",
-    password: "",
-    phone_no: "",
-  });
-  const handleChange = (e) => {
-    const { id, value } = e.target;
-    setFormData({
-      ...formData,
-      [id]: value,
-    });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log(e, formData);
-    try {
-      await axios
-        .post("http://localhost:2345/register", formData)
-        .then((res) => {
-          console.log("res", res);
-        })
-        .then(() => {
-          alert("user created successfully, Please Sign In");
-          // setFormData({
-          //   id: Math.random(),
-          //   date,
-          //   name: "",
-          //   email: "",
-          //   password: "",
-          //   phone_no: "",
-          // });
-        });
-    } catch (e) {
-      console.log("error", e);
-    }
-  };
-
-  useEffect(() => {
-    file && setBlob(URL.createObjectURL(file));
-  }, [file]);
-
-  useEffect(() => {
-    return () => {
-      URL.revokeObjectURL(blob);
-    };
-  }, [blob]);
-
-  // finish add user
-
-  const handleUsers = () => {
+  const handleCart = () => {
     // console.log("auth", auth);
     axios
-      .get(`http://localhost:2345/user/admin?name=${name}`, {
-        headers: { authorization: `Bearer ${auth}` },
+      .get(`http://localhost:2345/cart/admin?user=${name}`, {
+        headers: { authorization: `Bearer ${token}` },
       })
       .then((res) => {
         console.log("res.data: ", res.data);
-        setUsers([...res.data]);
+        setCart([...res.data]);
       })
       .catch((err) => {
         console.log(err);
@@ -119,8 +39,8 @@ export const AdminCart = () => {
 
   const handleDelete = (e) => {
     axios
-      .delete(`http://localhost:2345/user/admin/${e}`, {
-        headers: { authorization: `Bearer ${auth}` },
+      .delete(`http://localhost:2345/cart/admin/${e}`, {
+        headers: { authorization: `Bearer ${token}` },
       })
       .then((res) => {
         console.log("res.data: ", res.data);
@@ -141,129 +61,76 @@ export const AdminCart = () => {
     >
       <Flex gap="5px">
         <Input onChange={(e) => setName(e.target.value)} />
-        <Button onClick={handleUsers}>Search</Button>
-        <Stack>
-          <Button onClick={onOpen}>Add User</Button>
-
-          <Modal isOpen={isOpen} onClose={onClose}>
-            <ModalOverlay />
-            <ModalContent>
-              <form onSubmit={handleSubmit}>
-                <ModalHeader>Modal Title</ModalHeader>
-                <ModalCloseButton />
-                <ModalBody>
-                  <h3>Sigh up</h3>
-                  <Input
-                    id="name"
-                    type="text"
-                    onChange={handleChange}
-                    placeholder="enter username"
-                  />
-                  <Input
-                    id="email"
-                    type="text"
-                    onChange={handleChange}
-                    placeholder="enter email"
-                  />
-                  <InputGroup size="md">
-                    <Input
-                      id="password"
-                      onChange={handleChange}
-                      pr="4.5rem"
-                      type={show ? "text" : "password"}
-                      placeholder="Enter password"
-                    />
-                    <InputRightElement width="4.5rem">
-                      <Button h="1.75rem" size="sm" onClick={handleClick}>
-                        {show ? "Hide" : "Show"}
-                      </Button>
-                    </InputRightElement>
-                  </InputGroup>
-                  <InputGroup>
-                    <InputRightElement
-                      pointerEvents="none"
-                      children={<PhoneIcon color="gray.300" />}
-                    />
-                    <InputLeftAddon children="+91" />
-                    <Input
-                      id="phone_no"
-                      onChange={handleChange}
-                      type="tel"
-                      placeholder="phone number"
-                    />
-                  </InputGroup>
-                  <Input
-                    type="file"
-                    placeholder="upload image"
-                    onChange={(e) => {
-                      setFile(e.target.files[0]);
-                    }}
-                  />
-                  <Select
-                    placeholder="Gender"
-                    id="gender"
-                    onChange={handleChange}
-                  >
-                    <option value="male">male</option>
-                    <option vlaue="female">female</option>
-                    <option value="other">other</option>
-                  </Select>
-                  <Button
-                    onClick={() => {
-                      setLoading(true);
-                      setTimeout(() => {
-                        setLoading(false);
-                      }, 2000);
-                    }}
-                    isLoading={loading}
-                  >
-                    status
-                  </Button>
-
-                  <Box boxSize="sm">
-                    <Image src={blob} />
-                  </Box>
-                </ModalBody>
-
-                <ModalFooter>
-                  <Button colorScheme="blue" mr={3} onClick={onClose}>
-                    Close
-                  </Button>
-                  <Button variant="ghost">
-                    <Input type="submit" value={"create user"} />
-                  </Button>
-                </ModalFooter>
-              </form>
-            </ModalContent>
-          </Modal>
-        </Stack>
+        <Button onClick={handleCart}>Search</Button>
       </Flex>
       <Table variant="striped" colorScheme="teal">
         <Thead>
           <Tr>
-            <Th>Name</Th>
-            <Th>Email</Th>
-            <Th>Date</Th>
-            <Th>Phone no</Th>
-            <Th>Image</Th>
-            <Th>Role</Th>
+            <Th>user</Th>
+            <Th>Land</Th>
+            <Th>Plot</Th>
           </Tr>
         </Thead>
         <Tbody>
-          {users &&
-            users.map((e, i) => (
+          {cart &&
+            cart.map((e, i) => (
               <Tr key={i}>
-                <Td>{e.name}</Td>
-                <Td>{e.email}</Td>
-                <Td>{e.date}</Td>
-                <Td>{e.phone_no}</Td>
                 <Td>
-                  <Image src={e.image} alt="not available" />
+                  {
+                    <Tr>
+                      <p>{e.user_id.name}</p>
+                      <p>{e.user_id.email}</p>
+                      <p>{e.user_id.date}</p>
+                      <p>{e.user_id.phone_no}</p>
+                      <p>
+                        <Image style={{width: "50px"}} src={e.user_id.image} alt="not available" />
+                      </p>
+                      <p>
+                        {e.user_id.role.map((el, it) => (
+                          <span key={it}>{el}</span>
+                        ))}
+                      </p>
+                    </Tr>
+                  }
                 </Td>
                 <Td>
-                  {e.role.map((el, it) => (
-                    <Text key={it}>{el}</Text>
-                  ))}
+                  {
+                    <div>
+                      <p>{e.land_id.location}</p>
+                      <p>{e.land_id.scheme.scheme_name}</p>
+                      <p>{e.land_id.title}</p>
+                      <p>{e.land_id.price}</p>
+                      <p>{e.land_id.area}</p>
+                      <p>
+                        {e.land_id.partners.map((el, it) => (
+                          <span key={it}>{el.name}</span>
+                        ))}
+                      </p>
+                      <p>
+                        {e.land_id.facility.map((el, it) => (
+                          <p key={it}>{el}</p>
+                        ))}
+                      </p>
+                    </div>
+                  }
+                </Td>
+                <Td>
+                  {
+                    <div>
+                      <p>{e.plot_id.title}</p>
+                      <p>{e.plot_id.length}</p>
+                      <p>{e.plot_id.width}</p>
+                      <p>{e.plot_id.price}</p>
+                      <p>
+                        {e.plot_id.road.map((ell, itt) => (
+                          <span key={itt}>
+                            {ell}
+                            <br />
+                          </span>
+                        ))}
+                      </p>
+                    </div>
+                  }
                 </Td>
                 <Td>
                   <Button onClick={() => handleDelete(e._id)}>Delete</Button>

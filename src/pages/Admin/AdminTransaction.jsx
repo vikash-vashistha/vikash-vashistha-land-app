@@ -46,40 +46,20 @@ export const AdminTransaction = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initState = {
     date,
-    price: "",
-    area: "",
-    title: "",
-    length: "",
-    width: "",
+    amount: "",
+    type: "",
+    transaction_id: "",
+    from: "",
+    to: "",
     land_id: "",
-    eastroad: false,
-    westroad: false,
-    northroad: false,
-    southroad: false,
+    plot_id: ""
   };
   const [formData, setFormData] = useState(initState);
   const handleSubmit = (e) => {
     e.preventDefault();
-    let road = [];
-
-    if (formData?.eastroad) road.push("east");
-    if (formData?.westroad) road.push("west");
-    if (formData?.northroad) road.push("north");
-    if (formData?.southroad) road.push("south");
-    newData = {
-      date: formData.date,
-      price: formData.price,
-      title: formData.title,
-      length: formData.length,
-      widht: formData.width,
-      area: formData.area,
-      land_id: formData.land_id,
-      road,
-    };
-    console.log("form", formData);
-    console.log("new", newData);
+console.log(formData);
     axios
-      .post("http://localhost:2345/transaction/admin", newData)
+      .post("http://localhost:2345/transaction/admin", formData)
       .then((res) => console.log(res))
       .catch((e) => console.log(e));
   };
@@ -139,95 +119,66 @@ export const AdminTransaction = () => {
         <Input onChange={(e) => setName(e.target.value)} />
         <Button onClick={handleTransaction}>Search</Button>
         <Stack>
-          <Button onClick={onOpen}>Add Plot</Button>
+          <Button onClick={onOpen}>Add Transaction</Button>
 
           <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
             <ModalContent>
               <form onSubmit={handleSubmit}>
-                <ModalHeader>Create Plot</ModalHeader>
+                <ModalHeader>Create Transaction</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
-                  <label>Area</label>
+                  <label>Transaction Id</label>
                   <Input
-                    name="area"
-                    value={formData.area}
+                    name="transaction_id"
+                    value={formData.transaction_id}
                     onChange={handleChange}
-                    placeholder="Area"
+                    placeholder="Transaction Id"
                   />
-                  <label>Land</label>
+                  <label>Type</label>
+                  <Input
+                    name="type"
+                    value={formData.type}
+                    onChange={handleChange}
+                    placeholder="Type"
+                  />
+                  <label>Amount</label>
+                  <Input
+                    name="amount"
+                    value={formData.amount}
+                    onChange={handleChange}
+                    placeholder="Amount"
+                  />
+                  <label>From</label>
+                  <Input
+                    name="from"
+                    value={formData.from}
+                    onChange={handleChange}
+                    placeholder="From"
+                  ></Input>
+                  <br />
+                  <label>To</label>
+                  <Input
+                    name="to"
+                    value={formData.to}
+                    onChange={handleChange}
+                    placeholder="To"
+                  ></Input>
+                  <br /> <label>Land</label>
                   <Input
                     name="land_id"
                     value={formData.land_id}
                     onChange={handleChange}
-                    placeholder="Land Id"
-                  />
-                  <label>Price</label>
-                  <Input
-                    name="price"
-                    value={formData.price}
-                    onChange={handleChange}
-                    placeholder="Price"
-                  />
-                  <label>Title</label>
-                  <Input
-                    name="title"
-                    value={formData.title}
-                    onChange={handleChange}
-                    placeholder="title"
+                    placeholder="Land"
                   ></Input>
                   <br />
-                  <label>Length</label>
+                   <label>Plot</label>
                   <Input
-                    name="length"
-                    value={formData.length}
+                    name="plot_id"
+                    value={formData.plot_id}
                     onChange={handleChange}
-                    placeholder="length"
+                    placeholder="plot"
                   ></Input>
-                  <br /> <label>Width</label>
-                  <Input
-                    name="width"
-                    value={formData.width}
-                    onChange={handleChange}
-                    placeholder="width"
-                  ></Input>
-                  <br />
-                  <label>East road</label>
-                  <Checkbox
-                    colorScheme="red"
-                    name="eastroad"
-                    type="checkbox"
-                    value={formData.eastroad}
-                    onChange={handleChange}
-                  ></Checkbox>
-                  <br />
-                  <label>West Road</label>
-                  <Checkbox
-                    colorScheme="red"
-                    name="westroad"
-                    type="checkbox"
-                    value={formData.westroad}
-                    onChange={handleChange}
-                  ></Checkbox>
-                  <br />
-                  <label>North Road</label>
-                  <Checkbox
-                    colorScheme="red"
-                    name="northroad"
-                    type="checkbox"
-                    value={formData.northroad}
-                    onChange={handleChange}
-                  ></Checkbox>
-                  <br />
-                  <label>South Road</label>
-                  <Checkbox
-                    colorScheme="red"
-                    name="southroad"
-                    type="checkbox"
-                    value={formData.southroad}
-                    onChange={handleChange}
-                  ></Checkbox>
-                  <br />
                 </ModalBody>
 
                 <ModalFooter>
@@ -235,7 +186,7 @@ export const AdminTransaction = () => {
                     Close
                   </Button>
                   <Button variant="ghost">
-                    <Input type="submit" value={"create scheme"} />
+                    <Input type="submit" value={"create transaction"} />
                   </Button>
                 </ModalFooter>
               </form>
