@@ -28,89 +28,82 @@ import {
   InputRightElement,
   InputGroup,
   Select,
+  Checkbox,
 } from "@chakra-ui/react";
 
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
-let auth = localStorage.getItem("token");
+let newData;
+const date = new Date().toDateString();
+const token = localStorage.getItem("token");
+
 export const AdminPlot = () => {
   const [name, setName] = useState("");
-  const [users, setUsers] = useState([]);
+  const [plot, setPlot] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
-
-  // add user
-  const [loading, setLoading] = useState(false);
-  const [show, setShow] = useState(false);
-  const handleClick = () => setShow(!show);
-  const [file, setFile] = useState(null);
-  const [blob, setBlob] = useState(null);
-
-  const date = new Date().toDateString();
-  const [formData, setFormData] = useState({
-    id: Math.random(),
+  const initState = {
     date,
-    name: "",
-    gender: "",
-    role: ["coustomer"],
-    email: "",
-    password: "",
-    phone_no: "",
-  });
-  const handleChange = (e) => {
-    const { id, value } = e.target;
-    setFormData({
-      ...formData,
-      [id]: value,
-    });
+    price: "",
+    area: "",
+    title: "",
+    length: "",
+    width: "",
+    land_id: "",
+    eastroad: false,
+    westroad: false,
+    northroad: false,
+    southroad: false,
   };
-
-  const handleSubmit = async (e) => {
+  const [formData, setFormData] = useState(initState);
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e, formData);
-    try {
-      await axios
-        .post("http://localhost:2345/register", formData)
-        .then((res) => {
-          console.log("res", res);
-        })
-        .then(() => {
-          alert("user created successfully, Please Sign In");
-          // setFormData({
-          //   id: Math.random(),
-          //   date,
-          //   name: "",
-          //   email: "",
-          //   password: "",
-          //   phone_no: "",
-          // });
-        });
-    } catch (e) {
-      console.log("error", e);
-    }
+    let road = [];
+
+    if (formData?.eastroad) road.push("east");
+    if (formData?.westroad) road.push("west");
+    if (formData?.northroad) road.push("north");
+    if (formData?.southroad) road.push("south");
+    newData = {
+      date: formData.date,
+      price: formData.price,
+      title: formData.title,
+      length: formData.length,
+      widht: formData.width,
+      area: formData.area,
+      land_id: formData.land_id,
+      road,
+    };
+    console.log("form", formData);
+    console.log("new", newData);
+    axios
+      .post("http://localhost:2345/products/admin", newData)
+      .then((res) => console.log(res))
+      .catch((e) => console.log(e));
   };
 
-  useEffect(() => {
-    file && setBlob(URL.createObjectURL(file));
-  }, [file]);
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    const valueToUpdate = type === "checkbox" ? checked : value;
+    setFormData({ ...formData, [name]: valueToUpdate });
 
-  useEffect(() => {
-    return () => {
-      URL.revokeObjectURL(blob);
-    };
-  }, [blob]);
+    // console.log(formData);
+    // console.log(newData);
+  };
 
   // finish add user
 
-  const handleUsers = () => {
+  const handlePlots = () => {
     // console.log("auth", auth);
     axios
-      .get(`http://localhost:2345/user/admin?name=${name}`, {
-        headers: { authorization: `Bearer ${auth}` },
+      .get(`http://localhost:2345/products/admin?title=${name}`, {
+        headers: { authorization: `Bearer ${token}` },
       })
       .then((res) => {
         console.log("res.data: ", res.data);
-        setUsers([...res.data]);
+        setPlot([...res.data]);
       })
       .catch((err) => {
         console.log(err);
@@ -119,8 +112,8 @@ export const AdminPlot = () => {
 
   const handleDelete = (e) => {
     axios
-      .delete(`http://localhost:2345/user/admin/${e}`, {
-        headers: { authorization: `Bearer ${auth}` },
+      .delete(`http://localhost:2345/products/admin/${e}`, {
+        headers: { authorization: `Bearer ${token}` },
       })
       .then((res) => {
         console.log("res.data: ", res.data);
@@ -141,88 +134,97 @@ export const AdminPlot = () => {
     >
       <Flex gap="5px">
         <Input onChange={(e) => setName(e.target.value)} />
-        <Button onClick={handleUsers}>Search</Button>
+        <Button onClick={handlePlots}>Search</Button>
         <Stack>
-          <Button onClick={onOpen}>Add User</Button>
+          <Button onClick={onOpen}>Add Plot</Button>
 
           <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
             <ModalContent>
               <form onSubmit={handleSubmit}>
-                <ModalHeader>Modal Title</ModalHeader>
+                <ModalHeader>Create Plot</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
-                  <h3>Sigh up</h3>
+                  <label>Area</label>
                   <Input
-                    id="name"
-                    type="text"
+                    name="area"
+                    value={formData.area}
                     onChange={handleChange}
-                    placeholder="enter username"
+                    placeholder="Area"
                   />
+                  <label>Land</label>
                   <Input
-                    id="email"
-                    type="text"
+                    name="land_id"
+                    value={formData.land_id}
                     onChange={handleChange}
-                    placeholder="enter email"
+                    placeholder="Land Id"
                   />
-                  <InputGroup size="md">
-                    <Input
-                      id="password"
-                      onChange={handleChange}
-                      pr="4.5rem"
-                      type={show ? "text" : "password"}
-                      placeholder="Enter password"
-                    />
-                    <InputRightElement width="4.5rem">
-                      <Button h="1.75rem" size="sm" onClick={handleClick}>
-                        {show ? "Hide" : "Show"}
-                      </Button>
-                    </InputRightElement>
-                  </InputGroup>
-                  <InputGroup>
-                    <InputRightElement
-                      pointerEvents="none"
-                      children={<PhoneIcon color="gray.300" />}
-                    />
-                    <InputLeftAddon children="+91" />
-                    <Input
-                      id="phone_no"
-                      onChange={handleChange}
-                      type="tel"
-                      placeholder="phone number"
-                    />
-                  </InputGroup>
+                  <label>Price</label>
                   <Input
-                    type="file"
-                    placeholder="upload image"
-                    onChange={(e) => {
-                      setFile(e.target.files[0]);
-                    }}
-                  />
-                  <Select
-                    placeholder="Gender"
-                    id="gender"
+                    name="price"
+                    value={formData.price}
                     onChange={handleChange}
-                  >
-                    <option value="male">male</option>
-                    <option vlaue="female">female</option>
-                    <option value="other">other</option>
-                  </Select>
-                  <Button
-                    onClick={() => {
-                      setLoading(true);
-                      setTimeout(() => {
-                        setLoading(false);
-                      }, 2000);
-                    }}
-                    isLoading={loading}
-                  >
-                    status
-                  </Button>
-
-                  <Box boxSize="sm">
-                    <Image src={blob} />
-                  </Box>
+                    placeholder="Price"
+                  />
+                  <label>Title</label>
+                  <Input
+                    name="title"
+                    value={formData.title}
+                    onChange={handleChange}
+                    placeholder="title"
+                  ></Input>
+                  <br />
+                  <label>Length</label>
+                  <Input
+                    name="length"
+                    value={formData.length}
+                    onChange={handleChange}
+                    placeholder="length"
+                  ></Input>
+                  <br /> <label>Width</label>
+                  <Input
+                    name="width"
+                    value={formData.width}
+                    onChange={handleChange}
+                    placeholder="width"
+                  ></Input>
+                  <br />
+                  <label>East road</label>
+                  <Checkbox
+                    colorScheme="red"
+                    name="eastroad"
+                    type="checkbox"
+                    value={formData.eastroad}
+                    onChange={handleChange}
+                  ></Checkbox>
+                  <br />
+                  <label>West Road</label>
+                  <Checkbox
+                    colorScheme="red"
+                    name="westroad"
+                    type="checkbox"
+                    value={formData.westroad}
+                    onChange={handleChange}
+                  ></Checkbox>
+                  <br />
+                  <label>North Road</label>
+                  <Checkbox
+                    colorScheme="red"
+                    name="northroad"
+                    type="checkbox"
+                    value={formData.northroad}
+                    onChange={handleChange}
+                  ></Checkbox>
+                  <br />
+                  <label>South Road</label>
+                  <Checkbox
+                    colorScheme="red"
+                    name="southroad"
+                    type="checkbox"
+                    value={formData.southroad}
+                    onChange={handleChange}
+                  ></Checkbox>
+                  <br />
                 </ModalBody>
 
                 <ModalFooter>
@@ -230,7 +232,7 @@ export const AdminPlot = () => {
                     Close
                   </Button>
                   <Button variant="ghost">
-                    <Input type="submit" value={"create user"} />
+                    <Input type="submit" value={"create scheme"} />
                   </Button>
                 </ModalFooter>
               </form>
@@ -241,32 +243,52 @@ export const AdminPlot = () => {
       <Table variant="striped" colorScheme="teal">
         <Thead>
           <Tr>
-            <Th>Name</Th>
-            <Th>Email</Th>
-            <Th>Date</Th>
-            <Th>Phone no</Th>
-            <Th>Image</Th>
-            <Th>Role</Th>
+            <Th>Title</Th>
+            <Th>Length</Th>
+            <Th>Width</Th>
+            <Th>Price</Th>
+            <Th>Road</Th>
+            <Th>Land</Th>
           </Tr>
         </Thead>
         <Tbody>
-          {users &&
-            users.map((e, i) => (
+          {plot &&
+            plot.map((e, i) => (
               <Tr key={i}>
-                <Td>{e.name}</Td>
-                <Td>{e.email}</Td>
-                <Td>{e.date}</Td>
-                <Td>{e.phone_no}</Td>
+                <Td>{e.title}</Td>
+                <Td>{e.length}</Td>
+                <Td>{e.width}</Td>
+                <Td>{e.price}</Td>
                 <Td>
-                  <Image src={e.image} alt="not available" />
-                </Td>
-                <Td>
-                  {e.role.map((el, it) => (
-                    <Text key={it}>{el}</Text>
+                  {e.road.map((ell, itt) => (
+                    <p key={itt}>{ell}</p>
                   ))}
                 </Td>
                 <Td>
-                  <Button onClick={() => handleDelete(e._id)}>Delete</Button>
+                  {
+                    <div>
+                      <p>{e.land_id.location}</p>
+                      <p>{e.land_id.scheme.scheme_name}</p>
+                      <p>{e.land_id.title}</p>
+                      <p>{e.land_id.price}</p>
+                      <p>{e.land_id.area}</p>
+                      <p>
+                        {e.land_id.partners.map((el, it) => (
+                          <span key={it}>{el.name}</span>
+                        ))}
+                      </p>
+                      <p>
+                        {e.land_id.facility.map((el, it) => (
+                          <span key={it}>{el}</span>
+                        ))}
+                      </p>
+                      <Td>
+                        <Button onClick={() => handleDelete(e._id)}>
+                          Delete
+                        </Button>
+                      </Td>
+                    </div>
+                  }
                 </Td>
               </Tr>
             ))}

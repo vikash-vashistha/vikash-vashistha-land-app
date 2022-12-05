@@ -132,7 +132,7 @@ export const AdminLand = () => {
             <ModalOverlay />
             <ModalContent>
               <form onSubmit={handleSubmit}>
-                <ModalHeader>Modal Title</ModalHeader>
+                <ModalHeader>Create Land</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
                   <label>Location</label>
@@ -188,7 +188,6 @@ export const AdminLand = () => {
                   >
                     Partners
                   </Checkbox>
-                  <Input type="submit" />
                 </ModalBody>
 
                 <ModalFooter>
@@ -207,6 +206,7 @@ export const AdminLand = () => {
       <Table variant="striped" colorScheme="teal">
         <Thead>
           <Tr>
+            <Th>Land Id</Th>
             <Th>Location</Th>
             <Th>Scheme</Th>
             <Th>Title</Th>
@@ -220,6 +220,7 @@ export const AdminLand = () => {
           {land &&
             land.map((e, i) => (
               <Tr key={i}>
+                <Td>{e._id}</Td>
                 <Td>{e.location}</Td>
                 <Td>{e.scheme.scheme_name}</Td>
                 <Td>{e.title}</Td>

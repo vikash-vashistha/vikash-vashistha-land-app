@@ -149,7 +149,7 @@ export const AdminUser = () => {
             <ModalOverlay />
             <ModalContent>
               <form onSubmit={handleSubmit}>
-                <ModalHeader>Modal Title</ModalHeader>
+                <ModalHeader>Create User</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
                   <h3>Sigh up</h3>

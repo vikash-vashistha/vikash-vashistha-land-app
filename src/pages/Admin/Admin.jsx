@@ -1,4 +1,5 @@
 import { Stack, Text } from "@chakra-ui/react";
+import { AdminCart } from "./AdminCart";
 import { AdminLand } from "./AdminLand";
 import { AdminPlot } from "./AdminPlot";
 import { AdminScheme } from "./AdminScheme";
@@ -18,6 +19,8 @@ export const Admin = () => {
       <AdminPlot />
       <Text size="xl">Transactions</Text>
       <AdminTransaction />
+      <Text size="xl">Cart</Text>
+      <AdminCart />
     </Stack>
   );
 };

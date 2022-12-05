@@ -130,7 +130,7 @@ export const AdminScheme = () => {
             <ModalOverlay />
             <ModalContent>
               <form onSubmit={handleSubmit}>
-                <ModalHeader>Modal Title</ModalHeader>
+                <ModalHeader>Create Scheme</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
                   <h3>Sigh up</h3>
