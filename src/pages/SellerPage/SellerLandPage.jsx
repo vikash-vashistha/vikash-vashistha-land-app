@@ -14,7 +14,7 @@ export const SellerLandPage = () => {
   useEffect(() => {
     if (lands.length === 0 || location.search) {
         axios
-          .get(`http://localhost:2345/land/seller/${location.search}`, {
+          .get(`http://localhost:2345/land/seller/all/${location.search}`, {
             headers: { authorization: `Bearer ${token}` },
           })
           .then((res) => {

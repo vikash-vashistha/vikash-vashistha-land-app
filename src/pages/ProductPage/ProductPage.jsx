@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { ThemeContext } from "../../Context/TheamContext";
 import { useThrottle } from "use-throttle";
-import logo from "../../logo.png";
+
 import {
   Input,
   InputGroup,
@@ -168,11 +168,6 @@ export const ProductsPage = () => {
         )}
       </div>
       <Carouseldiv  />
-      <img
-        style={{ borderRadius: "50px", width: "10%" }}
-        src={logo}
-        alt="logo"
-      />
     </div>
   );
 };

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { getUser } from "../../Redux/user/action";
+import styles from "./Navbar.module.css"
 
 const baseStyle = {
   color: "black",
@@ -26,8 +27,8 @@ export const Navbar = () => {
  console.log(auth,user);
   const links = [
     { to: "/", title: "🏠" },
-    { to: "/balance", title: "history📃" },
-    { to: "/chat", title: "message💬" },
+    { to: "/balance", title: "History📃" },
+    { to: "/chat", title: "Message💬" },
 
     {
       to: "/signup",
@@ -39,7 +40,7 @@ export const Navbar = () => {
     },
     {
       to: user?.role?.includes("seller") ? "/seller" : "/admin",
-      title: user?.role?.includes("seller") ? "seller👔" : user?.role?.includes("admin") ? "admin🙎‍♂️" : "",
+      title: user?.role?.includes("seller") ? "seller👔" : user?.role?.includes("admin") ? "Admin🙎‍♂️" : "",
     },
     {
       to: `/cart/${user._id}`,
@@ -47,7 +48,7 @@ export const Navbar = () => {
     },
     {
       to: auth ? "/signout" : "/login",
-      title: auth ? "signout☣️" : "Login",
+      title: auth ? "Signout☣️" : "Login",
     },
   ];
   // console.log(auth);
@@ -55,12 +56,7 @@ export const Navbar = () => {
   return (
     <>
       <div
-        style={{
-          display: "flex",
-          justifyContent: "space-around",
-          borderBottom: "1px solid gray",
-          marginBottom: "10px",
-        }}
+        className={styles.nav}
       >
         {links.map((el) => {
           return (

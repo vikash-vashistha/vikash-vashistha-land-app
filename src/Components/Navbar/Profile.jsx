@@ -2,10 +2,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button, Stack, Text, Image } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { getUser } from "../../Redux/user/action";
+import axios from "axios";
 
 export const Profile = () => {
   const dispatch = useDispatch();
-  const {user} = useSelector((state) => ({ user: state.app.user }));
+  const { user } = useSelector((state) => ({ user: state.app.user }));
+  
+  const handleSeller = async () => {
+    await axios
+        .post(`http://localhost:2345/request/${user._id}`)
+        .then((res) => {
+          console.log("res", res);
+        })
+      .catch((e) => {
+          console.log(e);
+        })
+  }
 
   useEffect(() => {
     dispatch(getUser());
@@ -26,6 +38,7 @@ export const Profile = () => {
       <Text>Phone - {user?.phone_no}</Text>
       <Text>Role - {user?.role}</Text>
       <Image src={user?.image} />
+      <Button onClick={ handleSeller}>Request to become Seller</Button>
     </Stack>
   );
 };

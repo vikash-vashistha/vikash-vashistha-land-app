@@ -128,20 +128,22 @@ console.log(formData);
                 <ModalHeader>Create Transaction</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
-                  <label>Transaction Id</label>
+                  <label>Transaction Name</label>
                   <Input
                     name="transaction_id"
                     value={formData.transaction_id}
                     onChange={handleChange}
-                    placeholder="Transaction Id"
+                    placeholder="Transaction Name"
                   />
                   <label>Type</label>
-                  <Input
+                  <Select
                     name="type"
-                    value={formData.type}
                     onChange={handleChange}
                     placeholder="Type"
-                  />
+                  >
+                    <option value="debit">Debit</option>
+                    <option value="credit">Credit</option>
+                  </Select>
                   <label>Amount</label>
                   <Input
                     name="amount"
@@ -172,7 +174,7 @@ console.log(formData);
                     placeholder="Land"
                   ></Input>
                   <br />
-                   <label>Plot</label>
+                  <label>Plot</label>
                   <Input
                     name="plot_id"
                     value={formData.plot_id}
