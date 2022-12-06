@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import logo from "../logo.png"
+import logo1 from "../logo1.png"
 import back_ground from "../back_ground.png";
 import items from "../items.png";
 import { Carousel } from 'react-responsive-carousel';
@@ -10,7 +10,7 @@ export const Carouseldiv = () => {
       <div style={{ width: "90%", margin: "auto" }}>
         <Carousel>
           <div>
-            <img src={logo} />
+            <img src={logo1} />
             <p className="legend">Logo</p>
           </div>
           <div>

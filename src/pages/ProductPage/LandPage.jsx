@@ -4,12 +4,15 @@ import { useParams, useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Button, Text, Stack, Flex, useDisclosure } from "@chakra-ui/react";
 import { LandFilterSort } from "./LandFilterSort";
+import { useSelector } from "react-redux";
+import { Payment } from "../../Components/Payment";
 
 export const Land = () => {
+  const { user } = useSelector((state) => ({ user: state.app.user }));
   const { id } = useParams();
-  console.log(id)
+  console.log(id);
   const [lands, setLands] = useState([]);
-const location = useLocation()
+  const location = useLocation();
   // getting lands inside scheme
   useEffect(() => {
     if (lands.length === 0 || location.search) {
@@ -29,16 +32,16 @@ const location = useLocation()
     }
   }, [location.search]);
 
-  const handlePartner = (e) => {
-    console.log(e);
-    axios
-      .get(`http://localhost:2345/land/${e}`)
-      .then((res) => {
-        console.log( res.data);
-      });
-  }
+  const handlePartner = (e, p) => {
+    console.log(e, p);
+    let arr = p.map((el) => el._id);
+    arr.push(user._id)
+    axios.patch(`http://localhost:2345/land/partner/${e}`, arr).then((res) => {
+      console.log(res.data);
+    });
+  };
 
-console.log(location.search, lands)
+  console.log(location.search, lands);
   return (
     <div style={{ display: "flex" }}>
       <LandFilterSort />
@@ -87,13 +90,13 @@ console.log(location.search, lands)
                       to={`/chat/${el._id}`}
                       style={{ margin: "5px", textDecoration: "none" }}
                     >
-                      <Button 
-                        colorScheme="teal" variant="link" key={it}>{el.name}
+                      <Button colorScheme="teal" variant="link" key={it}>
+                        {el.name}
                       </Button>
                     </Link>
                   ))}{" "}
                 </Flex>
-                <Button onClick={() => handlePartner(e._id)}>
+                <Button onClick={() => handlePartner(e._id, e.partners)}>
                   become partner
                 </Button>
               </Stack>
