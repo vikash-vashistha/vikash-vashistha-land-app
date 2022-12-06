@@ -22,12 +22,7 @@ const location = useLocation();
       .then((res) => {
         console.log(plots, res.data);
         setPlots([...res.data]);
-        console.log("plots", plots);
-        let temp;
-        if (plots.length > 0) {
-          temp = plots.reduce((a, e) => (a += Number(e.plot_id.price)));
-        }
-        setTotal(temp);
+        console.log("plots", plots); 
       })
   }, [location.search]);
 
@@ -124,12 +119,10 @@ return (
               </Text>
             </Stack>
             <Button onClick={() => itemRemoveHandler(e._id)}>Remove</Button>
+            <Payment price={e?.plot_id?.price} />
           </Stack>
         ))}
     </div>
-    <Text>Total {total}</Text>
-    <Payment />
-    
   </div>
 );
 }

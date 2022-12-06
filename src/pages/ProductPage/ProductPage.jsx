@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { ThemeContext } from "../../Context/TheamContext";
 import { useThrottle } from "use-throttle";
+import logo from "../../logo.png";
 import {
   Input,
   InputGroup,
@@ -18,6 +19,7 @@ import {
   Box,
   Text
 } from "@chakra-ui/react";
+import { Carouseldiv } from "../../Components/Carouseldiv";
 
 export const styles = {
   dark: {
@@ -85,18 +87,20 @@ export const ProductsPage = () => {
             ref={ref1}
           />
           <InputRightElement width="4.5rem">
-            {text && <Button
-              h="1.5rem"
-              size="sm"
-              style={styles[theme]}
-              onClick={handleClose}
-            >
-              <Image
-                style={{ width: "20px", cursor: "pointer" }}
-                src="https://www.pngkey.com/png/full/105-1058931_black-cross-png-cross-sign-png-black.png"
-                alt="close button"
-              />
-            </Button>}
+            {text && (
+              <Button
+                h="1.5rem"
+                size="sm"
+                style={styles[theme]}
+                onClick={handleClose}
+              >
+                <Image
+                  style={{ width: "20px", cursor: "pointer" }}
+                  src="https://www.pngkey.com/png/full/105-1058931_black-cross-png-cross-sign-png-black.png"
+                  alt="close button"
+                />
+              </Button>
+            )}
             {loading && (
               <Spinner
                 thickness="1px"
@@ -115,15 +119,20 @@ export const ProductsPage = () => {
           height: "380px",
           margin: "5px",
           alignItems: "stretch",
+          // border: "1px solid red",
+          position: "absolute",
+          zIndex: 1,
         }}
       >
         {text && (
           <div
             style={{
+              // border: "1px solid red",
               marginLeft: "10%",
-              width: "30%",
+              width: "100%",
               height: "300px",
               display: "flex",
+              zIndex: -1,
             }}
           >
             <div
@@ -158,6 +167,12 @@ export const ProductsPage = () => {
           </div>
         )}
       </div>
+      <Carouseldiv  />
+      <img
+        style={{ borderRadius: "50px", width: "10%" }}
+        src={logo}
+        alt="logo"
+      />
     </div>
   );
 };

@@ -19,7 +19,8 @@ function loadScript(src) {
 
 const __DEV__ = document.domain === "localhost";
 
-export const Payment = () => {
+export const Payment = ({ price }) => {
+  
   const [name, setName] = useState("Mehul");
 
   async function displayRazorpay() {
@@ -34,6 +35,10 @@ export const Payment = () => {
 
     const data = await fetch("http://localhost:2345/razorpay", {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ price }),
     }).then((t) => t.json());
 
     console.log(data);
@@ -41,11 +46,11 @@ export const Payment = () => {
     const options = {
       key: __DEV__ ? "rzp_test_X1AazF5paSfEvw" : "PRODUCTION_KEY",
       currency: data.currency,
-      amount: data.amount.toString(),
+      amount: price.toString() || data.amount.toString(),
       order_id: data.id,
-      name: "Donation",
+      name: "Payment to Vikash Land App",
       description: "Thank you for nothing. Please give us some money",
-      // image: "http://localhost:2345/logo.svg",
+      image: "http://localhost:2345/logo.png",
       handler: function (response) {
         alert(response.razorpay_payment_id);
         alert(response.razorpay_order_id);
