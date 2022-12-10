@@ -17,7 +17,7 @@ function loadScript(src) {
   });
 }
 
-const __DEV__ = document.domain === "onrender.com";
+const __DEV__ = document.domain === "localhost";
 
 export const Payment = ({ price }) => {
   
@@ -50,7 +50,7 @@ export const Payment = ({ price }) => {
       order_id: data.id,
       name: "Payment to Vikash Land App",
       description: "Thank you for nothing. Please give us some money",
-      image: "https://vikash-land-app.onrender.com/logo.png",
+      image: "https://freeimage.host/i/Hn8E08u",
       handler: function (response) {
         alert(response.razorpay_payment_id);
         alert(response.razorpay_order_id);

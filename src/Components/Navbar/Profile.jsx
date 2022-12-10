@@ -36,9 +36,21 @@ export const Profile = () => {
       <Text>Name - {user?.name}</Text>
       <Text>Email - {user?.email}</Text>
       <Text>Phone - {user?.phone_no}</Text>
-      <Text>Role - {user?.role}</Text>
+      <Text
+        style={{
+          border: "1px solid grey",
+          borderRadius: "5px",
+          margin: "5px",
+          padding: "5px",
+        }}
+      >
+        Role -{" "}
+        {user?.role?.map((el, it) => (
+          <Text style={{marginLeft: "50px"}} key={it}>{el}</Text>
+        ))}
+      </Text>
       <Image src={user?.image} />
-      <Button onClick={ handleSeller}>Request to become Seller</Button>
+      <Button disabled={user?.role?.includes("seller")} onClick={handleSeller}>Request to become Seller</Button>
     </Stack>
   );
 };
