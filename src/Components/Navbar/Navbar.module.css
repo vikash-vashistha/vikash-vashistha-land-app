@@ -1,5 +1,6 @@
 @media screen  and (max-width: 385px) {
   .nav {
+    background-color: #1c9152;
   border-bottom: 1px solid gray;
   margin-bottom: 10px;
 }
@@ -7,6 +8,7 @@
 
 @media screen  and (min-width: 385px) {
   .nav {
+    background-color: #1c9152;
   display: flex;
   justify-content: space-around;
   
