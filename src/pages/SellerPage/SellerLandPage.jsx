@@ -14,9 +14,12 @@ export const SellerLandPage = () => {
   useEffect(() => {
     if (lands.length === 0 || location.search) {
         axios
-          .get(`http://localhost:2345/land/seller/all/${location.search}`, {
-            headers: { authorization: `Bearer ${token}` },
-          })
+          .get(
+            `https://vikash-land-app.onrender.com/land/seller/all/${location.search}`,
+            {
+              headers: { authorization: `Bearer ${token}` },
+            }
+          )
           .then((res) => {
             setLands([...res.data]);
             console.log(res.data);

@@ -67,7 +67,7 @@ export const ProductsPage = () => {
   const getData = () => {
     setLoading(true)
     axios
-      .get(`http://localhost:2345/products/locations?city=${throttledText}`)
+      .get(`https://vikash-land-app.onrender.com/products/locations?city=${throttledText}`)
       .then((res) => {
         setData([...res.data]);
         setLoading(false);

@@ -32,14 +32,15 @@ export const getUser = (payload) => (dispatch) => {
   let auth = localStorage.getItem("token")
   // console.log("auth", auth);
    axios
-      .get(`http://localhost:2345/user`, {
-        headers: { authorization: `Bearer ${auth}` },
-      })
-      .then((res) => {
-        // console.log("res.data: ", res.data.user[0]);
-        dispatch(getUserSuccess(res.data.user[0]));
-      }).catch((err) => {
-      // console.log(err);
-      dispatch(getUserFailure(err));
-    });
+     .get(`https://vikash-land-app.onrender.com/user`, {
+       headers: { authorization: `Bearer ${auth}` },
+     })
+     .then((res) => {
+       // console.log("res.data: ", res.data.user[0]);
+       dispatch(getUserSuccess(res.data.user[0]));
+     })
+     .catch((err) => {
+       // console.log(err);
+       dispatch(getUserFailure(err));
+     });
 };

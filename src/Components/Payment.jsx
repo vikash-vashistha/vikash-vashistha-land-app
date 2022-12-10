@@ -17,7 +17,7 @@ function loadScript(src) {
   });
 }
 
-const __DEV__ = document.domain === "localhost";
+const __DEV__ = document.domain === "onrender.com";
 
 export const Payment = ({ price }) => {
   
@@ -33,7 +33,7 @@ export const Payment = ({ price }) => {
       return;
     }
 
-    const data = await fetch("http://localhost:2345/razorpay", {
+    const data = await fetch("https://vikash-land-app.onrender.com/razorpay", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -50,7 +50,7 @@ export const Payment = ({ price }) => {
       order_id: data.id,
       name: "Payment to Vikash Land App",
       description: "Thank you for nothing. Please give us some money",
-      image: "http://localhost:2345/logo.png",
+      image: "https://vikash-land-app.onrender.com/logo.png",
       handler: function (response) {
         alert(response.razorpay_payment_id);
         alert(response.razorpay_order_id);

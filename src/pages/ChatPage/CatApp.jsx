@@ -33,7 +33,7 @@ export const ChatApp = () => {
 
   const gettingChat = () => {
     axios
-      .get(`http://localhost:2345/chat/${id}`, {
+      .get(`https://vikash-land-app.onrender.com/chat/${id}`, {
         headers: { authorization: `Bearer ${token}` },
       })
       .then((res) => {
@@ -45,7 +45,7 @@ export const ChatApp = () => {
 
   const gettingReply = () => {
     axios
-      .get(`http://localhost:2345/chat/${id}`, {
+      .get(`https://vikash-land-app.onrender.com/chat/${id}`, {
         headers: { authorization: `Bearer ${token}` },
       })
       .then((res) => {
@@ -80,7 +80,7 @@ export const ChatApp = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:2345/user/all`, {
+      .get(`https://vikash-land-app.onrender.com/user/all`, {
         headers: { authorization: `Bearer ${token}` },
       })
       .then((res) => {
@@ -114,7 +114,7 @@ export const ChatApp = () => {
       console.log("inside post", messages);
       axios
         .post(
-          `http://localhost:2345/chat`,
+          `https://vikash-land-app.onrender.com/chat`,
           {
             user_id: `${user?._id}`,
             chat_with: `${subscribedTo?._id}`,
@@ -135,7 +135,7 @@ export const ChatApp = () => {
 
       axios
         .patch(
-          `http://localhost:2345/chat`,
+          `https://vikash-land-app.onrender.com/chat`,
           {
             user_id: user._id,
             chat_with: subscribedTo._id,

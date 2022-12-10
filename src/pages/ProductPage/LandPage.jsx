@@ -24,7 +24,9 @@ export const Land = () => {
       //   },
       // };
       axios
-        .get(`http://localhost:2345/land/${id}${location.search}`)
+        .get(
+          `https://vikash-land-app.onrender.com/land/${id}${location.search}`
+        )
         .then((res) => {
           setLands([...res.data]);
           console.log(res.data);
@@ -36,9 +38,11 @@ export const Land = () => {
     console.log(e, p);
     let arr = p.map((el) => el._id);
     arr.push(user._id)
-    axios.patch(`http://localhost:2345/land/partner/${e}`, arr).then((res) => {
-      console.log(res.data);
-    });
+    axios
+      .patch(`https://vikash-land-app.onrender.com/land/partner/${e}`, arr)
+      .then((res) => {
+        console.log(res.data);
+      });
   };
 
   console.log(location.search, lands);

@@ -59,7 +59,7 @@ export const AdminTransaction = () => {
     e.preventDefault();
 console.log(formData);
     axios
-      .post("http://localhost:2345/transaction/admin", formData)
+      .post("https://vikash-land-app.onrender.com/transaction/admin", formData)
       .then((res) => console.log(res))
       .catch((e) => console.log(e));
   };
@@ -79,7 +79,7 @@ console.log(formData);
     // console.log("auth", auth);
     axios
       .get(
-        `http://localhost:2345/transaction/admin?transaction_id=${name}`,
+        `https://vikash-land-app.onrender.com/transaction/admin?transaction_id=${name}`,
         {
           headers: { authorization: `Bearer ${token}` },
         }
@@ -95,7 +95,7 @@ console.log(formData);
 
   const handleDelete = (e) => {
     axios
-      .delete(`http://localhost:2345/transaction/admin/${e}`, {
+      .delete(`https://vikash-land-app.onrender.com/transaction/admin/${e}`, {
         headers: { authorization: `Bearer ${token}` },
       })
       .then((res) => {

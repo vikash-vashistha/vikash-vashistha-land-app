@@ -16,10 +16,12 @@ console.log(IDBObjectStore)
 
   // getting schemes
   const getProducts = () => {
-    axios.get(`http://localhost:2345/scheme/all/${id}`).then((res) => {
-      setSchemes([...res.data]);
-      console.log(res.data);
-    });
+    axios
+      .get(`https://vikash-land-app.onrender.com/scheme/all/${id}`)
+      .then((res) => {
+        setSchemes([...res.data]);
+        console.log(res.data);
+      });
   };
 
   return (

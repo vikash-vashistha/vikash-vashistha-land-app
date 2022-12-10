@@ -25,7 +25,7 @@ export const AdminCart = () => {
   const handleCart = () => {
     // console.log("auth", auth);
     axios
-      .get(`http://localhost:2345/cart/admin?user=${name}`, {
+      .get(`https://vikash-land-app.onrender.com/cart/admin?user=${name}`, {
         headers: { authorization: `Bearer ${token}` },
       })
       .then((res) => {
@@ -39,7 +39,7 @@ export const AdminCart = () => {
 
   const handleDelete = (e) => {
     axios
-      .delete(`http://localhost:2345/cart/admin/${e}`, {
+      .delete(`https://vikash-land-app.onrender.com/cart/admin/${e}`, {
         headers: { authorization: `Bearer ${token}` },
       })
       .then((res) => {

@@ -57,9 +57,14 @@ const getProducts = async (state, dispatch) => {
     // setLoading(true);
     dispatch(transLoadingAction);
     await axios
-      .get(`http://localhost:2345/transaction?page=${state.page}&size=${10}`, {
-        headers: { authorization: `Bearer ${token}` },
-      })
+      .get(
+        `https://vikash-land-app.onrender.com/transaction?page=${
+          state.page
+        }&size=${10}`,
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => {
         console.log("res.data: ", res.data.transaction);
         dispatch({

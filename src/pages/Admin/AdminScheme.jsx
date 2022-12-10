@@ -63,7 +63,7 @@ export const AdminScheme = () => {
     console.log(e, formData, user);
     try {
       await axios
-        .post("http://localhost:2345/scheme/admin", formData)
+        .post("https://vikash-land-app.onrender.com/scheme/admin", formData)
         .then((res) => {
           console.log("res", res);
         })
@@ -86,9 +86,12 @@ export const AdminScheme = () => {
   const handleSchemes = () => {
     // console.log("auth", auth);
     axios
-      .get(`http://localhost:2345/scheme/admin?scheme_name=${name}`, {
-        headers: { authorization: `Bearer ${auth}` },
-      })
+      .get(
+        `https://vikash-land-app.onrender.com/scheme/admin?scheme_name=${name}`,
+        {
+          headers: { authorization: `Bearer ${auth}` },
+        }
+      )
       .then((res) => {
         console.log("res.data: ", res.data);
         setScheme([...res.data]);
@@ -100,7 +103,7 @@ export const AdminScheme = () => {
 
   const handleDelete = (e) => {
     axios
-      .delete(`http://localhost:2345/scheme/admin/${e}`, {
+      .delete(`https://vikash-land-app.onrender.com/scheme/admin/${e}`, {
         headers: { authorization: `Bearer ${auth}` },
       })
       .then((res) => {

@@ -14,7 +14,7 @@ export const ChatAll = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:2345/chat/all`, {
+      .get(`https://vikash-land-app.onrender.com/chat/all`, {
         headers: { authorization: `Bearer ${token}` },
       })
       .then((res) => {

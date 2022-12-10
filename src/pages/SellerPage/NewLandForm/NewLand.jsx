@@ -43,7 +43,7 @@ export const NewLand = () => {
     let newData = { ...formData, partners: [user._id] }
     console.log(newData);
     axios
-      .post("http://localhost:2345/land", newData)
+      .post("https://vikash-land-app.onrender.com/land", newData)
       .then((res) => console.log(res))
       .catch((e) => console.log(e));
   };

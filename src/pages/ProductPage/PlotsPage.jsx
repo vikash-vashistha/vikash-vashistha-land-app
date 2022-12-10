@@ -14,7 +14,9 @@ const location = useLocation();
 
   useEffect(() => {
     axios
-      .get(`http://localhost:2345/products/singleland/${id}${location.search}`)
+      .get(
+        `https://vikash-land-app.onrender.com/products/singleland/${id}${location.search}`
+      )
       .then((res) => {
         console.log(plots, res.data);
         setPlots((prv) => [...res.data]);

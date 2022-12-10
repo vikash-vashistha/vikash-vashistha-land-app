@@ -79,7 +79,7 @@ export const AdminPlot = () => {
     console.log("form", formData);
     console.log("new", newData);
     axios
-      .post("http://localhost:2345/products/admin", newData)
+      .post("https://vikash-land-app.onrender.com/products/admin", newData)
       .then((res) => console.log(res))
       .catch((e) => console.log(e));
   };
@@ -98,9 +98,12 @@ export const AdminPlot = () => {
   const handlePlots = () => {
     // console.log("auth", auth);
     axios
-      .get(`http://localhost:2345/products/admin?title=${name}`, {
-        headers: { authorization: `Bearer ${token}` },
-      })
+      .get(
+        `https://vikash-land-app.onrender.com/products/admin?title=${name}`,
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => {
         console.log("res.data: ", res.data);
         setPlot([...res.data]);
@@ -112,7 +115,7 @@ export const AdminPlot = () => {
 
   const handleDelete = (e) => {
     axios
-      .delete(`http://localhost:2345/products/admin/${e}`, {
+      .delete(`https://vikash-land-app.onrender.com/products/admin/${e}`, {
         headers: { authorization: `Bearer ${token}` },
       })
       .then((res) => {

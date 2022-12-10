@@ -40,7 +40,7 @@ export const AdminRequests = () => {
 
   const handleUsers = () => {
     axios
-      .get(`http://localhost:2345/request/admin?name=${name}`, {
+      .get(`https://vikash-land-app.onrender.com/request/admin?name=${name}`, {
         headers: { authorization: `Bearer ${auth}` },
       })
       .then((res) => {
@@ -55,9 +55,12 @@ export const AdminRequests = () => {
   const handleAllow = (e) => {
     console.log("inside allow handler", e);
     axios
-      .patch(`http://localhost:2345/user/admin/${e.user_id._id}`, {
-        headers: { authorization: `Bearer ${auth}` },
-      })
+      .patch(
+        `https://vikash-land-app.onrender.com/user/admin/${e.user_id._id}`,
+        {
+          headers: { authorization: `Bearer ${auth}` },
+        }
+      )
       .then((res) => {
         console.log("res.data: ", res.data);
       })
@@ -66,7 +69,7 @@ export const AdminRequests = () => {
       });
     
     axios
-      .delete(`http://localhost:2345/request/admin/${e._id}`, {
+      .delete(`https://vikash-land-app.onrender.com/request/admin/${e._id}`, {
         headers: { authorization: `Bearer ${auth}` },
       })
       .then((res) => {

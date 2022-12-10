@@ -71,12 +71,11 @@ export const Signup = () => {
 
     try {
       await axios
-        .post("http://localhost:2345/register", formData)
+        .post("https://vikash-land-app.onrender.com/register", formData)
         .then((res) => {
           console.log("res", res);
         })
         .then(() => {
-           
           alert("user created successfully, Please Sign In");
           navigate("/login");
           // setFormData({

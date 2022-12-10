@@ -44,7 +44,8 @@ export const NewPlot = () => {
     console.log("form", formData);
     console.log("new", newData);
     axios
-      .post("http://localhost:2345/products",newData).then((res) => console.log(res))
+      .post("https://vikash-land-app.onrender.com/products", newData)
+      .then((res) => console.log(res))
       .catch((e) => console.log(e));
   };
 

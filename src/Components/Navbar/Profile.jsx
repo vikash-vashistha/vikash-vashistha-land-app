@@ -10,13 +10,13 @@ export const Profile = () => {
   
   const handleSeller = async () => {
     await axios
-        .post(`http://localhost:2345/request/${user._id}`)
-        .then((res) => {
-          console.log("res", res);
-        })
+      .post(`https://vikash-land-app.onrender.com/request/${user._id}`)
+      .then((res) => {
+        console.log("res", res);
+      })
       .catch((e) => {
-          console.log(e);
-        })
+        console.log(e);
+      });
   }
 
   useEffect(() => {

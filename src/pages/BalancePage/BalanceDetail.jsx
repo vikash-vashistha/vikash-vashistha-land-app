@@ -11,7 +11,7 @@ export const BalanceDetail = () => {
   useEffect(() => {
     try {
       axios
-        .get(`http://localhost:2345/transaction/balance/${id}`, {
+        .get(`https://vikash-land-app.onrender.com/transaction/balance/${id}`, {
           headers: { authorization: `Bearer ${token}` },
         })
         .then((res) => {

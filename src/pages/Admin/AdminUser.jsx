@@ -70,7 +70,7 @@ export const AdminUser = () => {
      console.log(e, formData);
      try {
        await axios
-         .post("http://localhost:2345/register", formData)
+         .post("https://vikash-land-app.onrender.com/register", formData)
          .then((res) => {
            console.log("res", res);
          })
@@ -105,7 +105,7 @@ export const AdminUser = () => {
   const handleUsers = () => {
     // console.log("auth", auth);
     axios
-      .get(`http://localhost:2345/user/admin?name=${name}`, {
+      .get(`https://vikash-land-app.onrender.com/user/admin?name=${name}`, {
         headers: { authorization: `Bearer ${auth}` },
       })
       .then((res) => {
@@ -119,7 +119,7 @@ export const AdminUser = () => {
 
   const handleDelete = (e) => {
     axios
-      .delete(`http://localhost:2345/user/admin/${e}`, {
+      .delete(`https://vikash-land-app.onrender.com/user/admin/${e}`, {
         headers: { authorization: `Bearer ${auth}` },
       })
       .then((res) => {

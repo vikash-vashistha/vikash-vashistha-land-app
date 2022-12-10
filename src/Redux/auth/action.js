@@ -29,7 +29,7 @@ const loginUser = (payload) => (dispatch) => {
   const { email, password } = payload;
   // console.log(payload);
   axios
-    .post("http://localhost:2345/login", {
+    .post("https://vikash-land-app.onrender.com/login", {
       email,
       password,
     })

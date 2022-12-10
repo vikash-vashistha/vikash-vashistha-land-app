@@ -63,7 +63,7 @@ export const AdminLand = () => {
     let newData = { ...formData, partners: [user._id] };
     console.log(newData);
     axios
-      .post("http://localhost:2345/land/admin", newData)
+      .post("https://vikash-land-app.onrender.com/land/admin", newData)
       .then((res) => console.log(res))
       .catch((e) => console.log(e));
   };
@@ -84,7 +84,7 @@ export const AdminLand = () => {
   const handleLands = () => {
     // console.log("auth", auth);
     axios
-      .get(`http://localhost:2345/land/admin?title=${name}`, {
+      .get(`https://vikash-land-app.onrender.com/land/admin?title=${name}`, {
         headers: { authorization: `Bearer ${auth}` },
       })
       .then((res) => {
@@ -98,7 +98,7 @@ export const AdminLand = () => {
 
   const handleDelete = (e) => {
     axios
-      .delete(`http://localhost:2345/land/admin/${e}`, {
+      .delete(`https://vikash-land-app.onrender.com/land/admin/${e}`, {
         headers: { authorization: `Bearer ${auth}` },
       })
       .then((res) => {

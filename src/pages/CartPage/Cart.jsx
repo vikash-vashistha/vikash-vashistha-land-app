@@ -16,19 +16,19 @@ const location = useLocation();
 
   useEffect(() => {
     axios
-      .get(`http://localhost:2345/cart/${id}`,{
-         headers: { authorization: `Bearer ${token}` },
-       })
+      .get(`https://vikash-land-app.onrender.com/cart/${id}`, {
+        headers: { authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         console.log(plots, res.data);
         setPlots([...res.data]);
-        console.log("plots", plots); 
-      })
+        console.log("plots", plots);
+      });
   }, [location.search]);
 
   const itemRemoveHandler = (e) => {
   axios
-    .delete(`http://localhost:2345/cart/${e}`, {
+    .delete(`https://vikash-land-app.onrender.com/cart/${e}`, {
       headers: { authorization: `Bearer ${token}` },
     })
     .then((res) => {

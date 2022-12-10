@@ -12,10 +12,12 @@ export const PlotDetails = () => {
 
   useEffect(() => {
     try {
-      axios.get(`http://localhost:2345/products/plots/${id}`).then((res) => {
-        // console.log("vik",res.data);
-        setPlotDetails(res.data[0]);
-      });
+      axios
+        .get(`https://vikash-land-app.onrender.com/products/plots/${id}`)
+        .then((res) => {
+          // console.log("vik",res.data);
+          setPlotDetails(res.data[0]);
+        });
     } catch (e) {
       console.log(e);
     }
@@ -26,7 +28,7 @@ export const PlotDetails = () => {
      try {
        axios
          .post(
-           `http://localhost:2345/cart`,
+           `https://vikash-land-app.onrender.com/cart`,
            {
              user_id: user._id,
              plot_id: id,
