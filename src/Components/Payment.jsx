@@ -21,7 +21,7 @@ const __DEV__ = document.domain === "localhost";
 
 export const Payment = ({ price }) => {
   
-  const [name, setName] = useState("Mehul");
+  const [name, setName] = useState("Vikash");
 
   async function displayRazorpay() {
     const res = await loadScript(
@@ -58,8 +58,8 @@ export const Payment = ({ price }) => {
       },
       prefill: {
         name,
-        email: "vikashvashistha278@gmail.com",
-        phone_number: "6367785627",
+        email: process.env.EMAIL,
+        phone_number: process.env.PHONE_NO,
       },
     };
     const paymentObject = new window.Razorpay(options);
