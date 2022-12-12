@@ -119,7 +119,9 @@ return (
               </Text>
             </Stack>
             <Button onClick={() => itemRemoveHandler(e._id)}>Remove</Button>
-            <Payment price={e?.plot_id?.price} />
+            <Payment
+              price={e?.plot_id?.price}
+            />
           </Stack>
         ))}
     </div>

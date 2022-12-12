@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, Navigate, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Button, Text, Stack, Flex, useDisclosure } from "@chakra-ui/react";
 import { LandFilterSort } from "./LandFilterSort";
@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { Payment } from "../../Components/Payment";
 
 export const Land = () => {
+  const navigate = useNavigate()
   const { user } = useSelector((state) => ({ user: state.app.user }));
   const { id } = useParams();
   console.log(id);
@@ -43,6 +44,7 @@ export const Land = () => {
       .then((res) => {
         console.log(res.data);
       });
+    navigate("payment")
   };
 
   console.log(location.search, lands);

@@ -22,6 +22,7 @@ import { Cart } from "../pages/CartPage/Cart";
 import { ChatAll } from "../pages/ChatPage/ChatAll";
 import { SellerLandPage } from "../pages/SellerPage/SellerLandPage";
 import { Admin } from "../pages/Admin/Admin";
+import { Payment } from "../Components/Payment";
 
 export const Routess = () => {
   return (
@@ -125,6 +126,7 @@ export const Routess = () => {
             </PrivateRoute>
           }
         />
+        <Route path="lands/:id/payment" element={ <Payment price="60000"/>}/>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <Footer />

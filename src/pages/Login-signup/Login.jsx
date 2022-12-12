@@ -19,6 +19,7 @@ import {
 import { loginUser } from "../../Redux/auth/action";
 
 export const Login = () => {
+  const { auth } = useSelector((state) => ({ auth: state.auth }));
   const navigate = useNavigate()
   const [otp, setOtp] = useState("");
   const dispatch = useDispatch();
@@ -45,16 +46,19 @@ export const Login = () => {
     e.preventDefault();
     console.log(e, formData);
     let payload = formData
+    console.log("before", auth);
     handleLogin(payload)
     // setFormData({
-    //   email: "",
+      //   email: "",
     //   password: "",
     // });
     console.log("vikash");
+    setTimeout(() => {
+      console.log("inside login page", location, comingFrom);
+      navigate(comingFrom, { replace: true });
+    }, 1000)
     // navigate("/")
-    navigate(comingFrom, { replace: true });
   };
-console.log("inside login page", location);
   return (
     <Stack margin="auto" width="40%">
       <form onSubmit={handleSubmit}>

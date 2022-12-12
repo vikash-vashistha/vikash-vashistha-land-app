@@ -24,7 +24,7 @@ export const Navbar = () => {
     dispatch(getUser());
   }, [auth]);
   
- console.log(auth,user);
+//  console.log(auth,user);
   const links = [
     { to: "/", title: "🏠" },
     { to: "/balance", title: "History📃" },
