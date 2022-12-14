@@ -156,7 +156,7 @@ export const ChatApp = () => {
   //  console.log("sf", subscribedTo)
 
   return (
-    <>
+    <div style={{ marginTop: "50px" }}>
       <Button ref={btnRef} colorScheme="teal" onClick={onOpen}>
         check
       </Button>
@@ -225,6 +225,6 @@ export const ChatApp = () => {
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
-    </>
+    </div>
   );
 };

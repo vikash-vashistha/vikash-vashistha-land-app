@@ -60,7 +60,7 @@ export const Login = () => {
     // navigate("/")
   };
   return (
-    <Stack margin="auto" width="40%">
+    <Stack margin="auto" width="40%" style={{ marginTop: "50px" }}>
       <form onSubmit={handleSubmit}>
         <h3>Log in</h3>
         <Input

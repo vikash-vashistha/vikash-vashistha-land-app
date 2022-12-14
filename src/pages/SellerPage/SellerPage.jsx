@@ -5,6 +5,7 @@ import {
   Stack,
   Button,
   Text,
+  Flex,
 } from "@chakra-ui/react";
 import styles from "./SellerPage.module.css";
 
@@ -31,9 +32,9 @@ export const SellerPage = () => {
   //      });
   // },[])
   return (
-    <Stack>
-      <Stack>
-        <Button onClick={schemeHandler}>Choose Scheme</Button>
+    <Stack style={{ marginTop: "50px" }}>
+    <Button onClick={schemeHandler}>Choose Scheme</Button>
+      <Flex flexWrap ="wrap">
         {scheme &&
           scheme.map((e, i) => {
             return (
@@ -61,7 +62,7 @@ export const SellerPage = () => {
               </Stack>
             );
           })}
-      </Stack>
+      </Flex>
 
       <Stack className={styles.main}>
         {lands &&

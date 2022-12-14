@@ -88,10 +88,10 @@ export const BalancePage = () => {
   }, [state.page]);
 
   return (
-    <>
+    <div style={{ marginTop: "50px" }}>
       <TableContainer>
-      <Table variant="simple">
-      <TableCaption>All user Transactions</TableCaption>
+        <Table variant="simple">
+          <TableCaption>All user Transactions</TableCaption>
           <Thead>
             <Tr>
               <Th>Serial no.</Th>
@@ -111,7 +111,7 @@ export const BalancePage = () => {
               state.data.map((el, i) => {
                 return (
                   <Tr key={el._id}>
-                    <td>{i+1}</td>
+                    <td>{i + 1}</td>
                     <td>{el.date}</td>
                     <td>{el.type}</td>
                     <td>{el.land_id.title}</td>
@@ -135,13 +135,16 @@ export const BalancePage = () => {
           prv
         </Button>
         <span style={{ padding: "0.5rem" }}>{state.page}</span>
-        <Button onClick={() => dispatch({ ...incPage, payload: state.page })} disabled={state.data.length === 0}>
+        <Button
+          onClick={() => dispatch({ ...incPage, payload: state.page })}
+          disabled={state.data.length === 0}
+        >
           next
         </Button>
       </div>
       <div style={{ marginLeft: "45%" }}>
         {state.isLoading && <h3>...loading</h3>}
       </div>
-    </>
+    </div>
   );
 };

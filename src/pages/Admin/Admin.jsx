@@ -9,7 +9,7 @@ import { AdminUser } from "./AdminUser";
 
 export const Admin = () => {
   return (
-    <Stack>
+    <Stack style={{ marginTop: "50px" }}>
       <Text size="xl">Users</Text>
       <AdminUser />
       <Text size="xl">Schemes</Text>

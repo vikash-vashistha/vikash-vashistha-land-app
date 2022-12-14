@@ -47,7 +47,7 @@ export const PlotDetails = () => {
   }
   // console.log(plotsDetails);
   return (
-    <div style={{ margin: "auto", display: "flex" }}>
+    <div style={{ margin: "auto", display: "flex", marginTop: "50px" }}>
       <Stack
         width="sm"
         style={{
@@ -148,7 +148,9 @@ export const PlotDetails = () => {
           margin: "5px",
           padding: "20px",
           height: "150px",
-          backgroundColor: plotsDetails?.user_id?.phone_no ? "grey" : "lightGreen",
+          backgroundColor: plotsDetails?.user_id?.phone_no
+            ? "grey"
+            : "lightGreen",
           width: plotsDetails.length === plotsDetails.width ? "150px" : "75px",
           borderRight: plotsDetails?.road?.includes("east")
             ? "10px dashed black"
@@ -176,8 +178,8 @@ export const PlotDetails = () => {
         <Text>
           {plotsDetails?.land_id?.facility.includes("sewerage") ? "🚽" : ""}
         </Text>
-        </Stack>
-        <Button onClick={handleCart}>Add to Cart</Button>
+      </Stack>
+      <Button onClick={handleCart}>Add to Cart</Button>
     </div>
   );
 };

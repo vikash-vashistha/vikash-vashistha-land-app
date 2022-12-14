@@ -21,5 +21,9 @@ export const Signout = () => {
   
   };
 // console.log("lllll",location);
-  return <Button onClick={handleClick}>Sign out</Button>;
+  return (
+    <Button style={{ marginTop: "50px" }} onClick={handleClick}>
+      Sign out
+    </Button>
+  );
 };

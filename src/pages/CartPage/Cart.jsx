@@ -42,7 +42,7 @@ console.log(plots);
 
 
 return (
-  <div style={{ display: "flex", justifyContent: "space-between" }}>
+  <div style={{ display: "flex", justifyContent: "space-between", marginTop: "50px" }}>
     <div style={{ display: "flex", flexWrap: "wrap" }}>
       {plots &&
         plots.map((e, i) => (

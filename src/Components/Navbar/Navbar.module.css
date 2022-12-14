@@ -1,17 +1,27 @@
-@media screen  and (max-width: 385px) {
+@media screen  and (max-width: 664px) {
   .nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+     z-index: 1;
     background-color: #1c9152;
+    display: flex;
+    flex-wrap: wrap;
+  justify-content: space-around;
   border-bottom: 1px solid gray;
   margin-bottom: 10px;
 }
 }
 
-@media screen  and (min-width: 385px) {
+@media screen  and (min-width: 664px) {
   .nav {
+     position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
     background-color: #1c9152;
   display: flex;
   justify-content: space-around;
-  
   border-bottom: 1px solid gray;
   margin-bottom: 10px;
 }

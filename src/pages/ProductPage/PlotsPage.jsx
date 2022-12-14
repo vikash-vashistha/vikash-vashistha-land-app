@@ -27,7 +27,7 @@ const location = useLocation();
 console.log(location.search);
 
   return (
-    <div style={{ display: "flex" }}>
+    <div style={{ display: "flex", marginTop: "50px" }}>
       <PlotFilterSort />{" "}
       <div style={{ display: "flex", flexWrap: "wrap" }}>
         {plots &&

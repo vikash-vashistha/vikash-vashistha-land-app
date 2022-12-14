@@ -103,7 +103,7 @@ export const Signup = () => {
   }, [blob]);
 
   return (
-    <Stack spacing={4} margin="auto" width="40%">
+    <Stack spacing={4} margin="auto" width="40%" style={{ marginTop: "50px" }}>
       <form onSubmit={handleSubmit}>
         <h3>Sigh up</h3>
         <Input
@@ -133,7 +133,7 @@ export const Signup = () => {
           </InputRightElement>
         </InputGroup>
         <InputGroup>
-          <InputRightElement 
+          <InputRightElement
             pointerEvents="none"
             children={<PhoneIcon color="gray.300" />}
           />

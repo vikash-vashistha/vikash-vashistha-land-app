@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function Contacts({ users, active, onChange }) {
   return (
-    <div>
+    <div style={{ marginTop: "50px" }}>
       {users.map((user) => (
         <div
           style={{ background: active === user ? "tomato" : null }}

@@ -75,7 +75,7 @@ export const ProductsPage = () => {
   };
 
   return (
-    <div>
+    <div style={{marginTop: "50px"}}>
       <div>
         <InputGroup margin="auto" size="md" width="80%">
           <InputLeftAddon>🔎</InputLeftAddon>

@@ -59,7 +59,7 @@ export const NewPlot = () => {
   };
   console.log(id);
   return (
-    <Stack className={styles.temp}>
+    <Stack className={styles.temp} style={{ marginTop: "50px" }}>
       <form onSubmit={handleSubmit}>
         <label>Area</label>
         <Input

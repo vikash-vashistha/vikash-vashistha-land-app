@@ -60,7 +60,7 @@ export const NewLand = () => {
   }
 console.log(formData);
   return (
-    <div className={styles.temp}>
+    <div className={styles.temp} >
       <form onSubmit={handleSubmit}>
         <label>Location</label>
         <Input

@@ -26,7 +26,7 @@ export const ChatAll = () => {
   // console.log(onClose);
 
   return (
-    <div>
+    <div style={{ marginTop: "50px" }}>
       {chat?.map((e, i) => (
         <Stack
           style={{

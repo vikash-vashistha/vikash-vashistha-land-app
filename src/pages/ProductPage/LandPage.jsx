@@ -49,7 +49,7 @@ export const Land = () => {
 
   console.log(location.search, lands);
   return (
-    <div style={{ display: "flex" }}>
+    <div style={{ display: "flex", marginTop: "50px" }}>
       <LandFilterSort />
       <div style={{ width: "80%", display: "flex", flexWrap: "wrap" }}>
         {lands &&

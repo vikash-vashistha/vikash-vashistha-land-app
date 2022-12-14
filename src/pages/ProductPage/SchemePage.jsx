@@ -25,7 +25,7 @@ console.log(IDBObjectStore)
   };
 
   return (
-    <div style={{ display: "flex", flexWrap: "wrap" }}>
+    <div style={{ display: "flex", flexWrap: "wrap", marginTop: "50px" }}>
       {schemes &&
         schemes.map((e, i) => {
           return (

@@ -26,13 +26,13 @@ export const Navbar = () => {
   
 //  console.log(auth,user);
   const links = [
-    { to: "/", title: "🏠" },
+    { to: "/", title: "Home🏠" },
     { to: "/balance", title: "History📃" },
     { to: "/chat", title: "Message💬" },
 
     {
       to: "/signup",
-      title: "New user - Signup🪧",
+      title: "Signup🪧",
     },
     {
       to: "/profile",
@@ -44,7 +44,7 @@ export const Navbar = () => {
     },
     {
       to: `/cart/${user._id}`,
-      title: "🛒",
+      title: "Cart🛒",
     },
     {
       to: auth ? "/signout" : "/login",
