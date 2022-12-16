@@ -67,7 +67,7 @@ export const ChatApp = () => {
       gettingReply()
       let message = `${text} from ${
         user?.name
-      } at ${new Date().toTimeString()}`;
+      }`;
       callback(message);
       // }, 5000);
     }

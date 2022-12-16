@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { Flex, Stack, Text } from "@chakra-ui/react";
+import { Button, Flex, Input, Stack, Text } from "@chakra-ui/react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -56,44 +56,30 @@ export const ChatAll = () => {
             {e?.messages?.map((el, it) => (
               <Text key={it}>💬 {el}</Text>
             ))}
+            <Stack
+              style={{
+                border: "1px solid grey",
+                borderRadius: "5px",
+                margin: "5px",
+                padding: "5px",
+              }}
+            >
+              {reply?.map((rl, rt) => <Stack>
+                  {e.chat_with.name == rl.user_id.name &&
+                    rl?.messages?.map((rel, rit) => (
+                      <Text style={{ textAlign: "end" }} key={rit}>
+                        {rel} 💬
+                      </Text>
+                    ))}
+                </Stack>
+              )}
+            </Stack>
           </Stack>
+          <Input/>
         </Stack>
       ))}
 
-      {reply?.map((e, i) => (
-        <Stack
-          style={{
-            border: "1px solid grey",
-            borderRadius: "5px",
-            margin: "5px",
-            padding: "5px",
-          }}
-          key={i}
-        >
-          <Link
-            to={`/chat/${user._id}`}
-            style={{ margin: "5px", textDecoration: "none" }}
-          >
-            <Text fontSize="30px" color="tomato">
-              {e?.chat_with.name}
-            </Text>
-          </Link>
-          <Stack
-            style={{
-              border: "1px solid grey",
-              borderRadius: "5px",
-              margin: "5px",
-              padding: "5px",
-            }}
-          >
-            {e?.messages?.map((el, it) => (
-              <Text style={{ textAlign: "end" }} key={it}>
-                {el} 💬
-              </Text>
-            ))}
-          </Stack>
-        </Stack>
-      ))}
+     
     </div>
   );
 };

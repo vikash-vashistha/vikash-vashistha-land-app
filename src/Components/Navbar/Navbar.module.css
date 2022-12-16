@@ -4,12 +4,16 @@
     top: 0;
     width: 100%;
      z-index: 1;
-    background-color: #1c9152;
+    background-color: white;
     display: flex;
     flex-wrap: wrap;
   justify-content: space-around;
   border-bottom: 1px solid gray;
   margin-bottom: 10px;
+}
+
+.link{
+  width: 20%;
 }
 }
 
@@ -19,11 +23,15 @@
     top: 0;
     width: 100%;
     z-index: 1;
-    background-color: #1c9152;
+    background-color: white;
   display: flex;
   justify-content: space-around;
   border-bottom: 1px solid gray;
   margin-bottom: 10px;
+}
+.link{
+  width: 3%;
+  height: 30px;
 }
 }
 

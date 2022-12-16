@@ -4,6 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { ThemeContext } from "../../Context/TheamContext";
 import { useThrottle } from "use-throttle";
+import img1 from "../../logo1.png";
+import img2 from "../../back_ground.png";
+import img3 from "../../items.png";
+import img4 from "../../logo3.png";
 
 import {
   Input,
@@ -20,6 +24,7 @@ import {
   Text
 } from "@chakra-ui/react";
 import { Carouseldiv } from "../../Components/Carouseldiv";
+import { LandingScroller } from "../LandingPageScrollers/locationScroller";
 
 export const styles = {
   dark: {
@@ -75,7 +80,7 @@ export const ProductsPage = () => {
   };
 
   return (
-    <div style={{marginTop: "50px"}}>
+    <div style={{ marginTop: "50px" }}>
       <div>
         <InputGroup margin="auto" size="md" width="80%">
           <InputLeftAddon>🔎</InputLeftAddon>
@@ -167,7 +172,8 @@ export const ProductsPage = () => {
           </div>
         )}
       </div>
-      <Carouseldiv  />
+      <Carouseldiv img1={img1} img2={img2} img3={img3} img4={img4} />
+      <LandingScroller />
     </div>
   );
 };
