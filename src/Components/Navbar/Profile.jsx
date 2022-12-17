@@ -30,6 +30,7 @@ export const Profile = () => {
         border: "1px solid grey",
         borderRadius: "5px",
         margin: "5px",
+        marginTop: "70px",
         padding: "5px",
       }}
     >
@@ -46,11 +47,15 @@ export const Profile = () => {
       >
         Role -{" "}
         {user?.role?.map((el, it) => (
-          <Text style={{marginLeft: "50px"}} key={it}>{el}</Text>
+          <Text style={{ marginLeft: "50px" }} key={it}>
+            {el}
+          </Text>
         ))}
       </Text>
       <Image src={user?.image} />
-      <Button disabled={user?.role?.includes("seller")} onClick={handleSeller}>Request to become Seller</Button>
+      <Button disabled={user?.role?.includes("seller")} onClick={handleSeller}>
+        Request to become Seller
+      </Button>
     </Stack>
   );
 };
