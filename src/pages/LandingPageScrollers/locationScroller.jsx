@@ -29,10 +29,12 @@ export const LandingScroller = () => {
 
   // getting locations
   const getData = () => {
-    axios.get(`http://localhost:2345/products/image`).then((res) => {
-      console.log(res.data);
-      setData([...res.data]);
-    });
+    axios
+      .get(`https://vikash-land-app.onrender.com/products/image`)
+      .then((res) => {
+        console.log(res.data);
+        setData([...res.data]);
+      });
   };
 
   return (
