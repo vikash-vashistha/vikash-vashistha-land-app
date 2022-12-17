@@ -90,14 +90,12 @@ export const BalancePage = () => {
   return (
     <div style={{ marginTop: "50px" }}>
       <TableContainer>
-        <Table variant="simple">
+        <Table variant="simple" style={{ textAlign: "center" }}>
           <TableCaption>All user Transactions</TableCaption>
           <Thead>
             <Tr>
               <Th>Serial no.</Th>
               <Th>Date</Th>
-
-              <Th>type</Th>
               <Th>Land</Th>
               <Th>Plot</Th>
               <Th>from</Th>
@@ -111,9 +109,8 @@ export const BalancePage = () => {
               state.data.map((el, i) => {
                 return (
                   <Tr key={el._id}>
-                    <td>{i + 1}</td>
+                    <td>{el._id}</td>
                     <td>{el.date}</td>
-                    <td>{el.type}</td>
                     <td>{el.land_id.title}</td>
                     <td>{el.plot_id.title}</td>
                     <td>{el.from.name}</td>
