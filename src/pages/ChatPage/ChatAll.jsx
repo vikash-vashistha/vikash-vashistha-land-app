@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { Button, Flex, Input, Stack, Text } from "@chakra-ui/react";
+import { Button, Flex, Input, InputGroup, InputRightElement, Stack, Text } from "@chakra-ui/react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -11,18 +11,46 @@ export const ChatAll = () => {
   const { user } = useSelector((state) => ({ user: state.app.user }));
   const [chat, setChat] = useState([]);
   const [reply, setReply] = useState([]);
+  const [text, setText] = useState("")
+
+  const handleClick = ({el, mes}) => {
+    console.log(el, mes);
+     axios
+       .patch(
+         `https://vikash-land-app.onrender.com/chat`,
+         {
+           user_id: el.user_id._id,
+           chat_with: el.chat_with._id,
+           messages: [...mes, text],
+         },
+         {
+           headers: { authorization: `Bearer ${token}` },
+         }
+       )
+       .then((res) => {
+         console.log("user.data: ", res.data);
+       })
+       .catch((err) => {
+         console.log(err);
+       });
+    getData();
+  }
 
   useEffect(() => {
-    axios
-      .get(`https://vikash-land-app.onrender.com/chat/all`, {
-        headers: { authorization: `Bearer ${token}` },
-      })
-      .then((res) => {
-        console.log("res.data: ", res.data);
-        setChat([...res.data.chats]);
-        setReply([...res.data.chats_with]);
-      });
+   getData()
   }, []);
+
+  const getData = () => {
+     axios
+       .get(`https://vikash-land-app.onrender.com/chat/all`, {
+         headers: { authorization: `Bearer ${token}` },
+       })
+       .then((res) => {
+         console.log("res.data: ", res.data);
+         setChat([...res.data.chats]);
+         setReply([...res.data.chats_with]);
+       });
+  }
   // console.log(onClose);
 
   return (
@@ -42,7 +70,7 @@ export const ChatAll = () => {
             style={{ margin: "5px", textDecoration: "none" }}
           >
             <Text fontSize="30px" color="tomato">
-              {e?.chat_with.name}
+              {e?.user_id.name}
             </Text>
           </Link>
           <Stack
@@ -64,7 +92,11 @@ export const ChatAll = () => {
                 padding: "5px",
               }}
             >
-              {reply?.map((rl, rt) => <Stack>
+              <Text fontSize="30px" color="tomato">
+                {e?.chat_with.name}
+              </Text>
+              {reply?.map((rl, rt) => (
+                <Stack>
                   {e.chat_with.name == rl.user_id.name &&
                     rl?.messages?.map((rel, rit) => (
                       <Text style={{ textAlign: "end" }} key={rit}>
@@ -72,14 +104,22 @@ export const ChatAll = () => {
                       </Text>
                     ))}
                 </Stack>
-              )}
+              ))}
             </Stack>
           </Stack>
-          <Input/>
+          <InputGroup size="md">
+            <Input
+              onChange={(e) => setText(e.target.value)}
+              placeholder="message"
+            />
+            <InputRightElement width="4.5rem">
+              <Button h="1.75rem" size="sm" onClick={() => handleClick({el: e, mes: e.messages})}>
+                Send
+              </Button>
+            </InputRightElement>
+          </InputGroup>
         </Stack>
       ))}
-
-     
     </div>
   );
 };
