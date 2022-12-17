@@ -31,26 +31,29 @@ export const ChatApp = ({ id, nameOwner }) => {
   const [text, setText] = useState("");
   const [replys, setReplys] = useState([]);
 
-  const gettingChat = (id) => {
+  const gettingChat = (ids) => {
     axios
-      .get(`https://vikash-land-app.onrender.com/chat/${id}`, {
-        headers: { authorization: `Bearer ${token}` },
-      })
+      .get(
+        `https://vikash-land-app.onrender.com/chat/${(id = ids ? ids : id)}`,
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => {
-        console.log("res.data: ", res.data);
-        setMessages([...res.data.chats[0].messages]);
+        // console.log("res.data: ", res.data);
+        setMessages(res.data.chats.length > 0 ? [...res.data.chats[0].messages] : [""]);
         return res.data;
       });
   };
 
-  const gettingReply = (id) => {
+  const gettingReply = (ids) => {
     axios
-      .get(`https://vikash-land-app.onrender.com/chat/${id}`, {
+      .get(`https://vikash-land-app.onrender.com/chat/${id = ids ? ids : id}`, {
         headers: { authorization: `Bearer ${token}` },
       })
       .then((res) => {
         // console.log("res.data: ", res.data);
-        setReplys([...res.data.replys[0].messages]);
+        setReplys(res.data.replys.length > 0 ? [...res.data.replys[0].messages] : [""]);
         return res.data;
       });
   };
@@ -63,8 +66,8 @@ export const ChatApp = ({ id, nameOwner }) => {
     let id1;
     function listen(callback) {
       // id1 = setInterval(() => {
-      gettingChat(user._id);
-      gettingReply(user._id);
+      gettingChat(user?._id);
+      gettingReply(user?._id);
       let message = `${text} from ${user?.name}`;
       callback(message);
       // }, 5000);

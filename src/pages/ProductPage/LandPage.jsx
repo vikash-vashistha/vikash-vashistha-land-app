@@ -93,7 +93,7 @@ export const Land = () => {
                 <Flex>
                   {e?.partners?.map((el, it) => (
                     
-                      <ChatApp id={el._id} nameOwner={el.name} />
+                      <ChatApp id={el?._id} nameOwner={el?.name} />
                   ))}{" "}
                 </Flex>
                 <Button onClick={() => handlePartner(e._id, e.partners)}>
