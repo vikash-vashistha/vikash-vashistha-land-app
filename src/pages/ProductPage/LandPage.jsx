@@ -6,6 +6,7 @@ import { Button, Text, Stack, Flex, useDisclosure } from "@chakra-ui/react";
 import { LandFilterSort } from "./LandFilterSort";
 import { useSelector } from "react-redux";
 import { Payment } from "../../Components/Payment";
+import { ChatApp } from "../ChatPage/ChatApp";
 
 export const Land = () => {
   const navigate = useNavigate()
@@ -91,15 +92,8 @@ export const Land = () => {
                 </Flex>
                 <Flex>
                   {e?.partners?.map((el, it) => (
-                    <Link
-                      key={it}
-                      to={`/chat/${el._id}`}
-                      style={{ margin: "5px", textDecoration: "none" }}
-                    >
-                      <Button colorScheme="teal" variant="link" key={it}>
-                        {el.name}
-                      </Button>
-                    </Link>
+                    
+                      <ChatApp id={el._id} nameOwner={el.name} />
                   ))}{" "}
                 </Flex>
                 <Button onClick={() => handlePartner(e._id, e.partners)}>

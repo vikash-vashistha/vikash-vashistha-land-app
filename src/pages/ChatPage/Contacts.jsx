@@ -1,24 +1,19 @@
-import { Button } from "@chakra-ui/react";
+import { Button, Select } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 function Contacts({ users, active, onChange }) {
   return (
-    <div style={{ marginTop: "50px" }}>
+    <div style={{ marginTop: "50px", display: "flex", flexWrap: "wrap", gap: "5px" }}>
       {users.map((user) => (
-        <div
-          style={{ background: active === user ? "tomato" : null }}
-          key={user._id}
-          onClick={() => onChange(user)}
-        >
-          <Link
-            to={`/chat/${user._id}`}
-            style={{ margin: "5px", textDecoration: "none" }}
-          >
-            <Button colorScheme="teal" variant="link">
+            <Button
+              colorScheme="teal"
+              variant="link"
+              style={{ background: active === user ? "tomato" : null }}
+              key={user._id}
+              onClick={() => onChange(user)}
+            >
               {user.name}
             </Button>
-          </Link>
-        </div>
       ))}
     </div>
   );

@@ -20,9 +20,9 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 const token = localStorage.getItem("token");
 
-export const ChatApp = () => {
+export const ChatApp = ({ id, nameOwner }) => {
+
   const { user } = useSelector((state) => ({ user: state.app.user }));
-  const { id } = useParams();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
   const [messages, setMessages] = useState([]);
@@ -31,7 +31,7 @@ export const ChatApp = () => {
   const [text, setText] = useState("");
   const [replys, setReplys] = useState([]);
 
-  const gettingChat = () => {
+  const gettingChat = (id) => {
     axios
       .get(`https://vikash-land-app.onrender.com/chat/${id}`, {
         headers: { authorization: `Bearer ${token}` },
@@ -43,7 +43,7 @@ export const ChatApp = () => {
       });
   };
 
-  const gettingReply = () => {
+  const gettingReply = (id) => {
     axios
       .get(`https://vikash-land-app.onrender.com/chat/${id}`, {
         headers: { authorization: `Bearer ${token}` },
@@ -63,11 +63,9 @@ export const ChatApp = () => {
     let id1;
     function listen(callback) {
       // id1 = setInterval(() => {
-      gettingChat();
-      gettingReply()
-      let message = `${text} from ${
-        user?.name
-      }`;
+      gettingChat(user._id);
+      gettingReply(user._id);
+      let message = `${text} from ${user?.name}`;
       callback(message);
       // }, 5000);
     }
@@ -86,7 +84,6 @@ export const ChatApp = () => {
       .then((res) => {
         console.log("user.data: ", res.data);
         setUsers([...res.data.user]);
-        setSubscribedTo(res.data.user[0]);
       })
       .catch((err) => {
         console.log(err);
@@ -157,9 +154,14 @@ export const ChatApp = () => {
 
   return (
     <div style={{ marginTop: "50px" }}>
-      <Button ref={btnRef} colorScheme="teal" onClick={onOpen}>
-        check
-      </Button>
+      <Link
+        to={``}
+        style={{ margin: "5px", fontWeight: "bold", textDecoration: "none", color: "teal" }}
+        ref={btnRef}
+        onClick={onOpen}
+      >
+        {nameOwner}
+      </Link>
       <Drawer
         isOpen={isOpen}
         placement="right"
@@ -177,6 +179,7 @@ export const ChatApp = () => {
               users={users}
               active={subscribedTo}
               onChange={(user) => {
+                // console.log("user",user);
                 setSubscribedTo(user);
               }}
             />

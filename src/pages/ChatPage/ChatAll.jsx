@@ -92,9 +92,14 @@ export const ChatAll = () => {
                 padding: "5px",
               }}
             >
-              <Text fontSize="30px" color="tomato">
-                {e?.chat_with.name}
-              </Text>
+              <Link
+                to={`/chat/${user._id}`}
+                style={{ margin: "5px", textDecoration: "none" }}
+              >
+                <Text fontSize="30px" color="tomato">
+                  {e?.chat_with.name}
+                </Text>
+              </Link>
               {reply?.map((rl, rt) => (
                 <Stack>
                   {e.chat_with.name == rl.user_id.name &&
@@ -113,7 +118,11 @@ export const ChatAll = () => {
               placeholder="message"
             />
             <InputRightElement width="4.5rem">
-              <Button h="1.75rem" size="sm" onClick={() => handleClick({el: e, mes: e.messages})}>
+              <Button
+                h="1.75rem"
+                size="sm"
+                onClick={() => handleClick({ el: e, mes: e.messages })}
+              >
                 Send
               </Button>
             </InputRightElement>

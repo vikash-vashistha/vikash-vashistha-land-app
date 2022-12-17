@@ -8,7 +8,7 @@ import { Navbar } from "../Components/Navbar/Navbar";
 import { NotFoundPage } from "../pages/NotFoundPage/NotFoundPage";
 import { ProductsPage } from "../pages/ProductPage/ProductPage";
 import PrivateRoute from "./PrivateRoute";
-import {ChatApp} from "../pages/ChatPage/CatApp";
+import {ChatApp} from "../pages/ChatPage/ChatApp";
 import { Scheme } from "../pages/ProductPage/SchemePage";
 import { Land } from "../pages/ProductPage/LandPage";
 import { Plots } from "../pages/ProductPage/PlotsPage";
