@@ -2,10 +2,16 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { Button, Text, Checkbox, Select, Stack } from "@chakra-ui/react";
+import { Button, Text, Card, CardHeader, CardBody, CardFooter, Select, Stack, Heading, Divider, ButtonGroup, Flex } from "@chakra-ui/react";
 import { PlotFilterSort } from "./PlotFilterSort";
+import { useSelector } from "react-redux";
+import { GiRoad, GiElectric } from "react-icons/gi";
+import { MdOutlineWaterDrop, MdOutlineDeleteSweep } from "react-icons/md";
+
+const token = localStorage.getItem("token");
 
 export const Plots = () => {
+   const { user } = useSelector((state) => ({ user: state.app.user }));
   const { id } = useParams();
   const [plots, setPlots] = useState([]);
   // getting plots inside land
@@ -24,75 +30,149 @@ const location = useLocation();
       });
   }, [location.search]);
 
-console.log(location.search);
+  const handleCart = (e) => {
+    console.log(user._id, e);
+    try {
+      axios
+        .post(
+          `https://vikash-land-app.onrender.com/cart`,
+          {
+            user_id: user._id,
+            plot_id: e?._id,
+            land_id: e?.land_id?._id,
+          },
+          {
+            headers: { authorization: `Bearer ${token}` },
+          }
+        )
+        .then((res) => {
+          console.log("vik", res);
+        });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  console.log(location.search);
+  
 
   return (
-    <div style={{ display: "flex", marginTop: "50px" }}>
+    <Flex ml="20px" mt="50px" gap="20px">
       <PlotFilterSort />{" "}
-      <div style={{ display: "flex", flexWrap: "wrap" }}>
+      <Flex wrap="wrap" gap="20px">
         {plots &&
           plots.map((e, i) => (
-            <Stack
-              key={e._id}
-              style={{
-                border: "1px solid grey",
-                borderRadius: "5px",
-                margin: "5px",
-                padding: "5px",
-              }}
-            >
-              <Text>Plot No. {i + 1}</Text>
-              <Text>{e.title}</Text>
-              {e.road.includes("east") ? <Text>East Road 🛣️</Text> : ""}
-              {e.road.includes("west") ? <Text>West Road 🛣️</Text> : ""}
-              {e.road.includes("north") ? <Text>North Road 🛣️</Text> : ""}
-              {e.road.includes("south") ? <Text>South Road 🛣️</Text> : ""}
-              <Text>Price {e.price} 💰</Text>
-              <Link
-                key={e._id}
-                to={`/plotdetails/${e._id}`}
-                style={{ margin: "5px", textDecoration: "none" }}
-              >
-                <Button disabled={e?.user_id?.phone_no ? true : false}>Check out</Button>
-              </Link>
-              <Stack
-                style={{
-                  border: "5px solid grey",
-                  margin: "5px",
-                  padding: "20px",
-                  height: "150px",
-                  backgroundColor: e?.user_id?.phone_no ? "grey" : "lightGreen",
-                  width: e.length === e.width ? "150px" : "75px",
-                  borderRight: e?.road?.includes("east")
-                    ? "10px dashed black"
-                    : "5px solid blue",
-                  borderLeft: e?.road?.includes("west")
-                    ? "10px dashed black"
-                    : "5px solid blue",
-                  borderBottom: e?.road?.includes("south")
-                    ? "10px dashed black"
-                    : "5px solid blue",
-                  borderTop: e?.road?.includes("north")
-                    ? "10px dashed black"
-                    : "5px solid blue",
-                }}
-              >
-                <Text>
-                  {e?.land_id?.facility?.includes("electricity") ? "💡" : ""}
-                </Text>
-                <Text>
-                  {e?.land_id?.facility?.includes("water") ? "💧" : ""}
-                </Text>
-                <Text>
-                  {e?.land_id?.facility?.includes("road") ? "🛣️" : ""}
-                </Text>
-                <Text>
-                  {e?.land_id?.facility?.includes("sewerage") ? "🚽" : ""}
-                </Text>
-              </Stack>
-            </Stack>
+            <Card maxW="sm">
+              <CardBody>
+                <Stack mt="6" spacing="3">
+                  <Heading size="md">Plot No. {i + 1}</Heading>
+                  <Text>{e.title}</Text>
+                  {e.road.includes("east") ? (
+                    <Flex align="center">
+                      East Road <GiRoad />
+                    </Flex>
+                  ) : (
+                    ""
+                  )}
+                  {e.road.includes("west") ? (
+                    <Flex align="center">
+                      West Road <GiRoad />
+                    </Flex>
+                  ) : (
+                    ""
+                  )}
+                  {e.road.includes("north") ? (
+                    <Flex align="center">
+                      North Road <GiRoad />
+                    </Flex>
+                  ) : (
+                    ""
+                  )}
+                  {e.road.includes("south") ? (
+                    <Flex align="center">
+                      South Road <GiRoad />
+                    </Flex>
+                  ) : (
+                    ""
+                  )}
+                  <Stack
+                    style={{
+                      border: "5px solid grey",
+                      margin: "5px",
+                      padding: "20px",
+                      height: "150px",
+                      backgroundColor: e?.user_id?.phone_no
+                        ? "grey"
+                        : "lightGreen",
+                      width: e.length === e.width ? "150px" : "75px",
+                      borderRight: e?.road?.includes("east")
+                        ? "10px dashed black"
+                        : "5px solid blue",
+                      borderLeft: e?.road?.includes("west")
+                        ? "10px dashed black"
+                        : "5px solid blue",
+                      borderBottom: e?.road?.includes("south")
+                        ? "10px dashed black"
+                        : "5px solid blue",
+                      borderTop: e?.road?.includes("north")
+                        ? "10px dashed black"
+                        : "5px solid blue",
+                    }}
+                  >
+                    <Text>
+                      {e?.land_id?.facility?.includes("electricity") ? (
+                        <GiElectric />
+                      ) : (
+                        ""
+                      )}
+                    </Text>
+                    <Text>
+                      {e?.land_id?.facility?.includes("water") ? (
+                        <MdOutlineWaterDrop />
+                      ) : (
+                        ""
+                      )}
+                    </Text>
+                    <Text mt="4px">
+                      {e?.land_id?.facility?.includes("road") ? <GiRoad /> : ""}
+                    </Text>
+                    <Text>
+                      {e?.land_id?.facility?.includes("sewerage") ? (
+                        <MdOutlineDeleteSweep />
+                      ) : (
+                        ""
+                      )}
+                    </Text>
+                  </Stack>
+                  <Text color="blue.600" fontSize="2xl">
+                    ₹{e.price}
+                  </Text>
+                </Stack>
+              </CardBody>
+              <Divider />
+              <CardFooter>
+                <ButtonGroup spacing="2">
+                  <Link key={e._id} to={`/plotdetails/${e._id}`}>
+                    <Button
+                      variant="solid"
+                      colorScheme="blue"
+                      disabled={e?.user_id?.phone_no ? true : false}
+                    >
+                      Check
+                    </Button>
+                  </Link>
+                  <Button
+                    variant="ghost"
+                    colorScheme="blue"
+                    onClick={() => handleCart(e)}
+                  >
+                    Add to cart
+                  </Button>
+                </ButtonGroup>
+              </CardFooter>
+            </Card>
           ))}
-      </div>
-    </div>
+      </Flex>
+    </Flex>
   );
 };

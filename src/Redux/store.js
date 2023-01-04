@@ -8,23 +8,6 @@ const rootReducer = combineReducers({
   app: reducer,
 });
 
-/**
- *
- * @param {redux state} state
- */
-// const logger = (store) => (next) => (action) => {
-//   console.log("dispatching action,", action, next, state);
-//   const val = next(action);
-//   console.log("exiting logger");
-//   return val;
-// };
-
-const thunkMiddleware = (store) => (next) => (action) => {
-  return typeof action === "function"
-    ? action(store.dispatch, store.getState)
-    : next(action);
-};
-
 const composeEnhancers =
   (typeof window !== "undefined" &&
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||

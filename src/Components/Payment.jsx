@@ -17,7 +17,7 @@ function loadScript(src) {
   });
 }
 
-const __DEV__ = document.domain === "localhost";
+const __DEV__ = document.domain === "vikash-land-app.onrender";
 
 export const Payment = ({ price }) => {
   

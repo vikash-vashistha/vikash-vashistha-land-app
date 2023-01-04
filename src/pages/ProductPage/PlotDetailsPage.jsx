@@ -2,13 +2,15 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Button, Flex, Stack, Text } from "@chakra-ui/react";
+import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
-const token = localStorage.getItem("token");
+import { GiRoad, GiElectric } from "react-icons/gi";
+import { MdOutlineWaterDrop, MdOutlineDeleteSweep } from "react-icons/md";
 
 export const PlotDetails = () => {
   const { id } = useParams();
   const [plotsDetails, setPlotDetails] = useState({});
-  const { user } = useSelector((state) => ({ user: state.app.user }));
+ 
 
   useEffect(() => {
     try {
@@ -23,28 +25,7 @@ export const PlotDetails = () => {
     }
   }, []);
 
-  const handleCart = () => {
-    console.log(user._id, id);
-     try {
-       axios
-         .post(
-           `https://vikash-land-app.onrender.com/cart`,
-           {
-             user_id: user._id,
-             plot_id: id,
-             land_id: plotsDetails?.land_id,
-           },
-           {
-             headers: { authorization: `Bearer ${token}` },
-           }
-         )
-         .then((res) => {
-           console.log("vik", res);
-         });
-     } catch (e) {
-       console.log(e);
-     }
-  }
+  
   // console.log(plotsDetails);
   return (
     <div style={{ margin: "auto", display: "flex", marginTop: "50px" }}>
@@ -106,25 +87,25 @@ export const PlotDetails = () => {
             <Text>
               {plotsDetails?.land_id?.facility &&
               plotsDetails?.land_id?.facility.includes("electricity")
-                ? "💡"
+                ? <GiElectric/>
                 : ""}
             </Text>
             <Text>
               {plotsDetails?.land_id?.facility &&
               plotsDetails?.land_id?.facility.includes("water")
-                ? "💧"
+                ? <MdOutlineWaterDrop/>
                 : ""}
             </Text>
             <Text>
               {plotsDetails?.land_id?.facility &&
               plotsDetails?.land_id?.facility.includes("road")
-                ? "🛣️"
+                ? <GiRoad/>
                 : ""}
             </Text>
             <Text>
               {plotsDetails?.land_id?.facility &&
               plotsDetails?.land_id?.facility.includes("sewerage")
-                ? "🚽"
+                ? <MdOutlineDeleteSweep/>
                 : ""}
             </Text>
           </Flex>
@@ -167,19 +148,18 @@ export const PlotDetails = () => {
         }}
       >
         <Text>
-          {plotsDetails?.land_id?.facility.includes("electricity") ? "💡" : ""}
+          {plotsDetails?.land_id?.facility.includes("electricity") ? <GiElectric/> : ""}
         </Text>
         <Text>
-          {plotsDetails?.land_id?.facility.includes("water") ? "💧" : ""}
+          {plotsDetails?.land_id?.facility.includes("water") ? <MdOutlineWaterDrop/> : ""}
         </Text>
         <Text>
-          {plotsDetails?.land_id?.facility.includes("road") ? "🛣️" : ""}
+          {plotsDetails?.land_id?.facility.includes("road") ? <GiRoad/> : ""}
         </Text>
         <Text>
-          {plotsDetails?.land_id?.facility.includes("sewerage") ? "🚽" : ""}
+          {plotsDetails?.land_id?.facility.includes("sewerage") ? <MdOutlineDeleteSweep/> : ""}
         </Text>
       </Stack>
-      <Button onClick={handleCart}>Add to Cart</Button>
     </div>
   );
 };

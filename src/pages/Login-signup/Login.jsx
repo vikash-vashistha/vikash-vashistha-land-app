@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { Navigate, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Input,
@@ -17,6 +17,16 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { loginUser } from "../../Redux/auth/action";
+
+const baseStyle = {
+  color: "black",
+  TextDecoration: "none",
+};
+
+const activeStyle = {
+  color: "red",
+  TextDecoration: "none",
+};
 
 export const Login = () => {
   const { auth } = useSelector((state) => ({ auth: state.auth }));
@@ -61,6 +71,12 @@ export const Login = () => {
   };
   return (
     <Stack margin="auto" width="40%" style={{ marginTop: "50px" }}>
+      <NavLink
+        style={({ isActive }) => (isActive ? activeStyle : baseStyle)}
+        to="/signup"
+      >
+        Click Here For New User Signup🪧
+      </NavLink>
       <form onSubmit={handleSubmit}>
         <h3>Log in</h3>
         <Input

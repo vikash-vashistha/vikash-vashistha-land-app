@@ -1,15 +1,25 @@
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import { useParams, useLocation, Navigate, useNavigate } from "react-router-dom";
+import {
+  useParams,
+  useLocation,
+  Navigate,
+  useNavigate,
+} from "react-router-dom";
 import { Link } from "react-router-dom";
-import { Button, Text, Stack, Flex, useDisclosure } from "@chakra-ui/react";
+import { Button, Text, Stack, Flex, useDisclosure, ButtonGroup, Divider, Heading } from "@chakra-ui/react";
 import { LandFilterSort } from "./LandFilterSort";
 import { useSelector } from "react-redux";
 import { Payment } from "../../Components/Payment";
 import { ChatApp } from "../ChatPage/ChatApp";
+import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
+import { GiRoad, GiElectric } from "react-icons/gi";
+import { MdOutlineWaterDrop, MdOutlineDeleteSweep } from "react-icons/md";
+
+
 
 export const Land = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { user } = useSelector((state) => ({ user: state.app.user }));
   const { id } = useParams();
   console.log(id);
@@ -39,70 +49,89 @@ export const Land = () => {
   const handlePartner = (e, p) => {
     console.log(e, p);
     let arr = p.map((el) => el._id);
-    arr.push(user._id)
+    arr.push(user._id);
     axios
       .patch(`https://vikash-land-app.onrender.com/land/partner/${e}`, arr)
       .then((res) => {
         console.log(res.data);
       });
-    navigate("payment")
+    navigate("payment");
   };
 
   console.log(location.search, lands);
   return (
-    <div style={{ display: "flex", marginTop: "50px" }}>
+    <Flex ml="20px" mt="50px" gap="20px">
       <LandFilterSort />
-      <div style={{ width: "80%", display: "flex", flexWrap: "wrap" }}>
+      <Flex wrap="wrap" gap="20px">
         {lands &&
           lands.map((e, i) => {
             return (
-              <Stack
-                width="sm"
-                key={e._id}
-                style={{
-                  border: "1px solid grey",
-                  borderRadius: "5px",
-                  margin: "5px",
-                  padding: "5px",
-                }}
-              >
-                <Link
-                  to={`/singleland/${e._id}`}
-                  style={{ margin: "5px", textDecoration: "none" }}
-                >
-                  <Button>Land NO. {i + 1} Check out plots</Button>
-                </Link>
-                <Text>price = {e.price} rs/sq. ft.</Text>
-                <Text>area = {e.area} sq. ft.</Text>
-                <Flex>
-                  <Text>
-                    {e.facility && e.facility.includes("electricity")
-                      ? "💡"
-                      : ""}
-                  </Text>
-                  <Text>
-                    {e.facility && e.facility.includes("water") ? "💧" : ""}
-                  </Text>
-                  <Text>
-                    {e.facility && e.facility.includes("road") ? "🛣️" : ""}
-                  </Text>
-                  <Text>
-                    {e.facility && e.facility.includes("sewerage") ? "🚽" : ""}
-                  </Text>
-                </Flex>
-                <Flex>
-                  {e?.partners?.map((el, it) => (
-                    
-                      <ChatApp id={el?._id} nameOwner={el?.name} />
-                  ))}{" "}
-                </Flex>
-                <Button onClick={() => handlePartner(e._id, e.partners)}>
-                  become partner
-                </Button>
-              </Stack>
+              <Card maxW="md">
+                <CardBody>
+                  <Stack mt="6" spacing="3">
+                    <Heading size="md">Living room Sofa</Heading>
+                    <Text>area = {e.area} sq. ft.</Text>
+                    <Flex>
+                      <Text>
+                        {e.facility && e.facility.includes("electricity") ? (
+                          <GiElectric />
+                        ) : (
+                          ""
+                        )}
+                      </Text>
+                      <Text>
+                        {e.facility && e.facility.includes("water") ? (
+                          <MdOutlineWaterDrop />
+                        ) : (
+                          ""
+                        )}
+                      </Text>
+                      <Text>
+                        {e.facility && e.facility.includes("road") ? (
+                          <GiRoad />
+                        ) : (
+                          ""
+                        )}
+                      </Text>
+                      <Text>
+                        {e.facility && e.facility.includes("sewerage") ? (
+                          <MdOutlineDeleteSweep />
+                        ) : (
+                          ""
+                        )}
+                      </Text>
+                    </Flex>
+                    <Flex>
+                      {e?.partners?.map((el, it) => (
+                        <ChatApp id={el?._id} nameOwner={el?.name} />
+                      ))}{" "}
+                    </Flex>
+                    <Text color="blue.600" fontSize="2xl">
+                      price = {e.price} ₹/sq. ft.
+                    </Text>
+                  </Stack>
+                </CardBody>
+                <Divider />
+                <CardFooter>
+                  <ButtonGroup spacing="2">
+                    <Link to={`/singleland/${e._id}`}>
+                      <Button variant="solid" colorScheme="blue">
+                        Land NO. {i + 1} Check out plots
+                      </Button>
+                    </Link>
+                    <Button
+                      variant="ghost"
+                      colorScheme="blue"
+                      onClick={() => handlePartner(e._id, e.partners)}
+                    >
+                      become partner
+                    </Button>
+                  </ButtonGroup>
+                </CardFooter>
+              </Card>
             );
           })}
-      </div>
-    </div>
+      </Flex>
+    </Flex>
   );
 };

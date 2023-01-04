@@ -1,18 +1,20 @@
-import { Button, Stack, Text } from "@chakra-ui/react"
+import { Button, ButtonGroup, Divider, Flex, Heading, Stack, Text } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { Payment } from "../../Components/Payment";
+import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
+import { GiRoad, GiElectric } from "react-icons/gi";
+import { MdOutlineWaterDrop, MdOutlineDeleteSweep } from "react-icons/md";
 
 const token = localStorage.getItem("token");
 
 export const Cart = () => {
-  const { id } = useParams();
-  const [total, setTotal] = useState(0)
+  const { id } = useParams(); 
   const [plots, setPlots] = useState([]);
   // getting plots inside land
 
-const location = useLocation();
+  const location = useLocation();
 
   useEffect(() => {
     axios
@@ -27,104 +29,139 @@ const location = useLocation();
   }, [location.search]);
 
   const itemRemoveHandler = (e) => {
-  axios
-    .delete(`https://vikash-land-app.onrender.com/cart/${e}`, {
-      headers: { authorization: `Bearer ${token}` },
-    })
-    .then((res) => {
-      console.log(plots, res.data);
-      setPlots((prv) => [...res.data]);
-      console.log("plots", plots);
-    });
-}
+    axios
+      .delete(`https://vikash-land-app.onrender.com/cart/${e}`, {
+        headers: { authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        console.log(plots, res.data);
+        setPlots((prv) => [...res.data]);
+        console.log("plots", plots);
+      });
+  };
 
-console.log(plots);
+  console.log(plots);
 
+  return (
+    <Flex justify="space-between" mt="50px">
+      <Flex wrap="wrap" gap="20px">
+        {plots &&
+          plots.map((e, i) => (
+            <Card maxW="sm">
+              <CardBody>
+                <Stack mt="6" spacing="3">
+                  <Heading size="md">Plot No. {i + 1}</Heading>
+                  <Text>{e?.plot_id?.title}</Text>
+                  {e?.plot_id?.road?.includes("east") ? (
+                    <Flex align="center">
+                      East Road <GiRoad />
+                    </Flex>
+                  ) : (
+                    ""
+                  )}
+                  {e?.plot_id?.road?.includes("west") ? (
+                    <Flex align="center">
+                      West Road <GiRoad />
+                    </Flex>
+                  ) : (
+                    ""
+                  )}
+                  {e?.plot_id?.road?.includes("north") ? (
+                    <Flex align="center">
+                      North Road <GiRoad />
+                    </Flex>
+                  ) : (
+                    ""
+                  )}
+                  {e?.plot_id?.road?.includes("south") ? (
+                    <Flex align="center">
+                      South Road <GiRoad />
+                    </Flex>
+                  ) : (
+                    ""
+                  )}
 
-return (
-  <div style={{ display: "flex", justifyContent: "space-between", marginTop: "50px" }}>
-    <div style={{ display: "flex", flexWrap: "wrap" }}>
-      {plots &&
-        plots.map((e, i) => (
-          <Stack
-            key={e._id}
-            style={{
-              border: "1px solid grey",
-              borderRadius: "5px",
-              margin: "5px",
-              padding: "5px",
-            }}
-          >
-            <Text>Plot No. {i + 1}</Text>
-            <Text>{e?.plot_id?.title}</Text>
-            {e?.plot_id?.road?.includes("east") ? (
-              <Text>East Road 🛣️</Text>
-            ) : (
-              ""
-            )}
-            {e?.plot_id?.road?.includes("west") ? (
-              <Text>West Road 🛣️</Text>
-            ) : (
-              ""
-            )}
-            {e?.plot_id?.road?.includes("north") ? (
-              <Text>North Road 🛣️</Text>
-            ) : (
-              ""
-            )}
-            {e?.plot_id?.road?.includes("south") ? (
-              <Text>South Road 🛣️</Text>
-            ) : (
-              ""
-            )}
-            <Text>Price {e?.plot_id?.price} 💰</Text>
+                  <Link
+                    key={e._id}
+                    to={`/plotdetails/${e._id}`}
+                    style={{ margin: "5px", textDecoration: "none" }}
+                  ></Link>
+                  <Stack
+                    style={{
+                      border: "5px solid grey",
+                      margin: "5px",
+                      padding: "20px",
+                      height: "150px",
+                      backgroundColor: e?.plot_id?.user_id?.phone_no
+                        ? "grey"
+                        : "lightGreen",
+                      width:
+                        e?.plot_id?.length === e?.plot_id?.width
+                          ? "150px"
+                          : "75px",
+                      borderRight: e?.plot_id?.road?.includes("east")
+                        ? "10px dashed black"
+                        : "5px solid blue",
+                      borderLeft: e?.plot_id?.road?.includes("west")
+                        ? "10px dashed black"
+                        : "5px solid blue",
+                      borderBottom: e?.road?.includes("south")
+                        ? "10px dashed black"
+                        : "5px solid blue",
+                      borderTop: e?.plot_id?.road?.includes("north")
+                        ? "10px dashed black"
+                        : "5px solid blue",
+                    }}
+                  >
+                    <Text>
+                      {e?.land_id?.facility?.includes("electricity") ? (
+                        <GiElectric />
+                      ) : (
+                        ""
+                      )}
+                    </Text>
+                    <Text>
+                      {e?.land_id?.facility?.includes("water") ? (
+                        <MdOutlineWaterDrop />
+                      ) : (
+                        ""
+                      )}
+                    </Text>
+                    <Text>
+                      {e?.land_id?.facility?.includes("road") ? <GiRoad /> : ""}
+                    </Text>
+                    <Text>
+                      {e?.land_id?.facility?.includes("sewerage") ? (
+                        <MdOutlineDeleteSweep />
+                      ) : (
+                        ""
+                      )}
+                    </Text>
+                  </Stack>
 
-            <Link
-              key={e._id}
-              to={`/plotdetails/${e._id}`}
-              style={{ margin: "5px", textDecoration: "none" }}
-            ></Link>
-            <Stack
-              style={{
-                border: "5px solid grey",
-                margin: "5px",
-                padding: "20px",
-                height: "150px",
-                backgroundColor: e?.plot_id?.user_id?.phone_no
-                  ? "grey"
-                  : "lightGreen",
-                width:
-                  e?.plot_id.length === e?.plot_id.width ? "150px" : "75px",
-                borderRight: e?.plot_id?.road?.includes("east")
-                  ? "10px dashed black"
-                  : "5px solid blue",
-                borderLeft: e?.plot_id?.road?.includes("west")
-                  ? "10px dashed black"
-                  : "5px solid blue",
-                borderBottom: e?.road?.includes("south")
-                  ? "10px dashed black"
-                  : "5px solid blue",
-                borderTop: e?.plot_id?.road?.includes("north")
-                  ? "10px dashed black"
-                  : "5px solid blue",
-              }}
-            >
-              <Text>
-                {e?.land_id?.facility?.includes("electricity") ? "💡" : ""}
-              </Text>
-              <Text>{e?.land_id?.facility?.includes("water") ? "💧" : ""}</Text>
-              <Text>{e?.land_id?.facility?.includes("road") ? "🛣️" : ""}</Text>
-              <Text>
-                {e?.land_id?.facility?.includes("sewerage") ? "🚽" : ""}
-              </Text>
-            </Stack>
-            <Button onClick={() => itemRemoveHandler(e._id)}>Remove</Button>
-            <Payment
-              price={e?.plot_id?.price}
-            />
-          </Stack>
-        ))}
-    </div>
-  </div>
-);
-}
+                  <Text color="blue.600" fontSize="2xl">
+                    ₹{e?.plot_id?.price}
+                  </Text>
+                </Stack>
+              </CardBody>
+              <Divider />
+              <CardFooter>
+                <ButtonGroup spacing="2">
+                  <Button
+                    variant="solid"
+                    colorScheme="red"
+                    onClick={() => itemRemoveHandler(e._id)}
+                  >
+                    Remove
+                  </Button>
+                  <Button variant="ghost" colorScheme="blue">
+                    <Payment price={e?.plot_id?.price} />
+                  </Button>
+                </ButtonGroup>
+              </CardFooter>
+            </Card>
+          ))}
+      </Flex>
+    </Flex>
+  );
+};
