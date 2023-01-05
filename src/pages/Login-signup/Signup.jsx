@@ -70,25 +70,23 @@ export const Signup = () => {
     //   .catch((error) => console.log(error));
 
     try {
-      await axios
+     let res = await axios
         .post("https://vikash-land-app.onrender.com/register", formData)
-        .then((res) => {
-          console.log("res", res);
-        })
-        .then(() => {
+      let data = await res.json()
+      console.log(data);
           alert("user created successfully, Please Sign In");
           navigate("/login");
-          // setFormData({
-          //   id: Math.random(),
-          //   date,
-          //   name: "",
-          //   email: "",
-          //   password: "",
-          //   phone_no: "",
-          // });
-        });
+          setFormData({
+            id: Math.random(),
+            date,
+            name: "",
+            email: "",
+            password: "",
+            phone_no: "",
+          });
+      
     } catch (e) {
-      console.log("error", e);
+      console.log("error", e.response.data.message);
     }
   };
 

@@ -30,9 +30,16 @@ import {
   Box,
   Text,
 } from "@chakra-ui/react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
 import { ThemeContext } from "../../Context/TheamContext";
 import { useThrottle } from "use-throttle";
+import {
+  loginRequest,
+  loginSuccess,
+  loginFailure,
+  loginUser,
+} from "../../Redux/auth/action";
 const token = localStorage.getItem("token");
 
 const baseStyle = {
@@ -56,7 +63,10 @@ export const Navbar = () => {
    const [text, setText] = useState("");
    const [data, setData] = useState([]);
    const [loading, setLoading] = useState(false);
-   const throttledText = useThrottle(text, 2000);
+  const throttledText = useThrottle(text, 2000);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const comingFrom = location.state?.from?.pathname || "/";
 
    const handleSearch = (e) => {
      setText(e.target.value);
@@ -103,6 +113,13 @@ export const Navbar = () => {
          setTotal(res.data.length);
        });
    }, []);
+
+  const handleSignOut = () => {
+    localStorage.removeItem("token");
+    dispatch(loginFailure(null));
+    alert("Sign Out Successfull")
+    navigate(comingFrom, { replace: true });
+  };
   console.log(auth);
 
   return (
@@ -194,7 +211,6 @@ export const Navbar = () => {
                   {data &&
                     data.map((e) => (
                       <Text
-                        
                         style={{ margin: "5px", textDecoration: "none" }}
                         key={e._id}
                       >
@@ -276,9 +292,13 @@ export const Navbar = () => {
           </NavLink>
           <NavLink
             style={({ isActive }) => (isActive ? activeStyle : baseStyle)}
-            to={auth ? "/signout" : "/login"}
+            to={auth ? "" : "/login"}
           >
-            {auth ? <VscSignOut /> : <CiUser />}
+            {auth ? (
+              <VscSignOut onClick={handleSignOut}/>
+            ) : (
+              <CiUser />
+            )}
           </NavLink>
         </Flex>
       </Flex>

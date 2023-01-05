@@ -1,7 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { Signup } from "../pages/Login-signup/Signup";
 import { Login } from "../pages/Login-signup/Login";
-import { Signout } from "../pages/Login-signup/Signout";
 import { BalancePage } from "../pages/BalancePage/BalancePage";
 import { SellerPage } from "../pages/SellerPage/SellerPage";
 import { Navbar } from "../Components/Navbar/Navbar";
@@ -37,7 +36,6 @@ export const Routess = () => {
         <Route path="plotdetails/:id" element={<PlotDetails />} />
         <Route path="signup" element={<Signup />} />
         <Route path="login" element={<Login />} />
-        <Route path="signout" element={<Signout />} />
         <Route
           path="profile"
           element={
