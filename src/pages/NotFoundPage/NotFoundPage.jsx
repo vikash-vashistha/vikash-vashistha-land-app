@@ -1,10 +1,12 @@
+import { Stack } from "@chakra-ui/react";
+
 export const NotFoundPage = () => {
   return (
-    <div className="notfound" style={{ marginTop: "50px" }}>
+    <Stack className="notfound" m="auto" w="sm" mt="100px">
       <img
         src="https://kinsta.com/wp-content/uploads/2018/08/funny-404-page.jpg"
         alt=""
       />
-    </div>
+    </Stack>
   );
 };

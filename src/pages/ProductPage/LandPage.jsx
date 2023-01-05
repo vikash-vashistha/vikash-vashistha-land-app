@@ -15,6 +15,7 @@ import { ChatApp } from "../ChatPage/ChatApp";
 import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
 import { GiRoad, GiElectric } from "react-icons/gi";
 import { MdOutlineWaterDrop, MdOutlineDeleteSweep } from "react-icons/md";
+import styles from "./LandPage.module.css"
 
 
 
@@ -60,9 +61,9 @@ export const Land = () => {
 
   console.log(location.search, lands);
   return (
-    <Flex ml="20px" mt="50px" gap="20px">
+    <Flex ml="20px" mt="100px" gap="20px">
       <LandFilterSort />
-      <Flex wrap="wrap" gap="20px">
+      <Flex w={[300, 400, 500]} wrap="wrap" gap="20px">
         {lands &&
           lands.map((e, i) => {
             return (
@@ -113,7 +114,7 @@ export const Land = () => {
                 </CardBody>
                 <Divider />
                 <CardFooter>
-                  <ButtonGroup spacing="2">
+                  <ButtonGroup spacing="2" className={styles.media}>
                     <Link to={`/singleland/${e._id}`}>
                       <Button variant="solid" colorScheme="blue">
                         Land NO. {i + 1} Check out plots

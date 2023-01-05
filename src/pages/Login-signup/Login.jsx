@@ -71,7 +71,7 @@ export const Login = () => {
     // navigate("/")
   };
   return (
-    <Stack margin="auto" width="40%" style={{ marginTop: "50px" }}>
+    <Stack m="auto" w="md" mt="100px" >
       <NavLink
         style={({ isActive }) => (isActive ? activeStyle : baseStyle)}
         to="/signup"

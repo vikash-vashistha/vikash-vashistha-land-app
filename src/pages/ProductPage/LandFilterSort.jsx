@@ -90,7 +90,7 @@ export const LandFilterSort = () => {
   console.log(category,  sortBy, range);
   
   return (
-    <div style={{ width: "20%" }}>
+    <Stack w="20%">
       <br />
 
       <h3>Facility</h3>
@@ -137,46 +137,49 @@ export const LandFilterSort = () => {
           </Radio>
         </Stack>
       </RadioGroup>
-      <br />
-
-      <h3>Select range</h3>
-      <Stack>
-        <Checkbox
-          onChange={handleRange}
-          value="1to5"
-          defaultChecked={range.includes("1to5")}
-        >
-          1L to 5L
-        </Checkbox>
-        <Checkbox
-          onChange={handleRange}
-          value="5to15"
-          defaultChecked={range.includes("5to15")}
-        >
-          5L to 15L
-        </Checkbox>
-        <Checkbox
-          onChange={handleRange}
-          value="15to25"
-          defaultChecked={range.includes("15to25")}
-        >
-          15L to 25L
-        </Checkbox>
-        <Checkbox
-          onChange={handleRange}
-          value="25to50"
-          defaultChecked={range.includes("25to50")}
-        >
-          25L to 50L
-        </Checkbox>
-        <Checkbox
-          onChange={handleRange}
-          value="50andabove"
-          defaultChecked={range.includes("50andabove")}
-        >
-          50L and above
-        </Checkbox>
-      </Stack>
-    </div>
+      
+    </Stack>
   );
 };
+
+
+// <br />
+
+      // <h3>Select range</h3>
+      // <Stack>
+      //   <Checkbox
+      //     onChange={handleRange}
+      //     value="1to5"
+      //     defaultChecked={range.includes("1to5")}
+      //   >
+      //     1L to 5L
+      //   </Checkbox>
+      //   <Checkbox
+      //     onChange={handleRange}
+      //     value="5to15"
+      //     defaultChecked={range.includes("5to15")}
+      //   >
+      //     5L to 15L
+      //   </Checkbox>
+      //   <Checkbox
+      //     onChange={handleRange}
+      //     value="15to25"
+      //     defaultChecked={range.includes("15to25")}
+      //   >
+      //     15L to 25L
+      //   </Checkbox>
+      //   <Checkbox
+      //     onChange={handleRange}
+      //     value="25to50"
+      //     defaultChecked={range.includes("25to50")}
+      //   >
+      //     25L to 50L
+      //   </Checkbox>
+      //   <Checkbox
+      //     onChange={handleRange}
+      //     value="50andabove"
+      //     defaultChecked={range.includes("50andabove")}
+      //   >
+      //     50L and above
+      //   </Checkbox>
+      // </Stack>

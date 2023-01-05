@@ -11,7 +11,8 @@ import {
   Td,
   TableCaption,
   TableContainer,
-  Button
+  Button,
+  Stack
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
@@ -88,7 +89,7 @@ export const BalancePage = () => {
   }, [state.page]);
 
   return (
-    <div style={{ marginTop: "50px" }}>
+    <Stack m="auto" w="sm" mt="100px">
       <TableContainer>
         <Table variant="simple" style={{ textAlign: "center" }}>
           <TableCaption>All user Transactions</TableCaption>
@@ -142,6 +143,6 @@ export const BalancePage = () => {
       <div style={{ marginLeft: "45%" }}>
         {state.isLoading && <h3>...loading</h3>}
       </div>
-    </div>
+    </Stack>
   );
 };

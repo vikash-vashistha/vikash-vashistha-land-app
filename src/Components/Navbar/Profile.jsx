@@ -25,12 +25,12 @@ export const Profile = () => {
 // console.log(user);
   return (
     <Stack
-      width="sm"
+      m="auto"
+      w="sm"
+      mt="100px"
       style={{
         border: "1px solid grey",
         borderRadius: "5px",
-        margin: "5px",
-        marginTop: "70px",
         padding: "5px",
       }}
     >

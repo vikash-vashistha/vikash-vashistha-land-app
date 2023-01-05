@@ -28,7 +28,7 @@ export const PlotDetails = () => {
   
   // console.log(plotsDetails);
   return (
-    <div style={{ margin: "auto", display: "flex", marginTop: "50px" }}>
+    <Flex m="auto" mt="100px" >
       <Stack
         width="sm"
         style={{
@@ -160,6 +160,6 @@ export const PlotDetails = () => {
           {plotsDetails?.land_id?.facility.includes("sewerage") ? <MdOutlineDeleteSweep/> : ""}
         </Text>
       </Stack>
-    </div>
+    </Flex>
   );
 };

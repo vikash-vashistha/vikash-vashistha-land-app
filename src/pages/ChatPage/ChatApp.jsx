@@ -14,6 +14,7 @@ import {
   Button,
   Input,
   Flex,
+  Stack,
 } from "@chakra-ui/react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
@@ -156,10 +157,15 @@ export const ChatApp = ({ id, nameOwner }) => {
   //  console.log("sf", subscribedTo)
 
   return (
-    <div style={{ marginTop: "50px" }}>
+    <Stack m="auto" w="sm" mt="100px">
       <Link
         to={``}
-        style={{ margin: "5px", fontWeight: "bold", textDecoration: "none", color: "teal" }}
+        style={{
+          margin: "5px",
+          fontWeight: "bold",
+          textDecoration: "none",
+          color: "teal",
+        }}
         ref={btnRef}
         onClick={onOpen}
       >
@@ -231,6 +237,6 @@ export const ChatApp = ({ id, nameOwner }) => {
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
-    </div>
+    </Stack>
   );
 };

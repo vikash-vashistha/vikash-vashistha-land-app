@@ -57,7 +57,7 @@ const location = useLocation();
   
 
   return (
-    <Flex ml="20px" mt="50px" gap="20px">
+    <Flex ml="20px" mt="100px" gap="40px">
       <PlotFilterSort />{" "}
       <Flex wrap="wrap" gap="20px">
         {plots &&

@@ -25,7 +25,7 @@ console.log(IDBObjectStore)
   };
 
   return (
-    <Flex wrap="wrap" mt="50px" gap="20px">
+    <Flex wrap="wrap" mt="100px" gap="20px">
       {schemes &&
         schemes.map((e, i) => {
           return (

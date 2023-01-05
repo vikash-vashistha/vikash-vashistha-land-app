@@ -43,8 +43,8 @@ export const Cart = () => {
   console.log(plots);
 
   return (
-    <Flex justify="space-between" mt="50px">
-      <Flex wrap="wrap" gap="20px">
+    <Stack m="auto" w="sm" mt="100px">
+      <Flex ml="40px" wrap="wrap" gap="40px">
         {plots &&
           plots.map((e, i) => (
             <Card maxW="sm">
@@ -162,6 +162,6 @@ export const Cart = () => {
             </Card>
           ))}
       </Flex>
-    </Flex>
+    </Stack>
   );
 };

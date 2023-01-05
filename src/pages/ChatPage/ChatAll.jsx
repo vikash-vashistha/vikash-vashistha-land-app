@@ -54,7 +54,7 @@ export const ChatAll = () => {
   // console.log(onClose);
 
   return (
-    <div style={{ marginTop: "50px" }}>
+    <Stack m="auto" w="sm" mt="100px">
       {chat?.map((e, i) => (
         <Stack
           style={{
@@ -129,6 +129,6 @@ export const ChatAll = () => {
           </InputGroup>
         </Stack>
       ))}
-    </div>
+    </Stack>
   );
 };
