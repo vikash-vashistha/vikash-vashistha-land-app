@@ -124,8 +124,8 @@ export const Navbar = () => {
 
   return (
     <>
-      <Flex className={styles.nav}>
-        <Flex align="center" m="10px">
+      <Flex className={styles.nav} >
+        <Flex align="center" m="10px" >
           <NavLink
             style={({ isActive }) => (isActive ? activeStyle : baseStyle)}
             to="/"
@@ -138,7 +138,11 @@ export const Navbar = () => {
         </Flex>
         <Spacer />
 
-        <Flex align="center" gap="15px">
+        <Flex
+          align="center"
+          gap="15px"
+          wrap="wrap"
+        >
           <Flex>
             <InputGroup size="sm" width="80%">
               <InputLeftAddon>
@@ -180,20 +184,17 @@ export const Navbar = () => {
           </Flex>
           <Spacer />
           <Flex
-            style={{
-              height: "380px",
-              marginLeft: "150px",
-              alignItems: "stretch",
-              // border: "1px solid red",
-              position: "absolute",
-              zIndex: 1,
-            }}
+            mt={20}
+            align="strech"
+            h="380px"
+            position="absolute"
+            zIndex={1}
           >
             {text && (
               <div
                 style={{
-                  marginLeft: "30%",
-                  marginTop: "50px",
+                  // marginLeft: "10%",
+                  marginTop: "170px",
                   width: "100%",
                   height: "300px",
                   display: "flex",
@@ -294,11 +295,7 @@ export const Navbar = () => {
             style={({ isActive }) => (isActive ? activeStyle : baseStyle)}
             to={auth ? "" : "/login"}
           >
-            {auth ? (
-              <VscSignOut onClick={handleSignOut}/>
-            ) : (
-              <CiUser />
-            )}
+            {auth ? <VscSignOut onClick={handleSignOut} /> : <CiUser />}
           </NavLink>
         </Flex>
       </Flex>
