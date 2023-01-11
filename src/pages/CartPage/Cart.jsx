@@ -43,7 +43,7 @@ export const Cart = () => {
   console.log(plots);
 
   return (
-    <Stack m="auto" w="sm" mt="100px">
+    <Stack m="auto" w="sm" mt="150px">
       <Flex ml="40px" wrap="wrap" gap="40px">
         {plots &&
           plots.map((e, i) => (

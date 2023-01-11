@@ -29,7 +29,7 @@ export const SellerLandPage = () => {
 
   console.log(location.search, lands);
   return (
-    <div style={{ display: "flex", marginTop: "50px" }}>
+    <div style={{ display: "flex", marginTop: "150px" }}>
       <LandFilterSort />
       <div style={{ width: "80%", display: "flex", flexWrap: "wrap" }}>
         {lands &&

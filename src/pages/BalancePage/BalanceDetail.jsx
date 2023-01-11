@@ -24,7 +24,7 @@ export const BalanceDetail = () => {
   }, []);
   console.log(balanceDetails);
   return (
-    <Stack style={{ marginTop: "50px" }}>
+    <Stack style={{ marginTop: "150px" }}>
       <p>type - {balanceDetails?.type}</p>
       <p>date - {balanceDetails?.date}</p>
       <p>amount - {balanceDetails?.amount}</p>

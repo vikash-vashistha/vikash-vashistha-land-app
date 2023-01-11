@@ -45,7 +45,7 @@ export const ProductsPage = () => {
   }, [])
 
   return (
-    <Stack mt="100px">
+    <Stack mt="150px">
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>

@@ -157,7 +157,7 @@ export const ChatApp = ({ id, nameOwner }) => {
   //  console.log("sf", subscribedTo)
 
   return (
-    <Stack m="auto" w="sm" mt="100px">
+    <Stack w="30%" >
       <Link
         to={``}
         style={{

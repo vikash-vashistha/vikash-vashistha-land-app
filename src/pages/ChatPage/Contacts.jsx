@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function Contacts({ users, active, onChange }) {
   return (
-    <div style={{ marginTop: "50px", display: "flex", flexWrap: "wrap", gap: "5px" }}>
+    <div style={{ marginTop: "150px", display: "flex", flexWrap: "wrap", gap: "5px" }}>
       {users.map((user) => (
             <Button
               colorScheme="teal"

@@ -56,81 +56,81 @@ export const Navbar = () => {
   const [total, setTotal] = useState(0);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => ({ user: state.app.user }));
-   const ref = useRef();
-   const ref1 = useRef();
-   const { theme, toggleTheme } = useContext(ThemeContext);
-   const auth = useSelector((state) => state.auth.isAuth );
-   const [text, setText] = useState("");
-   const [data, setData] = useState([]);
-   const [loading, setLoading] = useState(false);
+  const ref = useRef();
+  const ref1 = useRef();
+  const { theme, toggleTheme } = useContext(ThemeContext);
+  const auth = useSelector((state) => state.auth.isAuth);
+  const [text, setText] = useState("");
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
   const throttledText = useThrottle(text, 2000);
   const navigate = useNavigate();
   const location = useLocation();
   const comingFrom = location.state?.from?.pathname || "/";
 
-   const handleSearch = (e) => {
-     setText(e.target.value);
-   };
+  const handleSearch = (e) => {
+    setText(e.target.value);
+  };
 
-   const handleScroll = () => {
-     ref.current.scrollTop = 0;
-   };
+  const handleScroll = () => {
+    ref.current.scrollTop = 0;
+  };
 
-   const handleClose = () => {
-     setText("");
-     ref1.current.value = "";
-   };
+  const handleClose = () => {
+    setText("");
+    ref1.current.value = "";
+  };
 
-   useEffect(() => {
-     getData();
-     // ref1.current = setInterval(() => {}, 2000);
-     // return clearInterval(ref1.current);
-   }, [throttledText]);
+  useEffect(() => {
+    getData();
+    // ref1.current = setInterval(() => {}, 2000);
+    // return clearInterval(ref1.current);
+  }, [throttledText]);
 
-   // getting locations
-   const getData = () => {
-     setLoading(true);
-     axios
-       .get(
-         `https://vikash-land-app.onrender.com/products/locations?city=${throttledText}`
-       )
-       .then((res) => {
-         setData([...res.data]);
-         setLoading(false);
-       });
-   };
+  // getting locations
+  const getData = () => {
+    setLoading(true);
+    axios
+      .get(
+        `https://vikash-land-app.onrender.com/products/locations?city=${throttledText}`
+      )
+      .then((res) => {
+        setData([...res.data]);
+        setLoading(false);
+      });
+  };
 
   useEffect(() => {
     dispatch(getUser());
   }, [auth]);
 
-   useEffect(() => {
-     axios
-       .get(`https://vikash-land-app.onrender.com/cart/${user._id}`, {
-         headers: { authorization: `Bearer ${token}` },
-       })
-       .then((res) => {
-         setTotal(res.data.length);
-       });
-   }, []);
+  useEffect(() => {
+    axios
+      .get(`https://vikash-land-app.onrender.com/cart/${user._id}`, {
+        headers: { authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        setTotal(res.data.length);
+      });
+  }, []);
 
   const handleSignOut = () => {
     localStorage.removeItem("token");
     dispatch(loginFailure(null));
-    alert("Sign Out Successfull")
+    alert("Sign Out Successfull");
     navigate(comingFrom, { replace: true });
   };
   console.log(auth);
 
   return (
     <>
-      <Flex className={styles.nav} >
-        <Flex align="center" m="10px" >
+      <Flex className={styles.nav}>
+        <Flex align="center" m="10px">
           <NavLink
             style={({ isActive }) => (isActive ? activeStyle : baseStyle)}
             to="/"
           >
-            <Flex align="center" gap="5px">
+            <Flex align="center" gap="5px" className={styles.home}>
               <GoHome />
               <i>VLA</i>
             </Flex>
@@ -138,13 +138,16 @@ export const Navbar = () => {
         </Flex>
         <Spacer />
 
-        <Flex
-          align="center"
-          gap="15px"
-          wrap="wrap"
-        >
-          <Flex>
-            <InputGroup size="sm" width="80%">
+        <Flex align="center" gap="1px" wrap="wrap">
+          <Flex align="center">
+            <InputGroup
+              sm="30em"
+              md="48em"
+              lg="62em"
+              xl="80em"
+              align="center"
+              className={styles.search}
+            >
               <InputLeftAddon>
                 <CiSearch />
               </InputLeftAddon>
@@ -183,13 +186,7 @@ export const Navbar = () => {
             </InputGroup>
           </Flex>
           <Spacer />
-          <Flex
-            mt={20}
-            align="strech"
-            h="380px"
-            position="absolute"
-            zIndex={1}
-          >
+          <Flex mt={20} align="strech" h="380px" position="absolute" zIndex={1}>
             {text && (
               <div
                 style={{

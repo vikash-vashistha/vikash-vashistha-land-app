@@ -61,15 +61,15 @@ export const Land = () => {
 
   console.log(location.search, lands);
   return (
-    <Flex ml="20px" mt="100px" gap="20px">
+    <Flex ml="20px" mt="150px" gap="20px">
       <LandFilterSort />
-      <Flex w={[300, 400, 500]} wrap="wrap" gap="20px">
+      <Flex w={[300, 800, 1000]} wrap="wrap" gap="20px" >
         {lands &&
           lands.map((e, i) => {
             return (
-              <Card maxW="md">
-                <CardBody>
-                  <Stack mt="6" spacing="3">
+              <Card maxW="md" w={[250, 300, 400]} m={2}>
+                <CardBody h={[100, 150, 200]}>
+                  <Stack spacing="2">
                     <Heading size="md">Living room Sofa</Heading>
                     <Text>area = {e.area} sq. ft.</Text>
                     <Flex>
@@ -102,19 +102,18 @@ export const Land = () => {
                         )}
                       </Text>
                     </Flex>
-                    <Flex>
+                    <Flex wrap="wrap">
                       {e?.partners?.map((el, it) => (
                         <ChatApp id={el?._id} nameOwner={el?.name} />
                       ))}{" "}
                     </Flex>
-                    <Text color="blue.600" fontSize="2xl">
+                    <Text m={0} color="blue.600" fontSize="2xl">
                       price = {e.price} ₹/sq. ft.
                     </Text>
                   </Stack>
                 </CardBody>
-                <Divider />
-                <CardFooter>
-                  <ButtonGroup spacing="2" className={styles.media}>
+                <CardFooter m="auto" p={0}>
+                  <ButtonGroup spacing="1" className={styles.media}>
                     <Link to={`/singleland/${e._id}`}>
                       <Button variant="solid" colorScheme="blue">
                         Land NO. {i + 1} Check out plots

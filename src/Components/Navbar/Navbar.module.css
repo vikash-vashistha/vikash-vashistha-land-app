@@ -18,7 +18,7 @@
 }
 }
 
-@media screen  and (min-width: 664px) {
+@media screen  and (max-width: 664px) {
   .nav {
      position: fixed;
     top: 0;
@@ -34,5 +34,33 @@
   width: 3%;
   height: 30px;
 }
+
 }
 
+@media screen  and (max-width: 377px) {
+  .nav {
+     position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    background-color: white;
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 1px solid gray;
+  margin-bottom: 10px;
+}
+.link{
+  width: 3%;
+  height: 30px;
+}
+
+.home{
+  /* border: 3px solid red; */
+  /* padding-bottom: 20px; */
+ margin-left: 300%;
+}
+
+.search{
+  margin-left: 20%;
+}
+}

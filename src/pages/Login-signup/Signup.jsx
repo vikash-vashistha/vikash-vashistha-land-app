@@ -101,7 +101,7 @@ export const Signup = () => {
   }, [blob]);
 
   return (
-    <Stack spacing={4} m="auto" w="md" mt="100px">
+    <Stack spacing={4} m="auto" w="md" mt="150px">
       <form onSubmit={handleSubmit}>
         <h3>Sigh up</h3>
         <Input

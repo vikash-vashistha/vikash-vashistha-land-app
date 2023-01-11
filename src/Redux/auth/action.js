@@ -36,11 +36,13 @@ const loginUser = (payload) => (dispatch) => {
     .then((res) => {
       const successAction = loginSuccess(res.data.token);
       dispatch(successAction);
+       alert("Sign In Successfull");
       localStorage.setItem("token", res.data.token);
     })
     .catch((err) => {
       const failureAction = loginFailure(err.message);
       dispatch(failureAction);
+       alert("Sign In Fail");
     });
 };
 

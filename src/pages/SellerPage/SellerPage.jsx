@@ -32,7 +32,7 @@ export const SellerPage = () => {
   //      });
   // },[])
   return (
-    <Stack style={{ marginTop: "50px" }}>
+    <Stack style={{ marginTop: "150px" }}>
     <Button onClick={schemeHandler}>Choose Scheme</Button>
       <Flex flexWrap ="wrap">
         {scheme &&

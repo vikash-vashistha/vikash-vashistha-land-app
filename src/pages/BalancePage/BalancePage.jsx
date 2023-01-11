@@ -89,7 +89,7 @@ export const BalancePage = () => {
   }, [state.page]);
 
   return (
-    <Stack m="auto" w="sm" mt="100px">
+    <Stack m="auto" w="sm" mt="150px">
       <TableContainer>
         <Table variant="simple" style={{ textAlign: "center" }}>
           <TableCaption>All user Transactions</TableCaption>

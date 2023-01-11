@@ -63,15 +63,17 @@ export const Login = () => {
     //   password: "",
     // });
     console.log("vikash");
-    alert("Sign In Successfull")
+   
     setTimeout(() => {
       console.log("inside login page", location, comingFrom);
       navigate(comingFrom, { replace: true });
     }, 1000)
     // navigate("/")
   };
+
+  // if(auth) return navigate(comingFrom, { replace: true });
   return (
-    <Stack m="auto" w="md" mt="100px" >
+    <Stack m="auto" w="sm" mt="150px" align="center" justify="center">
       <NavLink
         style={({ isActive }) => (isActive ? activeStyle : baseStyle)}
         to="/signup"

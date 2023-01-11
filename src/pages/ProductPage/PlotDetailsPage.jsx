@@ -28,7 +28,7 @@ export const PlotDetails = () => {
   
   // console.log(plotsDetails);
   return (
-    <Flex m="auto" mt="100px" >
+    <Flex m="auto" mt="150px" >
       <Stack
         width="sm"
         style={{

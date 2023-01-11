@@ -54,7 +54,7 @@ export const ChatAll = () => {
   // console.log(onClose);
 
   return (
-    <Stack m="auto" w="sm" mt="100px">
+    <Stack m="auto" w="sm" mt="150px">
       {chat?.map((e, i) => (
         <Stack
           style={{
