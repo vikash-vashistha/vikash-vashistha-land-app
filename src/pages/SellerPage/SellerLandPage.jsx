@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { Button, Text, Stack, Flex } from "@chakra-ui/react";
+import { Button, Text, Stack, Flex, HStack } from "@chakra-ui/react";
 import { LandFilterSort } from "../ProductPage/LandFilterSort";
 
 const token = localStorage.getItem("token");
@@ -29,22 +29,13 @@ export const SellerLandPage = () => {
 
   console.log(location.search, lands);
   return (
-    <div style={{ display: "flex", marginTop: "150px" }}>
+    <Flex mt={[150, 10, 10]} gap="20px">
       <LandFilterSort />
-      <div style={{ width: "80%", display: "flex", flexWrap: "wrap" }}>
+      <Flex w={[300, 800, 1000]} wrap="wrap" gap="20px">
         {lands &&
           lands.map((e, i) => {
             return (
-              <Stack
-                width="sm"
-                key={e._id}
-                style={{
-                  border: "1px solid grey",
-                  borderRadius: "5px",
-                  margin: "5px",
-                  padding: "5px",
-                }}
-              >
+              <Stack maxW="md" w={[250, 300, 400]} m={2} p={2} bg="#FFFFE0">
                 <Link
                   to={`/singleland/${e._id}`}
                   style={{ margin: "5px", textDecoration: "none" }}
@@ -88,7 +79,7 @@ export const SellerLandPage = () => {
               </Stack>
             );
           })}
-      </div>
-    </div>
+      </Flex>
+    </Flex>
   );
 };

@@ -1,9 +1,7 @@
-import { loadData, saveData } from "../../utils/localStorage";
 import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS } from "./actionTypes";
 
 const token = localStorage.getItem("token");
-// verify
-// once verified
+
 
 const initState = {
   isAuth: token ? true : false,

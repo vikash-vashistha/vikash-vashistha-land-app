@@ -101,7 +101,16 @@ export const Signup = () => {
   }, [blob]);
 
   return (
-    <Stack spacing={4} m="auto" w="md" mt="150px">
+    <Stack
+      spacing={4}
+      m="auto"
+      w="md"
+      h="sm"
+      mt={[150, 10, 10]}
+      bg="#FFFFE0"
+      p={2}
+      border="1px solid grey"
+    >
       <form onSubmit={handleSubmit}>
         <h3>Sigh up</h3>
         <Input
@@ -109,12 +118,14 @@ export const Signup = () => {
           type="text"
           onChange={handleChange}
           placeholder="enter username"
+          value={formData.name}
         />
         <Input
           id="email"
           type="text"
           onChange={handleChange}
           placeholder="enter email"
+          value={formData.email}
         />
         <InputGroup size="md">
           <Input
@@ -123,6 +134,7 @@ export const Signup = () => {
             pr="4.5rem"
             type={show ? "text" : "password"}
             placeholder="Enter password"
+            value={formData.password}
           />
           <InputRightElement width="4.5rem">
             <Button h="1.75rem" size="sm" onClick={handleClick}>
@@ -141,6 +153,7 @@ export const Signup = () => {
             onChange={handleChange}
             type="tel"
             placeholder="phone number"
+            value={formData.phone_no}
           />
         </InputGroup>
         <Input
@@ -150,7 +163,12 @@ export const Signup = () => {
             setFile(e.target.files[0]);
           }}
         />
-        <Select placeholder="Gender" id="gender" onChange={handleChange}>
+        <Select
+          placeholder="Gender"
+          id="gender"
+          onChange={handleChange}
+          value={formData.gender}
+        >
           <option value="male">male</option>
           <option vlaue="female">female</option>
           <option value="other">other</option>

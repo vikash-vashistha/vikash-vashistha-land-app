@@ -5,9 +5,9 @@ import { Navigate, useLocation } from "react-router-dom";
 const PrivateRoute = ({ children }) => {
   const location = useLocation();
   console.log("inside private route", location);
-  const { auth } = useSelector((state) => ({ auth: state.auth.isAuth }));
-  console.log("auth", auth);
-  if (!auth) {
+  const { isAuth } = useSelector((state) => state.auth );
+  console.log("auth", isAuth);
+  if (!isAuth) {
     return (
       // <h1 style={{ textAlign: "center" }}>
       //   Not authorized, Please login to continue

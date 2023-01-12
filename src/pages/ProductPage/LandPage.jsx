@@ -59,15 +59,17 @@ export const Land = () => {
     navigate("payment");
   };
 
-  console.log(location.search, lands);
+  if (!lands) return <div>Lodading...</div>;
+  
+
   return (
-    <Flex ml="20px" mt="150px" gap="20px">
+    <Flex ml="20px" mt={[150, 10, 10]} gap="20px">
       <LandFilterSort />
-      <Flex w={[300, 800, 1000]} wrap="wrap" gap="20px" >
+      <Flex w={[300, 800, 1000]} wrap="wrap" gap="20px">
         {lands &&
           lands.map((e, i) => {
             return (
-              <Card maxW="md" w={[250, 300, 400]} m={2}>
+              <Card maxW="md" w={[250, 300, 400]} m={2} p={2} bg="#FFFFE0">
                 <CardBody h={[100, 150, 200]}>
                   <Stack spacing="2">
                     <Heading size="md">Living room Sofa</Heading>

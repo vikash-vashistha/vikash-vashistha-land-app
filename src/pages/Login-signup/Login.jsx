@@ -29,7 +29,7 @@ const activeStyle = {
 };
 
 export const Login = () => {
-  const { auth } = useSelector((state) => ({ auth: state.auth }));
+  const { isAuth } = useSelector((state) => state.auth );
   const navigate = useNavigate()
   const [otp, setOtp] = useState("");
   const dispatch = useDispatch();
@@ -51,29 +51,34 @@ export const Login = () => {
   };
   const location = useLocation()
   const comingFrom = location?.state?.from?.pathname || "/";
-  // console.log(comingFrom);
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(e, formData);
     let payload = formData
-    console.log("before", auth);
+    console.log("before", isAuth);
     handleLogin(payload)
-    // setFormData({
-      //   email: "",
-    //   password: "",
-    // });
-    console.log("vikash");
-   
-    setTimeout(() => {
-      console.log("inside login page", location, comingFrom);
-      navigate(comingFrom, { replace: true });
-    }, 1000)
-    // navigate("/")
+    setFormData({
+        email: "",
+      password: "",
+    });
   };
 
-  // if(auth) return navigate(comingFrom, { replace: true });
+  console.log(isAuth);
+
+  if (isAuth) return navigate(comingFrom, { replace: true });
+  
   return (
-    <Stack m="auto" w="sm" mt="150px" align="center" justify="center">
+    <Stack
+      m="auto"
+      w="sm"
+      mt={[150, 10, 10]}
+      bg="#FFFFE0"
+      align="center"
+      justify="center"
+      p={2}
+      border="1px solid grey"
+    >
       <NavLink
         style={({ isActive }) => (isActive ? activeStyle : baseStyle)}
         to="/signup"
@@ -87,12 +92,14 @@ export const Login = () => {
           type="email"
           onChange={handleChange}
           placeholder="enter email"
+          value={formData.email}
         />
         <Input
           id="password"
           type="text"
           onChange={handleChange}
           placeholder="enter password"
+          value={formData.password}
         />
         <Input type="submit" value={"Log in"} />
       </form>

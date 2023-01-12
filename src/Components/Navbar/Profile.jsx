@@ -27,12 +27,13 @@ export const Profile = () => {
     <Stack
       m="auto"
       w="sm"
-      mt="100px"
+      mt={[150, 10, 10]}
       style={{
         border: "1px solid grey",
         borderRadius: "5px",
         padding: "5px",
       }}
+      bg="#FFFFE0"
     >
       <Text>Name - {user?.name}</Text>
       <Text>Email - {user?.email}</Text>

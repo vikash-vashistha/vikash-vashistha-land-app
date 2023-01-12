@@ -60,7 +60,7 @@ export const NewLand = () => {
   }
 console.log(formData);
   return (
-    <div className={styles.temp} >
+    <Stack m="auto" w={[300, 450, 800]} p={5} bg="#FFFFE0" mt={[150, 10, 10]}>
       <form onSubmit={handleSubmit}>
         <label>Location</label>
         <Input
@@ -110,6 +110,6 @@ console.log(formData);
         </Checkbox>
         <Input type="submit" />
       </form>
-    </div>
+    </Stack>
   );
 };

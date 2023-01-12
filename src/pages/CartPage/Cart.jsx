@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, Divider, Flex, Heading, Stack, Text } from "@chakra-ui/react";
+import { Button, ButtonGroup, Divider, Flex, Heading, HStack, Stack, Text } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
@@ -6,47 +6,43 @@ import { Payment } from "../../Components/Payment";
 import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
 import { GiRoad, GiElectric } from "react-icons/gi";
 import { MdOutlineWaterDrop, MdOutlineDeleteSweep } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
+import { get_cart, remove_from_cart } from "../../Redux/cart/action";
 
-const token = localStorage.getItem("token");
 
 export const Cart = () => {
+  const { token } = useSelector((state) => state.auth);
+  const {cart, total} = useSelector((state) => state.cart)
+  const dispatch = useDispatch();
   const { id } = useParams(); 
-  const [plots, setPlots] = useState([]);
   // getting plots inside land
 
   const location = useLocation();
 
   useEffect(() => {
-    axios
-      .get(`https://vikash-land-app.onrender.com/cart/${id}`, {
-        headers: { authorization: `Bearer ${token}` },
-      })
-      .then((res) => {
-        console.log(plots, res.data);
-        setPlots([...res.data]);
-        console.log("plots", plots);
-      });
-  }, [location.search]);
+    dispatch(get_cart({id, token}))
+  }, []);
 
   const itemRemoveHandler = (e) => {
-    axios
-      .delete(`https://vikash-land-app.onrender.com/cart/${e}`, {
-        headers: { authorization: `Bearer ${token}` },
-      })
-      .then((res) => {
-        console.log(plots, res.data);
-        setPlots((prv) => [...res.data]);
-        console.log("plots", plots);
-      });
+    dispatch(remove_from_cart({ id: e, token }));
   };
 
-  console.log(plots);
+  console.log(cart);
+  if(!cart) return  <div>loading...</div>
 
   return (
-    <Stack m="auto" w="sm" mt="150px">
+    <Stack m="auto" mt={[150, 10, 10]} bg="#FFFFE0">
+      <HStack ml={2} justify="space-around">
+        <Text color="blue.600" fontSize="2xl">
+          Total - ₹{total}
+        </Text>
+        <Button variant="ghost" colorScheme="blue">
+          <Payment price={total} />
+        </Button>
+      </HStack>
       <Flex ml="40px" wrap="wrap" gap="40px">
-        {plots &&
-          plots.map((e, i) => (
+        {cart &&
+          cart.map((e, i) => (
             <Card maxW="sm">
               <CardBody>
                 <Stack mt="6" spacing="3">
@@ -153,9 +149,6 @@ export const Cart = () => {
                     onClick={() => itemRemoveHandler(e._id)}
                   >
                     Remove
-                  </Button>
-                  <Button variant="ghost" colorScheme="blue">
-                    <Payment price={e?.plot_id?.price} />
                   </Button>
                 </ButtonGroup>
               </CardFooter>

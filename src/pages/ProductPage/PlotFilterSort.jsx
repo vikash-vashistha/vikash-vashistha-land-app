@@ -90,7 +90,7 @@ export const PlotFilterSort = () => {
   console.log(category, sortBy, range);
 
   return (
-    <Stack w="20%">
+    <Stack w={[400, 400, 400]} bg="#FFFFE0">
       <br />
 
       <h3>Facing</h3>
@@ -145,7 +145,6 @@ export const PlotFilterSort = () => {
           </Radio>
         </Stack>
       </RadioGroup>
-      
     </Stack>
   );
 };

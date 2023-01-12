@@ -90,7 +90,7 @@ export const LandFilterSort = () => {
   console.log(category,  sortBy, range);
   
   return (
-    <Stack w="20%">
+    <Stack w={[250, 300, 300]} bg="#FFFFE0">
       <br />
 
       <h3>Facility</h3>
@@ -127,17 +127,24 @@ export const LandFilterSort = () => {
       <br />
 
       <h3>Sort by price</h3>
-      <RadioGroup onChange={setSortBy} >
+      <RadioGroup onChange={setSortBy}>
         <Stack>
-          <Radio onChange={handleSort} value="LTH" defaultChecked={sortBy == "LTH"}>
+          <Radio
+            onChange={handleSort}
+            value="LTH"
+            defaultChecked={sortBy == "LTH"}
+          >
             Low to High
           </Radio>
-          <Radio onChange={handleSort} value="HTL" defaultChecked={sortBy == "HTL"}>
+          <Radio
+            onChange={handleSort}
+            value="HTL"
+            defaultChecked={sortBy == "HTL"}
+          >
             High to Low
           </Radio>
         </Stack>
       </RadioGroup>
-      
     </Stack>
   );
 };

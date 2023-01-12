@@ -2,16 +2,18 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { Button, Text, Card, CardHeader, CardBody, CardFooter, Select, Stack, Heading, Divider, ButtonGroup, Flex } from "@chakra-ui/react";
+import { Button, Text, Card, CardHeader, CardBody, CardFooter, Select, Stack, Heading, Divider, ButtonGroup, Flex, useDisclosure } from "@chakra-ui/react";
 import { PlotFilterSort } from "./PlotFilterSort";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { GiRoad, GiElectric } from "react-icons/gi";
 import { MdOutlineWaterDrop, MdOutlineDeleteSweep } from "react-icons/md";
 
 const token = localStorage.getItem("token");
 
 export const Plots = () => {
-   const { user } = useSelector((state) => ({ user: state.app.user }));
+  const { user } = useSelector((state) => ({ user: state.app.user }));
+  const { token } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const { id } = useParams();
   const [plots, setPlots] = useState([]);
   // getting plots inside land
@@ -32,37 +34,19 @@ const location = useLocation();
 
   const handleCart = (e) => {
     console.log(user._id, e);
-    try {
-      axios
-        .post(
-          `https://vikash-land-app.onrender.com/cart`,
-          {
-            user_id: user._id,
-            plot_id: e?._id,
-            land_id: e?.land_id?._id,
-          },
-          {
-            headers: { authorization: `Bearer ${token}` },
-          }
-        )
-        .then((res) => {
-          console.log("vik", res);
-        });
-    } catch (e) {
-      console.log(e);
-    }
+    dispatch({user, e, token})
   };
 
-  console.log(location.search);
+   if (!plots) return <div>Lodading...</div>;
   
 
   return (
-    <Flex ml="20px" mt="150px" gap="40px">
+    <Flex mt={[150, 10, 10]} gap="20px">
       <PlotFilterSort />{" "}
       <Flex wrap="wrap" gap="20px">
         {plots &&
           plots.map((e, i) => (
-            <Card maxW="sm">
+            <Card maxW="sm" bg="#FFFFE0">
               <CardBody>
                 <Stack mt="6" spacing="3">
                   <Heading size="md">Plot No. {i + 1}</Heading>

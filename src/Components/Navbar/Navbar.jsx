@@ -124,7 +124,7 @@ export const Navbar = () => {
 
   return (
     <>
-      <Flex className={styles.nav}>
+      <Flex className={styles.nav} bg="#FFFFE0">
         <Flex align="center" m="10px">
           <NavLink
             style={({ isActive }) => (isActive ? activeStyle : baseStyle)}
@@ -201,7 +201,7 @@ export const Navbar = () => {
                 <Stack
                   style={{
                     overflowY: "scroll",
-                    background: "red",
+                    background: "#FFFFE0",
                     borderRadius: "4px",
                   }}
                   ref={ref}

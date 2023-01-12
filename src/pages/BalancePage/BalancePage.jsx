@@ -12,7 +12,8 @@ import {
   TableCaption,
   TableContainer,
   Button,
-  Stack
+  Stack,
+  Flex
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
@@ -89,7 +90,7 @@ export const BalancePage = () => {
   }, [state.page]);
 
   return (
-    <Stack m="auto" w="sm" mt="150px">
+    <Stack m="auto" w={[300, 750, 1000]} mt={[150, 10, 10]} bg="#FFFFE0" p={5}>
       <TableContainer>
         <Table variant="simple" style={{ textAlign: "center" }}>
           <TableCaption>All user Transactions</TableCaption>
@@ -125,7 +126,7 @@ export const BalancePage = () => {
         </Table>
       </TableContainer>
       <br />
-      <div style={{ marginLeft: "45%" }}>
+      <Flex m="auto">
         <Button
           onClick={() => dispatch({ ...decPage, payload: state.page })}
           disabled={state.page == 1}
@@ -139,10 +140,7 @@ export const BalancePage = () => {
         >
           next
         </Button>
-      </div>
-      <div style={{ marginLeft: "45%" }}>
-        {state.isLoading && <h3>...loading</h3>}
-      </div>
+      </Flex>
     </Stack>
   );
 };

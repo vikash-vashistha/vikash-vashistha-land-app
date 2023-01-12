@@ -10,7 +10,6 @@ const loginRequest = () => {
 const loginSuccess = (token) => {
   return {
     type: LOGIN_SUCCESS,
-    auth: true,
     payload: token
   };
 };
@@ -18,7 +17,6 @@ const loginSuccess = (token) => {
 const loginFailure = (err) => {
   return {
     type: LOGIN_FAILURE,
-    auth: false,
     payload: err
   };
 };
@@ -27,21 +25,18 @@ const loginUser = (payload) => (dispatch) => {
   const requestAction = loginRequest();
   dispatch(requestAction);
   const { email, password } = payload;
-  // console.log(payload);
   axios
     .post("https://vikash-land-app.onrender.com/login", {
       email,
       password,
     })
     .then((res) => {
-      const successAction = loginSuccess(res.data.token);
-      dispatch(successAction);
+      dispatch(loginSuccess(res.data.token));
        alert("Sign In Successfull");
       localStorage.setItem("token", res.data.token);
     })
     .catch((err) => {
-      const failureAction = loginFailure(err.message);
-      dispatch(failureAction);
+      dispatch(loginFailure(err.message));
        alert("Sign In Fail");
     });
 };

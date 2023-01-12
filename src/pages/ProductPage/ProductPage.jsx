@@ -45,7 +45,7 @@ export const ProductsPage = () => {
   }, [])
 
   return (
-    <Stack mt="150px">
+    <Stack mt={[150, 10, 10]}>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
@@ -53,9 +53,9 @@ export const ProductsPage = () => {
             <i>
               <Text fontSize="xxxl">VLA</Text>
             </i>
-            </ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
+          </ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
             <Text fontSize="xl">(Vikash Land App)</Text>
             <Text fontSize="xl">
               For testing purposes, only Jaipur city data is available. You can

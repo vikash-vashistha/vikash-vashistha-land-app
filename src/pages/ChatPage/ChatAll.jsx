@@ -54,7 +54,12 @@ export const ChatAll = () => {
   // console.log(onClose);
 
   return (
-    <Stack m="auto" w="sm" mt="150px">
+    <Stack
+      m="auto"
+      w={[300, 650, 1000]}
+      mt={[150, 10, 10]}
+      bg="#FFFFE0"
+    >
       {chat?.map((e, i) => (
         <Stack
           style={{
