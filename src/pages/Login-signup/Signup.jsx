@@ -110,6 +110,7 @@ export const Signup = () => {
       bg="#FFFFE0"
       p={2}
       border="1px solid grey"
+      borderRadius="4px"
     >
       <form onSubmit={handleSubmit}>
         <h3>Sigh up</h3>

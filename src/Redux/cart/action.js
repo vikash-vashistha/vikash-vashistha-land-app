@@ -24,6 +24,7 @@ export const get_cart = (payload) => (dispatch) => {
 
 export const add_to_cart = (payload) => (dispatch) => {
   const { user, e, token } = payload;
+  console.log("lala", user, e, token);
   try {
     axios
       .post(
@@ -38,7 +39,7 @@ export const add_to_cart = (payload) => (dispatch) => {
         }
       )
       .then((res) => {
-        console.log("vik", res);
+        console.log("vik", res.data);
       });
   } catch (e) {
     console.log(e);
@@ -46,6 +47,7 @@ export const add_to_cart = (payload) => (dispatch) => {
 };
 
 export const remove_from_cart = (payload) => (dispatch) => {
+  console.log(payload);
   axios
     .delete(`https://vikash-land-app.onrender.com/cart/${payload.id}`, {
       headers: { authorization: `Bearer ${payload.token}` },

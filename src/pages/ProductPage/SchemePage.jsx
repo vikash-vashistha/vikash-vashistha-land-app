@@ -25,9 +25,9 @@ console.log(IDBObjectStore)
   };
 
   if (!schemes) return <div>Lodading...</div>
-  
+
     return (
-      <Flex wrap="wrap" mt="150px" gap="20px">
+      <Flex wrap="wrap" mt={[150, 10, 10]} gap="20px" bg="#FFFFE0">
         {schemes &&
           schemes.map((e, i) => {
             return (

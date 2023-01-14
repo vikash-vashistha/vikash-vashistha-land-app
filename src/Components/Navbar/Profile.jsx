@@ -6,7 +6,7 @@ import axios from "axios";
 
 export const Profile = () => {
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => ({ user: state.app.user }));
+  const { user, token } = useSelector((state) => ({ user: state.app.user }));
   
   const handleSeller = async () => {
     await axios
@@ -20,7 +20,7 @@ export const Profile = () => {
   }
 
   useEffect(() => {
-    dispatch(getUser());
+    dispatch(getUser({token}));
   }, []);
 // console.log(user);
   return (

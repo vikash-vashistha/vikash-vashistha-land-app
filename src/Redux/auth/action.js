@@ -1,5 +1,6 @@
 import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS } from "./actionTypes";
 import axios from "axios";
+import { getUser } from "../user/action";
 
 const loginRequest = () => {
   return {
@@ -31,7 +32,9 @@ const loginUser = (payload) => (dispatch) => {
       password,
     })
     .then((res) => {
+      
       dispatch(loginSuccess(res.data.token));
+      dispatch(getUser({token: res.data.token}))
        alert("Sign In Successfull");
       localStorage.setItem("token", res.data.token);
     })

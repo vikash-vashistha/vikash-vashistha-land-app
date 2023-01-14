@@ -40,6 +40,7 @@ import {
   loginFailure,
   loginUser,
 } from "../../Redux/auth/action";
+import { get_cart, set_cart } from "../../Redux/cart/action";
 const token = localStorage.getItem("token");
 
 const baseStyle = {
@@ -55,11 +56,13 @@ const activeStyle = {
 export const Navbar = () => {
   const [total, setTotal] = useState(0);
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => ({ user: state.app.user }));
+  const { token } = useSelector((state) => state.auth );
+  const { user } = useSelector((state) => state.app );
+  const { cart } = useSelector((state) => state.cart );
   const ref = useRef();
   const ref1 = useRef();
   const { theme, toggleTheme } = useContext(ThemeContext);
-  const auth = useSelector((state) => state.auth.isAuth);
+  const {isAuth} = useSelector((state) => state.auth);
   const [text, setText] = useState("");
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -83,8 +86,6 @@ export const Navbar = () => {
 
   useEffect(() => {
     getData();
-    // ref1.current = setInterval(() => {}, 2000);
-    // return clearInterval(ref1.current);
   }, [throttledText]);
 
   // getting locations
@@ -100,27 +101,14 @@ export const Navbar = () => {
       });
   };
 
-  useEffect(() => {
-    dispatch(getUser());
-  }, [auth]);
-
-  useEffect(() => {
-    axios
-      .get(`https://vikash-land-app.onrender.com/cart/${user._id}`, {
-        headers: { authorization: `Bearer ${token}` },
-      })
-      .then((res) => {
-        setTotal(res.data.length);
-      });
-  }, []);
-
-  const handleSignOut = () => {
+     const handleSignOut = () => {
     localStorage.removeItem("token");
-    dispatch(loginFailure(null));
+     dispatch(loginFailure(null));
+     dispatch(set_cart([]))
     alert("Sign Out Successfull");
     navigate(comingFrom, { replace: true });
   };
-  console.log(auth);
+  console.log(isAuth);
 
   return (
     <>
@@ -244,7 +232,7 @@ export const Navbar = () => {
             style={({ isActive }) => (isActive ? activeStyle : baseStyle)}
             to="/profile"
           >
-            {auth ? (
+            {isAuth ? (
               <Flex align="center">
                 <GiCaptainHatProfile />
                 <Text ml="5px">{user?.email}</Text>{" "}
@@ -267,7 +255,7 @@ export const Navbar = () => {
           >
             <Flex align="center">
               <SlBag />
-              <Text>{total}</Text>
+              <Text>{cart.length}</Text>
             </Flex>
           </NavLink>
           <NavLink
@@ -290,9 +278,9 @@ export const Navbar = () => {
           </NavLink>
           <NavLink
             style={({ isActive }) => (isActive ? activeStyle : baseStyle)}
-            to={auth ? "" : "/login"}
+            to={isAuth ? "" : "/login"}
           >
-            {auth ? <VscSignOut onClick={handleSignOut} /> : <CiUser />}
+            {isAuth ? <VscSignOut onClick={handleSignOut} /> : <CiUser />}
           </NavLink>
         </Flex>
       </Flex>

@@ -45,10 +45,10 @@ export const ProductsPage = () => {
   }, [])
 
   return (
-    <Stack mt={[150, 10, 10]}>
+    <Stack mt={[150, 10, 10]} bg="#FFFFE0">
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent bg="#FFFFE0">
           <ModalHeader>
             <i>
               <Text fontSize="xxxl">VLA</Text>

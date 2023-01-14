@@ -78,8 +78,11 @@ export const Login = () => {
       justify="center"
       p={2}
       border="1px solid grey"
+      borderRadius="4px"
     >
       <NavLink
+        border= "1px solid grey"
+        borderRadius="4px"
         style={({ isActive }) => (isActive ? activeStyle : baseStyle)}
         to="/signup"
       >

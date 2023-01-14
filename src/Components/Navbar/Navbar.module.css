@@ -37,7 +37,7 @@
 
 }
 
-@media screen  and (max-width: 377px) {
+@media screen  and (max-width: 400px) {
   .nav {
      position: fixed;
     top: 0;
@@ -61,6 +61,8 @@
 }
 
 .search{
-  margin-left: 20%;
+  /* border: 3px solid red; */
+  margin-left: 24%;
+  margin-top: -10%;
 }
 }

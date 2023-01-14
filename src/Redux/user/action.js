@@ -1,5 +1,6 @@
 import axios from "axios";
 import { loadData, saveData } from "../../utils/localStorage";
+import { get_cart } from "../cart/action";
 import {
   GET_USER_REQUEST,
   GET_USER_SUCCESS,
@@ -29,15 +30,16 @@ export const getUserFailure = (error) => {
 
 export const getUser = (payload) => (dispatch) => {
   dispatch(getUserRequest());
-  let auth = localStorage.getItem("token")
-  // console.log("auth", auth);
+  // let auth = localStorage.getItem("token")
+  console.log("auth", payload);
    axios
      .get(`https://vikash-land-app.onrender.com/user`, {
-       headers: { authorization: `Bearer ${auth}` },
+       headers: { authorization: `Bearer ${payload.token}` },
      })
      .then((res) => {
        // console.log("res.data: ", res.data.user[0]);
        dispatch(getUserSuccess(res.data.user[0]));
+       dispatch(get_cart({id: res.data.user[0], token: payload.token}))
      })
      .catch((err) => {
        // console.log(err);

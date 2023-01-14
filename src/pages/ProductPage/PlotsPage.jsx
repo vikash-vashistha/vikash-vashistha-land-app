@@ -11,7 +11,7 @@ import { MdOutlineWaterDrop, MdOutlineDeleteSweep } from "react-icons/md";
 const token = localStorage.getItem("token");
 
 export const Plots = () => {
-  const { user } = useSelector((state) => ({ user: state.app.user }));
+  const { user } = useSelector((state) => state.app );
   const { token } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -33,6 +33,7 @@ const location = useLocation();
   }, [location.search]);
 
   const handleCart = (e) => {
+     console.log("lala", user, e, token);
     console.log(user._id, e);
     dispatch({user, e, token})
   };
