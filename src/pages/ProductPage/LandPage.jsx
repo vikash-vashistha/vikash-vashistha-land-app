@@ -69,7 +69,7 @@ export const Land = () => {
         {lands &&
           lands.map((e, i) => {
             return (
-              <Card maxW="md" w={[250, 300, 400]} m={2} p={2} bg="#FFFFE0">
+              <Card maxW="md" w={[250, 300, 400]} m={2} p={2} bg="#FFFFE0" key={i}>
                 <CardBody h={[100, 150, 200]}>
                   <Stack spacing="2">
                     <Heading size="md">Living room Sofa</Heading>

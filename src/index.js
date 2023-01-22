@@ -5,13 +5,12 @@ import App from "./App";
 import { ChakraProvider } from "@chakra-ui/react";
 import { Provider as ReduxProvider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-import { ThemeContextProviderComponent } from "./Context/TheamContext";
 import { store } from "./Redux/store";
+import { MantineProvider, Text } from "@mantine/core";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  
-    <ThemeContextProviderComponent>
+    <MantineProvider theme={{ colorScheme: "light" }}>
       <ReduxProvider store={store}>
         <ChakraProvider>
           <BrowserRouter>
@@ -19,5 +18,5 @@ root.render(
           </BrowserRouter>
         </ChakraProvider>
       </ReduxProvider>
-    </ThemeContextProviderComponent>
+    </MantineProvider>
 );

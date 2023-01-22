@@ -45,13 +45,13 @@ export const ProductsPage = () => {
   }, [])
 
   return (
-    <Stack mt={[150, 10, 10]} bg="#FFFFE0">
+    <Stack mt={[150, 10, 10]}>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent bg="#FFFFE0">
+        <ModalContent>
           <ModalHeader>
             <i>
-              <Text fontSize="xxxl">VLA</Text>
+              <Text fontSize="xl">VLA</Text>
             </i>
           </ModalHeader>
           <ModalCloseButton />

@@ -1,4 +1,4 @@
-import { ADD_TO_CART, REMOVE_FROM_CART, SET_CART } from "./action"
+import {SET_CART } from "./action"
 
 
 const initState = {

@@ -11,11 +11,7 @@ import {
   Button,
   Image,
   Box,
-  Alert,
-  AlertIcon,
-  AlertTitle,
-  AlertDescription,
-  CloseButton,
+  Card, CardHeader, CardBody, CardFooter,
   Select,
 } from "@chakra-ui/react";
 
@@ -101,95 +97,84 @@ export const Signup = () => {
   }, [blob]);
 
   return (
-    <Stack
-      spacing={4}
-      m="auto"
-      w="md"
-      h="sm"
-      mt={[150, 10, 10]}
-      bg="#FFFFE0"
-      p={2}
-      border="1px solid grey"
-      borderRadius="4px"
-    >
-      <form onSubmit={handleSubmit}>
-        <h3>Sigh up</h3>
-        <Input
-          id="name"
-          type="text"
-          onChange={handleChange}
-          placeholder="enter username"
-          value={formData.name}
-        />
-        <Input
-          id="email"
-          type="text"
-          onChange={handleChange}
-          placeholder="enter email"
-          value={formData.email}
-        />
-        <InputGroup size="md">
+    <Card w="400px" m="auto" mt="150px">
+      <CardBody size="sm">
+        <form onSubmit={handleSubmit}>
+          <h3>Sigh up</h3>
           <Input
-            id="password"
+            id="name"
+            type="text"
             onChange={handleChange}
-            pr="4.5rem"
-            type={show ? "text" : "password"}
-            placeholder="Enter password"
-            value={formData.password}
+            placeholder="enter username"
+            value={formData.name}
           />
-          <InputRightElement width="4.5rem">
-            <Button h="1.75rem" size="sm" onClick={handleClick}>
-              {show ? "Hide" : "Show"}
-            </Button>
-          </InputRightElement>
-        </InputGroup>
-        <InputGroup>
-          <InputRightElement
-            pointerEvents="none"
-            children={<PhoneIcon color="gray.300" />}
-          />
-          <InputLeftAddon children="+91" />
           <Input
-            id="phone_no"
+            id="email"
+            type="text"
             onChange={handleChange}
-            type="tel"
-            placeholder="phone number"
-            value={formData.phone_no}
+            placeholder="enter email"
+            value={formData.email}
           />
-        </InputGroup>
-        <Input
-          type="file"
-          placeholder="upload image"
-          onChange={(e) => {
-            setFile(e.target.files[0]);
-          }}
-        />
-        <Select
-          placeholder="Gender"
-          id="gender"
-          onChange={handleChange}
-          value={formData.gender}
-        >
-          <option value="male">male</option>
-          <option vlaue="female">female</option>
-          <option value="other">other</option>
-        </Select>
-        <Button
-          onClick={() => {
-            setLoading(true);
-            setTimeout(() => {
-              setLoading(false);
-            }, 2000);
-          }}
-          isLoading={loading}
-        >
-          status
-        </Button>
-        <Input type="submit" value={"create user"} />
-      </form>
-      <Box boxSize="sm">
-        <Image src={blob} />
-      </Box>
-    </Stack>
+          <InputGroup size="md">
+            <Input
+              id="password"
+              onChange={handleChange}
+              pr="4.5rem"
+              type={show ? "text" : "password"}
+              placeholder="Enter password"
+              value={formData.password}
+            />
+            <InputRightElement width="4.5rem">
+              <Button h="1.75rem" size="sm" onClick={handleClick}>
+                {show ? "Hide" : "Show"}
+              </Button>
+            </InputRightElement>
+          </InputGroup>
+          <InputGroup>
+            <InputRightElement
+              pointerEvents="none"
+              children={<PhoneIcon color="gray.300" />}
+            />
+            <InputLeftAddon children="+91" />
+            <Input
+              id="phone_no"
+              onChange={handleChange}
+              type="tel"
+              placeholder="phone number"
+              value={formData.phone_no}
+            />
+          </InputGroup>
+          <Input
+            type="file"
+            placeholder="upload image"
+            onChange={(e) => {
+              setFile(e.target.files[0]);
+            }}
+          />
+          <Select
+            placeholder="Gender"
+            id="gender"
+            onChange={handleChange}
+            value={formData.gender}
+          >
+            <option value="male">male</option>
+            <option vlaue="female">female</option>
+            <option value="other">other</option>
+          </Select>
+          <Button
+            onClick={() => {
+              setLoading(true);
+              setTimeout(() => {
+                setLoading(false);
+              }, 2000);
+            }}
+            isLoading={loading}
+          >
+            status
+          </Button>
+          <Input type="submit" value={"create user"} />
+        </form>
+      </CardBody>
+    </Card>
   );
 };

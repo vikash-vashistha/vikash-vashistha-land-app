@@ -17,6 +17,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { loginUser } from "../../Redux/auth/action";
+import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
 
 const baseStyle = {
   color: "black",
@@ -69,59 +70,53 @@ export const Login = () => {
   if (isAuth) return navigate(comingFrom, { replace: true });
   
   return (
-    <Stack
-      m="auto"
-      w="sm"
-      mt={[150, 10, 10]}
-      bg="#FFFFE0"
-      align="center"
-      justify="center"
-      p={2}
-      border="1px solid grey"
-      borderRadius="4px"
-    >
-      <NavLink
-        border= "1px solid grey"
-        borderRadius="4px"
-        style={({ isActive }) => (isActive ? activeStyle : baseStyle)}
-        to="/signup"
-      >
-        Click Here For New User Signup🪧
-      </NavLink>
-      <form onSubmit={handleSubmit}>
-        <h3>Log in</h3>
-        <Input
-          id="email"
-          type="email"
-          onChange={handleChange}
-          placeholder="enter email"
-          value={formData.email}
-        />
-        <Input
-          id="password"
-          type="text"
-          onChange={handleChange}
-          placeholder="enter password"
-          value={formData.password}
-        />
-        <Input type="submit" value={"Log in"} />
-      </form>
-      <br />
-      <br />
-      <h3>or use PIN</h3>
-      <br />
-      <br />
-      <Box>
-        <PinInput value={otp} onChange={(value) => setOtp(value)} otp>
-          <PinInputField />
-          <PinInputField />
-          <PinInputField />
-          <PinInputField />
-        </PinInput>
-      </Box>
-      <Box>
-        <Text>{otp}</Text>
-      </Box>
-    </Stack>
+    <Card w="400px" m="auto" mt="150px">
+      <CardBody size="sm">
+        <Box p={4} border="1px solid grey">
+          <NavLink
+            border="1px solid grey"
+            borderRadius="4px"
+            style={({ isActive }) => (isActive ? activeStyle : baseStyle)}
+            to="/signup"
+          >
+            Click Here For New User Signup🪧
+          </NavLink>
+        </Box>
+        <form onSubmit={handleSubmit}>
+          <h3>Log in</h3>
+          <Input
+            id="email"
+            type="email"
+            onChange={handleChange}
+            placeholder="enter email"
+            value={formData.email}
+          />
+          <Input
+            id="password"
+            type="text"
+            onChange={handleChange}
+            placeholder="enter password"
+            value={formData.password}
+          />
+          <Input type="submit" value={"Log in"} />
+        </form>
+        <br />
+        <br />
+        <h3>or use PIN</h3>
+        <br />
+        <br />
+        <Box>
+          <PinInput value={otp} onChange={(value) => setOtp(value)} otp>
+            <PinInputField />
+            <PinInputField />
+            <PinInputField />
+            <PinInputField />
+          </PinInput>
+        </Box>
+        <Box>
+          <Text>{otp}</Text>
+        </Box>
+      </CardBody>
+    </Card>
   );
 };

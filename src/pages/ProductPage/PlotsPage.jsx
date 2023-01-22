@@ -7,6 +7,7 @@ import { PlotFilterSort } from "./PlotFilterSort";
 import { useDispatch, useSelector } from "react-redux";
 import { GiRoad, GiElectric } from "react-icons/gi";
 import { MdOutlineWaterDrop, MdOutlineDeleteSweep } from "react-icons/md";
+import { add_to_cart } from "../../Redux/cart/action";
 
 const token = localStorage.getItem("token");
 
@@ -35,7 +36,7 @@ const location = useLocation();
   const handleCart = (e) => {
      console.log("lala", user, e, token);
     console.log(user._id, e);
-    dispatch({user, e, token})
+    dispatch(add_to_cart({user, e, token}))
   };
 
    if (!plots) return <div>Lodading...</div>;
@@ -47,7 +48,7 @@ const location = useLocation();
       <Flex wrap="wrap" gap="20px">
         {plots &&
           plots.map((e, i) => (
-            <Card maxW="sm" bg="#FFFFE0">
+            <Card maxW="sm" bg="#FFFFE0" key={i}>
               <CardBody>
                 <Stack mt="6" spacing="3">
                   <Heading size="md">Plot No. {i + 1}</Heading>

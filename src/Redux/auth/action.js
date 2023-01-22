@@ -35,8 +35,8 @@ const loginUser = (payload) => (dispatch) => {
       
       dispatch(loginSuccess(res.data.token));
       dispatch(getUser({token: res.data.token}))
-       alert("Sign In Successfull");
       localStorage.setItem("token", res.data.token);
+       alert("Sign In Successfull");
     })
     .catch((err) => {
       dispatch(loginFailure(err.message));

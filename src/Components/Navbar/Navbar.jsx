@@ -32,7 +32,6 @@ import {
 } from "@chakra-ui/react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
-import { ThemeContext } from "../../Context/TheamContext";
 import { useThrottle } from "use-throttle";
 import {
   loginRequest,
@@ -41,7 +40,7 @@ import {
   loginUser,
 } from "../../Redux/auth/action";
 import { get_cart, set_cart } from "../../Redux/cart/action";
-const token = localStorage.getItem("token");
+const t = localStorage.getItem("token");
 
 const baseStyle = {
   color: "black",
@@ -56,13 +55,12 @@ const activeStyle = {
 export const Navbar = () => {
   const [total, setTotal] = useState(0);
   const dispatch = useDispatch();
-  const { token } = useSelector((state) => state.auth );
-  const { user } = useSelector((state) => state.app );
-  const { cart } = useSelector((state) => state.cart );
+  const { token } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.app);
+  const { cart } = useSelector((state) => state.cart);
   const ref = useRef();
   const ref1 = useRef();
-  const { theme, toggleTheme } = useContext(ThemeContext);
-  const {isAuth} = useSelector((state) => state.auth);
+  const { isAuth } = useSelector((state) => state.auth);
   const [text, setText] = useState("");
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -85,6 +83,9 @@ export const Navbar = () => {
   };
 
   useEffect(() => {
+    dispatch(getUser({ token: t }))
+      dispatch(get_cart({ id: user[0], token: t }));
+    
     getData();
   }, [throttledText]);
 
@@ -101,10 +102,10 @@ export const Navbar = () => {
       });
   };
 
-     const handleSignOut = () => {
+  const handleSignOut = () => {
     localStorage.removeItem("token");
-     dispatch(loginFailure(null));
-     dispatch(set_cart([]))
+    dispatch(loginFailure(null));
+    dispatch(set_cart([]));
     alert("Sign Out Successfull");
     navigate(comingFrom, { replace: true });
   };
@@ -112,7 +113,7 @@ export const Navbar = () => {
 
   return (
     <>
-      <Flex className={styles.nav} bg="#FFFFE0">
+      <Flex className={styles.nav}>
         <Flex align="center" m="10px">
           <NavLink
             style={({ isActive }) => (isActive ? activeStyle : baseStyle)}
@@ -151,7 +152,6 @@ export const Navbar = () => {
                   <Button
                     h="1.5rem"
                     size="sm"
-                    style={styles[theme]}
                     onClick={handleClose}
                   >
                     <Image
@@ -287,3 +287,6 @@ export const Navbar = () => {
     </>
   );
 };
+
+
+
