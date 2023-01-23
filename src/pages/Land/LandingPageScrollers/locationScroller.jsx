@@ -15,7 +15,7 @@ import {
   Box,
   Text,
 } from "@chakra-ui/react";
-import { Carouseldiv } from "../../Components/Carouseldiv";
+import { Carouseldiv } from "../../../Components/Carouseldiv";
 
 export const LandingScroller = () => {
   const [data, setData] = useState([]);

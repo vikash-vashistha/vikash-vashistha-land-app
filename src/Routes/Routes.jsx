@@ -1,34 +1,36 @@
 import { Routes, Route } from "react-router-dom";
 import { Signup } from "../pages/Login-signup/Signup";
 import { Login } from "../pages/Login-signup/Login";
-import { BalancePage } from "../pages/BalancePage/BalancePage";
-import { SellerPage } from "../pages/SellerPage/SellerPage";
+import { BalancePage } from "../pages/Land/BalancePage/BalancePage";
+import { SellerPage } from "../pages/Land/SellerPage/SellerPage";
 import { Navbar } from "../Components/Navbar/Navbar";
 import { NotFoundPage } from "../pages/NotFoundPage/NotFoundPage";
-import { ProductsPage } from "../pages/ProductPage/ProductPage";
+import { ProductsPage } from "../pages/Land/LandProductPage/ProductPage";
 import PrivateRoute from "./PrivateRoute";
-import {ChatApp} from "../pages/ChatPage/ChatApp";
-import { Scheme } from "../pages/ProductPage/SchemePage";
-import { Land } from "../pages/ProductPage/LandPage";
-import { Plots } from "../pages/ProductPage/PlotsPage";
-import { PlotDetails } from "../pages/ProductPage/PlotDetailsPage";
-import { NewLand } from "../pages/SellerPage/NewLandForm/NewLand";
-import {NewPlot} from "../pages/SellerPage/NewPlotForm/NewPlot"
+import {ChatApp} from "../pages/Land/ChatPage/ChatApp";
+import { Scheme } from "../pages/Land/LandProductPage/SchemePage";
+import { Land } from "../pages/Land/LandProductPage/LandPage";
+import { Plots } from "../pages/Land/LandProductPage/PlotsPage";
+import { PlotDetails } from "../pages/Land/LandProductPage/PlotDetailsPage";
+import { NewLand } from "../pages/Land/SellerPage/NewLandForm/NewLand";
+import {NewPlot} from "../pages/Land/SellerPage/NewPlotForm/NewPlot"
 import { Footer } from "../Components/Footer";
-import { BalanceDetail } from "../pages/BalancePage/BalanceDetail";
+import { BalanceDetail } from "../pages/Land/BalancePage/BalanceDetail";
 import { Profile } from "../Components/Navbar/Profile";
-import { Cart } from "../pages/CartPage/Cart";
-import { ChatAll } from "../pages/ChatPage/ChatAll";
-import { SellerLandPage } from "../pages/SellerPage/SellerLandPage";
-import { Admin } from "../pages/Admin/Admin";
+import { Cart } from "../pages/Land/CartPage/Cart";
+import { ChatAll } from "../pages/Land/ChatPage/ChatAll";
+import { SellerLandPage } from "../pages/Land/SellerPage/SellerLandPage";
+import { Admin } from "../pages/Land/Admin/Admin";
 import { Payment } from "../Components/Payment";
+import { AllServises } from "../pages/AllServises";
 
 export const Routess = () => {
   return (
     <>
       <Navbar />
       <Routes>
-        <Route path="/" element={<ProductsPage />} />
+        <Route path="/" element={<AllServises />} />
+        <Route path="/property" element={<ProductsPage />} />
         <Route path="scheme/:id" element={<Scheme />} />
         <Route path="lands/:id" element={<Land />} />
         <Route path="singleland/:id" element={<Plots />} />
@@ -124,7 +126,7 @@ export const Routess = () => {
             </PrivateRoute>
           }
         />
-        <Route path="lands/:id/payment" element={ <Payment price="60000"/>}/>
+        <Route path="lands/:id/payment" element={<Payment price="60000" />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <Footer />

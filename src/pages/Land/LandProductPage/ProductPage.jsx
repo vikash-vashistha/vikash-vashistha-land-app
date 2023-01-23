@@ -12,14 +12,15 @@ import {
   Text,
 } from "@chakra-ui/react";
 
-import img1 from "../../logo1.png";
-import img2 from "../../back_ground.png";
-import img3 from "../../items.png";
-import img4 from "../../logo3.png";
+import img1 from "../../../logo1.png";
+import img2 from "../../../back_ground.png";
+import img3 from "../../../items.png";
+import img4 from "../../../logo3.png";
 
-import { Carouseldiv } from "../../Components/Carouseldiv";
-import { LandingScroller } from "../LandingPageScrollers/locationScroller";
+import { Carouseldiv } from "../../../Components/Carouseldiv";
+import { LandingScroller } from "../../Land/LandingPageScrollers/locationScroller";
 import { useEffect } from "react";
+import { CitySearch } from "./CitySearch";
 
 // export const styles = {
 //   dark: {
@@ -79,6 +80,7 @@ export const ProductsPage = () => {
           </ModalFooter>
         </ModalContent>
       </Modal>
+      <CitySearch/>
       <Carouseldiv img1={img1} img2={img2} img3={img3} img4={img4} />
       <LandingScroller />
     </Stack>

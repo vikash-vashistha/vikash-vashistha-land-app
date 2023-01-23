@@ -7,10 +7,18 @@ import {
   useNavigate,
 } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { Button, Text, Stack, Flex, useDisclosure, ButtonGroup, Divider, Heading } from "@chakra-ui/react";
+import {
+  Button,
+  Text,
+  Stack,
+  Flex,
+  useDisclosure,
+  ButtonGroup,
+  Heading,
+} from "@chakra-ui/react";
 import { LandFilterSort } from "./LandFilterSort";
 import { useSelector } from "react-redux";
-import { Payment } from "../../Components/Payment";
+import { Payment } from "../../../Components/Payment";
 import { ChatApp } from "../ChatPage/ChatApp";
 import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
 import { GiRoad, GiElectric } from "react-icons/gi";
@@ -105,6 +113,7 @@ export const Land = () => {
                       </Text>
                     </Flex>
                     <Flex wrap="wrap">
+                      <Text>Owners</Text>
                       {e?.partners?.map((el, it) => (
                         <ChatApp id={el?._id} nameOwner={el?.name} />
                       ))}{" "}

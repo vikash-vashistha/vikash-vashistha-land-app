@@ -1,106 +1,110 @@
-import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Button, ButtonGroup, Divider, Flex, Heading, HStack, Stack, Text } from "@chakra-ui/react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
-import { Button, Text, Card, CardHeader, CardBody, CardFooter, Select, Stack, Heading, Divider, ButtonGroup, Flex, useDisclosure } from "@chakra-ui/react";
-import { PlotFilterSort } from "./PlotFilterSort";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { Link, useLocation, useParams } from "react-router-dom";
+import { Payment } from "../../../Components/Payment";
+import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
 import { GiRoad, GiElectric } from "react-icons/gi";
 import { MdOutlineWaterDrop, MdOutlineDeleteSweep } from "react-icons/md";
-import { add_to_cart } from "../../Redux/cart/action";
+import { useDispatch, useSelector } from "react-redux";
+import { get_cart, remove_from_cart } from "../../../Redux/cart/action";
 
-const token = localStorage.getItem("token");
 
-export const Plots = () => {
-  const { user } = useSelector((state) => state.app );
+export const Cart = () => {
   const { token } = useSelector((state) => state.auth);
+  const {cart, total} = useSelector((state) => state.cart)
   const dispatch = useDispatch();
-  const { id } = useParams();
-  const [plots, setPlots] = useState([]);
+  const { id } = useParams(); 
   // getting plots inside land
 
-const location = useLocation();
+  const location = useLocation();
 
   useEffect(() => {
-    axios
-      .get(
-        `https://vikash-land-app.onrender.com/products/singleland/${id}${location.search}`
-      )
-      .then((res) => {
-        console.log(plots, res.data);
-        setPlots((prv) => [...res.data]);
-        console.log("plots", plots);
-      });
-  }, [location.search]);
+    dispatch(get_cart({id, token}))
+  }, []);
 
-  const handleCart = (e) => {
-     console.log("lala", user, e, token);
-    console.log(user._id, e);
-    dispatch(add_to_cart({user, e, token}))
+  const itemRemoveHandler = (e) => {
+    dispatch(remove_from_cart({ id: e, token }));
   };
 
-   if (!plots) return <div>Lodading...</div>;
-  
+  console.log(cart);
+  if(!cart) return  <div>loading...</div>
 
   return (
-    <Flex mt={[150, 10, 10]} gap="20px">
-      <PlotFilterSort />{" "}
-      <Flex wrap="wrap" gap="20px">
-        {plots &&
-          plots.map((e, i) => (
-            <Card maxW="sm" bg="#FFFFE0" key={i}>
+    <Stack m="auto" mt={[150, 10, 10]} bg="#FFFFE0">
+      <HStack ml={2} justify="space-around">
+        <Text color="blue.600" fontSize="2xl">
+          Total - ₹{total}
+        </Text>
+        <Button variant="ghost" colorScheme="blue">
+          <Payment price={total} />
+        </Button>
+      </HStack>
+      <Flex ml="40px" wrap="wrap" gap="40px">
+        {cart &&
+          cart.map((e, i) => (
+            <Card maxW="sm">
               <CardBody>
                 <Stack mt="6" spacing="3">
                   <Heading size="md">Plot No. {i + 1}</Heading>
-                  <Text>{e.title}</Text>
-                  {e.road.includes("east") ? (
+                  <Text>{e?.plot_id?.title}</Text>
+                  {e?.plot_id?.road?.includes("east") ? (
                     <Flex align="center">
                       East Road <GiRoad />
                     </Flex>
                   ) : (
                     ""
                   )}
-                  {e.road.includes("west") ? (
+                  {e?.plot_id?.road?.includes("west") ? (
                     <Flex align="center">
                       West Road <GiRoad />
                     </Flex>
                   ) : (
                     ""
                   )}
-                  {e.road.includes("north") ? (
+                  {e?.plot_id?.road?.includes("north") ? (
                     <Flex align="center">
                       North Road <GiRoad />
                     </Flex>
                   ) : (
                     ""
                   )}
-                  {e.road.includes("south") ? (
+                  {e?.plot_id?.road?.includes("south") ? (
                     <Flex align="center">
                       South Road <GiRoad />
                     </Flex>
                   ) : (
                     ""
                   )}
+
+                  <Link
+                    key={e._id}
+                    to={`/plotdetails/${e._id}`}
+                    style={{ margin: "5px", textDecoration: "none" }}
+                  ></Link>
                   <Stack
                     style={{
                       border: "5px solid grey",
                       margin: "5px",
                       padding: "20px",
                       height: "150px",
-                      backgroundColor: e?.user_id?.phone_no
+                      backgroundColor: e?.plot_id?.user_id?.phone_no
                         ? "grey"
                         : "lightGreen",
-                      width: e.length === e.width ? "150px" : "75px",
-                      borderRight: e?.road?.includes("east")
+                      width:
+                        e?.plot_id?.length === e?.plot_id?.width
+                          ? "150px"
+                          : "75px",
+                      borderRight: e?.plot_id?.road?.includes("east")
                         ? "10px dashed black"
                         : "5px solid blue",
-                      borderLeft: e?.road?.includes("west")
+                      borderLeft: e?.plot_id?.road?.includes("west")
                         ? "10px dashed black"
                         : "5px solid blue",
                       borderBottom: e?.road?.includes("south")
                         ? "10px dashed black"
                         : "5px solid blue",
-                      borderTop: e?.road?.includes("north")
+                      borderTop: e?.plot_id?.road?.includes("north")
                         ? "10px dashed black"
                         : "5px solid blue",
                     }}
@@ -119,7 +123,7 @@ const location = useLocation();
                         ""
                       )}
                     </Text>
-                    <Text mt="4px">
+                    <Text>
                       {e?.land_id?.facility?.includes("road") ? <GiRoad /> : ""}
                     </Text>
                     <Text>
@@ -130,35 +134,27 @@ const location = useLocation();
                       )}
                     </Text>
                   </Stack>
+
                   <Text color="blue.600" fontSize="2xl">
-                    ₹{e.price}
+                    ₹{e?.plot_id?.price}
                   </Text>
                 </Stack>
               </CardBody>
               <Divider />
               <CardFooter>
                 <ButtonGroup spacing="2">
-                  <Link key={e._id} to={`/plotdetails/${e._id}`}>
-                    <Button
-                      variant="solid"
-                      colorScheme="blue"
-                      disabled={e?.user_id?.phone_no ? true : false}
-                    >
-                      Check
-                    </Button>
-                  </Link>
                   <Button
-                    variant="ghost"
-                    colorScheme="blue"
-                    onClick={() => handleCart(e)}
+                    variant="solid"
+                    colorScheme="red"
+                    onClick={() => itemRemoveHandler(e._id)}
                   >
-                    Add to cart
+                    Remove
                   </Button>
                 </ButtonGroup>
               </CardFooter>
             </Card>
           ))}
       </Flex>
-    </Flex>
+    </Stack>
   );
 };

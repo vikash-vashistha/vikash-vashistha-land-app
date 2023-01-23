@@ -3,7 +3,7 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Button, Text, Stack, Flex, HStack } from "@chakra-ui/react";
-import { LandFilterSort } from "../ProductPage/LandFilterSort";
+import { LandFilterSort } from "../LandProductPage/LandFilterSort";
 
 const token = localStorage.getItem("token");
 

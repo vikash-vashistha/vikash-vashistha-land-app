@@ -40,7 +40,6 @@ import {
   loginUser,
 } from "../../Redux/auth/action";
 import { get_cart, set_cart } from "../../Redux/cart/action";
-const t = localStorage.getItem("token");
 
 const baseStyle = {
   color: "black",
@@ -53,54 +52,23 @@ const activeStyle = {
 };
 
 export const Navbar = () => {
-  const [total, setTotal] = useState(0);
-  const dispatch = useDispatch();
   const { token } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.app);
   const { cart } = useSelector((state) => state.cart);
-  const ref = useRef();
-  const ref1 = useRef();
   const { isAuth } = useSelector((state) => state.auth);
-  const [text, setText] = useState("");
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const throttledText = useThrottle(text, 2000);
   const navigate = useNavigate();
   const location = useLocation();
   const comingFrom = location.state?.from?.pathname || "/";
 
-  const handleSearch = (e) => {
-    setText(e.target.value);
-  };
 
-  const handleScroll = () => {
-    ref.current.scrollTop = 0;
-  };
-
-  const handleClose = () => {
-    setText("");
-    ref1.current.value = "";
-  };
 
   useEffect(() => {
-    dispatch(getUser({ token: t }))
-      dispatch(get_cart({ id: user[0], token: t }));
-    
-    getData();
-  }, [throttledText]);
+    dispatch(getUser({ token }))
+      dispatch(get_cart({ id: user[0], token}));
+  }, []);
 
-  // getting locations
-  const getData = () => {
-    setLoading(true);
-    axios
-      .get(
-        `https://vikash-land-app.onrender.com/products/locations?city=${throttledText}`
-      )
-      .then((res) => {
-        setData([...res.data]);
-        setLoading(false);
-      });
-  };
+
 
   const handleSignOut = () => {
     localStorage.removeItem("token");
@@ -127,104 +95,7 @@ export const Navbar = () => {
         </Flex>
         <Spacer />
 
-        <Flex align="center" gap="1px" wrap="wrap">
-          <Flex align="center">
-            <InputGroup
-              sm="30em"
-              md="48em"
-              lg="62em"
-              xl="80em"
-              align="center"
-              className={styles.search}
-            >
-              <InputLeftAddon>
-                <CiSearch />
-              </InputLeftAddon>
-              <Input
-                onChange={handleSearch}
-                pr="4.5rem"
-                type="text"
-                placeholder="Search City"
-                ref={ref1}
-              />
-              <InputRightElement width="4.5rem">
-                {text && (
-                  <Button
-                    h="1.5rem"
-                    size="sm"
-                    onClick={handleClose}
-                  >
-                    <Image
-                      style={{ width: "20px", cursor: "pointer" }}
-                      src="https://www.pngkey.com/png/full/105-1058931_black-cross-png-cross-sign-png-black.png"
-                      alt="close button"
-                    />
-                  </Button>
-                )}
-                {loading && (
-                  <Spinner
-                    thickness="1px"
-                    speed="1.2s"
-                    emptyColor="white"
-                    color="blue.500"
-                    size="sm"
-                  />
-                )}
-              </InputRightElement>
-            </InputGroup>
-          </Flex>
-          <Spacer />
-          <Flex mt={20} align="strech" h="380px" position="absolute" zIndex={1}>
-            {text && (
-              <div
-                style={{
-                  // marginLeft: "10%",
-                  marginTop: "170px",
-                  width: "100%",
-                  height: "300px",
-                  display: "flex",
-                  zIndex: -1,
-                }}
-              >
-                <Stack
-                  style={{
-                    overflowY: "scroll",
-                    background: "#FFFFE0",
-                    borderRadius: "4px",
-                  }}
-                  ref={ref}
-                >
-                  {data &&
-                    data.map((e) => (
-                      <Text
-                        style={{ margin: "5px", textDecoration: "none" }}
-                        key={e._id}
-                      >
-                        <Link
-                          to={`/scheme/${e.city}`}
-                          style={{ margin: "5px", textDecoration: "none" }}
-                        >
-                          <span>{e.city}</span>
-                          <span> (</span>
-                          <span>{e.state}</span> <span>)</span>
-                        </Link>
-                      </Text>
-                    ))}
-                </Stack>
-                <Button
-                  onClick={handleScroll}
-                  style={{
-                    height: "30px",
-                    marginTop: "100%",
-                    background: "transparent",
-                  }}
-                >
-                  <MdArrowUpward size="md" />
-                </Button>
-              </div>
-            )}
-          </Flex>
-        </Flex>
+        
 
         <Spacer />
         <Flex align="center" wrap="wrap" gap="15px" m="10px">
