@@ -112,7 +112,7 @@ export const Land = () => {
                         )}
                       </Text>
                     </Flex>
-                    <Flex wrap="wrap">
+                    <Flex wrap="wrap" align="center">
                       <Text>Owners</Text>
                       {e?.partners?.map((el, it) => (
                         <ChatApp id={el?._id} nameOwner={el?.name} />
