@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { ProductsPage } from './Land/LandProductPage/ProductPage'
 import Searchbar from './Weather/SearchBar';
 import "./Weather.css";
+import { Dashboard } from './TaskManager/Dashboard';
 
 export const AllServises = () => {
   const [product, setProduct] = useState({
@@ -49,7 +50,7 @@ export const AllServises = () => {
         )}
         {product.weather && <Searchbar />}
       </Stack>
-      {/* <Stack m="auto" className={product.task && "App"}>
+      <Stack m="auto" >
         {!product.task && (
           <Button  w="100px" m="auto"
             onClick={() =>
@@ -63,8 +64,8 @@ export const AllServises = () => {
             Manage Task
           </Button>
         )}
-        {product.weather && <Searchbar />}
-      </Stack> */}
+        {product.task && <Dashboard />}
+      </Stack>
     </Stack>
   );
 }

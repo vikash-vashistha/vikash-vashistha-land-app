@@ -3,11 +3,13 @@ import { authReducer } from "./auth/reducer";
 import { reducer } from "./user/reducer";
 import thunk from "redux-thunk";
 import { cartReducer } from "./cart/reducer";
+import { bagReducer } from "./Bug/reducer";
 
 const rootReducer = combineReducers({
+  bug: bagReducer,
   auth: authReducer,
   app: reducer,
-  cart: cartReducer
+  cart: cartReducer,
 });
 
 const composeEnhancers =

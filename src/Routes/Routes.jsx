@@ -7,13 +7,13 @@ import { Navbar } from "../Components/Navbar/Navbar";
 import { NotFoundPage } from "../pages/NotFoundPage/NotFoundPage";
 import { ProductsPage } from "../pages/Land/LandProductPage/ProductPage";
 import PrivateRoute from "./PrivateRoute";
-import {ChatApp} from "../pages/Land/ChatPage/ChatApp";
+import { ChatApp } from "../pages/Land/ChatPage/ChatApp";
 import { Scheme } from "../pages/Land/LandProductPage/SchemePage";
 import { Land } from "../pages/Land/LandProductPage/LandPage";
 import { Plots } from "../pages/Land/LandProductPage/PlotsPage";
 import { PlotDetails } from "../pages/Land/LandProductPage/PlotDetailsPage";
 import { NewLand } from "../pages/Land/SellerPage/NewLandForm/NewLand";
-import {NewPlot} from "../pages/Land/SellerPage/NewPlotForm/NewPlot"
+import { NewPlot } from "../pages/Land/SellerPage/NewPlotForm/NewPlot";
 import { Footer } from "../Components/Footer";
 import { BalanceDetail } from "../pages/Land/BalancePage/BalanceDetail";
 import { Profile } from "../Components/Navbar/Profile";
@@ -128,7 +128,9 @@ export const Routess = () => {
         />
         <Route path="lands/:id/payment" element={<Payment price="60000" />} />
         <Route path="*" element={<NotFoundPage />} />
+       
       </Routes>
+
       <Footer />
     </>
   );
