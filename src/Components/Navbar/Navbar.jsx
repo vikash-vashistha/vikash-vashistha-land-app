@@ -32,6 +32,7 @@ import {
 } from "@chakra-ui/react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
+import { GrServices } from "react-icons/gr";
 import { useThrottle } from "use-throttle";
 import {
   loginRequest,
@@ -94,9 +95,11 @@ export const Navbar = () => {
           </NavLink>
         </Flex>
         <Spacer />
-
-        
-
+        <Spacer />
+        <Flex align="center">
+          <GrServices />
+          <Text>Micro Servises</Text>
+        </Flex>
         <Spacer />
         <Flex align="center" wrap="wrap" gap="15px" m="10px">
           <NavLink

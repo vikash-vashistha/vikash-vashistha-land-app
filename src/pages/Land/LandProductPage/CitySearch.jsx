@@ -6,7 +6,6 @@ import {
   InputGroup,
   InputLeftAddon,
   InputRightElement,
-  Link,
   Spacer,
   Spinner,
   Stack,
@@ -17,6 +16,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { MdArrowUpward } from "react-icons/md";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { useThrottle } from "use-throttle";
 
 export const CitySearch = () => {
