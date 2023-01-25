@@ -26,7 +26,7 @@ export const add_to_cart = (payload) => (dispatch) => {
   try {
     axios
       .post(
-        `http://localhost:2345/cart`,
+        `https://vikash-land-app.onrender.com/cart`,
         {
           user_id: user._id,
           plot_id: e?._id,
@@ -38,6 +38,7 @@ export const add_to_cart = (payload) => (dispatch) => {
       )
       .then((res) => {
         console.log("vik", res.data);
+         dispatch(get_cart(payload));
       });
   } catch (e) {
     console.log(e);
@@ -51,8 +52,10 @@ export const remove_from_cart = (payload) => (dispatch) => {
       headers: { authorization: `Bearer ${payload.token}` },
     })
     .then((res) => {
-      dispatch(set_cart(res.data));
-    }).catch((e) => {
-      console.log(e.message);
+      console.log(res.data);
+      dispatch(get_cart(payload));
     })
+    .catch((e) => {
+      console.log(e.message);
+    });
 };

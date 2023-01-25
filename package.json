@@ -17,6 +17,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
     "framer-motion": "^7.6.7",
+    "netlify-cli": "^12.9.2",
     "overlay-navbar": "^1.2.3",
     "react": "^18.2.0",
     "react-beautiful-dnd": "^13.1.1",

@@ -1,16 +1,18 @@
-import { Button, HStack, Stack } from '@chakra-ui/react'
-import React, { useState } from 'react'
-import { ProductsPage } from './Land/LandProductPage/ProductPage'
-import Searchbar from './Weather/SearchBar';
+import { Button, HStack, Stack } from "@chakra-ui/react";
+import React, { useState } from "react";
+import { ProductsPage } from "./Land/LandProductPage/ProductPage";
+import Searchbar from "./Weather/SearchBar";
 import "./Weather.css";
-import { Dashboard } from './TaskManager/Dashboard';
+import { Dashboard } from "./TaskManager/Dashboard";
+import { Url } from "./URL/Url";
 
 export const AllServises = () => {
   const [product, setProduct] = useState({
-    land: false, 
+    land: false,
     weather: false,
-    task: false
-  })
+    task: false,
+    url: false,
+  });
 
   return (
     <Stack m="auto">
@@ -24,6 +26,7 @@ export const AllServises = () => {
                 land: !product.land,
                 weather: false,
                 task: false,
+                url: false,
               })
             }
           >
@@ -42,6 +45,7 @@ export const AllServises = () => {
                 weather: !product.weather,
                 land: false,
                 task: false,
+                url: false,
               })
             }
           >
@@ -50,22 +54,44 @@ export const AllServises = () => {
         )}
         {product.weather && <Searchbar />}
       </Stack>
-      <Stack m="auto" >
+      <Stack m="auto">
         {!product.task && (
-          <Button  w="100px" m="auto"
+          <Button
+            w="120px"
+            m="auto"
             onClick={() =>
               setProduct({
                 task: !product.task,
                 land: false,
-                weather: false
+                weather: false,
+                url: false,
               })
             }
           >
-            Manage Task
+            Task Manager
           </Button>
         )}
         {product.task && <Dashboard />}
       </Stack>
+      <Stack m="auto">
+        {!product.url && (
+          <Button
+            w="120px"
+            m="auto"
+            onClick={() =>
+              setProduct({
+                url: !product.url,
+                land: false,
+                weather: false,
+                task: false,
+              })
+            }
+          >
+            Url Shortner
+          </Button>
+        )}
+        {product.url && <Url />}
+      </Stack>
     </Stack>
   );
-}
+};

@@ -1,59 +1,65 @@
-import { Button, Flex, Image, Input, InputGroup, InputLeftAddon, InputRightElement, Link, Spacer, Spinner, Stack, Text } from '@chakra-ui/react';
-import axios from 'axios';
-import React, { useEffect, useRef, useState } from 'react'
-import { CiSearch } from 'react-icons/ci';
-import { MdArrowUpward } from 'react-icons/md';
-import { useSelector } from 'react-redux';
-import { useThrottle } from 'use-throttle';
+import {
+  Button,
+  Flex,
+  Image,
+  Input,
+  InputGroup,
+  InputLeftAddon,
+  InputRightElement,
+  Link,
+  Spacer,
+  Spinner,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
+import axios from "axios";
+import React, { useEffect, useRef, useState } from "react";
+import { CiSearch } from "react-icons/ci";
+import { MdArrowUpward } from "react-icons/md";
+import { useSelector } from "react-redux";
+import { useThrottle } from "use-throttle";
 
 export const CitySearch = () => {
-    const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(false);
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
   const ref = useRef();
   const ref1 = useRef();
   const [text, setText] = useState("");
   const throttledText = useThrottle(text, 2000);
 
-    const handleSearch = (e) => {
-      setText(e.target.value);
-    };
+  const handleSearch = (e) => {
+    setText(e.target.value);
+  };
 
-    const handleScroll = () => {
-      ref.current.scrollTop = 0;
-    };
+  const handleScroll = () => {
+    ref.current.scrollTop = 0;
+  };
 
-    const handleClose = () => {
-      setText("");
-      ref1.current.value = "";
-    };
+  const handleClose = () => {
+    setText("");
+    ref1.current.value = "";
+  };
 
-    useEffect(() => {
+  useEffect(() => {
+    getData();
+  }, [throttledText]);
 
-      getData();
-    }, [throttledText]);
-
-    // getting locations
-    const getData = () => {
-      setLoading(true);
-      axios
-        .get(
-          `https://vikash-land-app.onrender.com/products/locations?city=${throttledText}`
-        )
-        .then((res) => {
-          setData([...res.data]);
-          setLoading(false);
-        });
-    };
+  // getting locations
+  const getData = () => {
+    setLoading(true);
+    axios
+      .get(
+        `https://vikash-land-app.onrender.com/products/locations?city=${throttledText}`
+      )
+      .then((res) => {
+        setData([...res.data]);
+        setLoading(false);
+      });
+  };
   return (
     <Flex align="center" m="auto" gap="1px" wrap="wrap">
       <Flex align="center">
-        <InputGroup
-          sm="30em"
-          md="48em"
-          lg="62em"
-          xl="80em"
-          align="center"
-        >
+        <InputGroup sm="30em" md="48em" lg="62em" xl="80em" align="center">
           <InputLeftAddon>
             <CiSearch />
           </InputLeftAddon>
@@ -139,4 +145,4 @@ export const CitySearch = () => {
       </Flex>
     </Flex>
   );
-}
+};
