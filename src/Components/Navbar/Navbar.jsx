@@ -98,7 +98,7 @@ export const Navbar = () => {
         <Spacer />
         <Flex align="center">
           <GrServices />
-          <Text>Micro Servises</Text>
+          <Text>Micro Services</Text>
         </Flex>
         <Spacer />
         <Flex align="center" wrap="wrap" gap="15px" m="10px">
