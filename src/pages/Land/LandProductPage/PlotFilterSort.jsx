@@ -18,7 +18,7 @@ export const PlotFilterSort = () => {
 
   // all filter logic
   const [category, setCategory] = useState(urlCategory || []);
-  const [sortBy, setSortBy] = useState(...(urlSort || ""));
+  const [sortBy, setSortBy] = useState(...urlSort || "");
   const [range, setRange] = useState(urlRange || []);
 
   const handleCheckbox = (e) => {

@@ -22,14 +22,13 @@ import { ChatAll } from "../pages/Land/ChatPage/ChatAll";
 import { SellerLandPage } from "../pages/Land/SellerPage/SellerLandPage";
 import { Admin } from "../pages/Land/Admin/Admin";
 import { Payment } from "../Components/Payment";
-import { AllServises } from "../pages/AllServises";
 
 export const Routess = () => {
   return (
     <>
       <Navbar />
       <Routes>
-        <Route path="/" element={<AllServises />} />
+        <Route path="/" element={<ProductsPage/>} />
         <Route path="/property" element={<ProductsPage />} />
         <Route path="scheme/:id" element={<Scheme />} />
         <Route path="lands/:id" element={<Land />} />

@@ -95,10 +95,9 @@ export const Navbar = () => {
           </NavLink>
         </Flex>
         <Spacer />
-        <Spacer />
         <Flex align="center">
           <GrServices />
-          <Text>Micro Services</Text>
+          <Text>Land and plots are sold and purchased here.</Text>
         </Flex>
         <Spacer />
         <Flex align="center" wrap="wrap" gap="15px" m="10px">
