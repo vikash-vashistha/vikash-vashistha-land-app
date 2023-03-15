@@ -107,9 +107,9 @@ export const CitySearch = () => {
           >
             <Stack
               style={{
-                overflowY: "scroll",
+                overflow: "scroll",
                 background: "#FFFFE0",
-                borderRadius: "4px",
+                borderRadius: "4px"
               }}
               ref={ref}
             >
