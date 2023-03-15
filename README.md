@@ -45,7 +45,7 @@ scheme, land, plots, transactions, and cart.</li>
 ### Thanks 😊.
 
 ![LandApp](/src/logo.png)
-![LandApp](/src/logo1.png)
-![LandApp](/src/logo2.png)
-![LandApp](/src/logo3.png)
+![LandApp](/src/img1.png)
+![LandApp](/src/img2.png)
+![LandApp](/src/img3.png)
 
